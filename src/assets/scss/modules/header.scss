@@ -1,0 +1,47 @@
+header {
+  border-bottom: $border-m-primary;
+  box-shadow:$primary-box-shadow;
+  background-color: $background-color-secondary;
+  .header-logo {
+    img {
+      margin-top: $space-m;
+      width: 80px;
+    }
+  }
+  .navbar {
+    padding: 0;
+    a {
+      border-left: $border-s-white;
+      &:hover, &:focus, &:active {
+        border-left: $border-s-primary;
+      }
+    }
+  }
+  .navbar-dark .navbar-nav .nav-link a, .navbar-dark .navbar-nav .nav-link, a{
+    text-decoration: none;
+    color: $color-white;
+    padding: $space-s $space-xl $space-s $space-m;
+    &:hover, &:focus, &:active {
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    border-radius: 0;
+    background-color: $primary-color;
+    margin-top: $space-s;
+    color: $color-white;
+    padding: $space-s;
+    & a {
+      color: $color-white;
+      border: none;
+    }
+    .dropdown-item:not(:last-child)  {
+      border-bottom: $border-s-black;
+    }
+    & a:focus, & a:hover, & a.active {
+      background-color: $primary-color;
+      color: $color-black;
+    }
+  }
+}

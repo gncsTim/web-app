@@ -1,0 +1,14 @@
+footer {
+  background-color: $background-color-secondary;
+  height: 60px;
+  border-top: $border-m-white;
+  bottom: 0;
+  position: relative;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  .footer-content {
+    color: $color-white;
+    text-align: center;
+  }
+}

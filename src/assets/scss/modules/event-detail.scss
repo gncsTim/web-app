@@ -1,0 +1,25 @@
+.event-detail {
+  text-align: left;
+  color: $color-white;
+  p {
+    max-width: 400px;
+  }
+  .event-headline {
+    width: fit-content;
+    background: $primary-color;
+    padding: $space-m;
+    color: $color-black;
+    margin: $space-m 0;
+    h2, h3 {
+      margin-bottom: 0;
+    }
+  }
+  .event-head {
+    border-bottom: $border-s-primary;
+    margin-bottom: $space-l;
+  }
+  .event-body {
+
+  }
+
+}
