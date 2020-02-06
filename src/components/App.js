@@ -11,7 +11,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 // import WikiBandDetail from 'components/wiki/wikiBandDetail/container';
 // import WikiListVenues from 'components/wiki/wikiListVenues/container';
 
-// import Header from 'components/header/component';
+import Header from 'components/header/component';
 // import Footer from 'components/footer/component';
 
 import PageNotFound from 'components/errors/component/pageNotFound'
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div className="App">
       <Router>
-        {/* <Header /> */}
+        <Header />
           <div className="main-container">
             <Switch>
               {/* <Route exact path="/" render={() => (
