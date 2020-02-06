@@ -1,11 +1,11 @@
 import PouchDB from 'pouchdb'
 
 import { remoteCouchdbUrl } from './utils'
-import {FETCH_EVENTS} from 'types/actions'
+import {FETCH_EVENTS} from 'rdx/constants/actionTypes'
 // import { set_event_list } from 'Components/Event/List/actions'
 
 export const couchdbMiddleware = store => next => {
-    const localDB = new PouchDB('waschbarriere')
+    const localDB = new PouchDB('gncs')
     const remoteDB = new PouchDB(remoteCouchdbUrl)
     localDB.sync(remoteDB, {
       live: true,

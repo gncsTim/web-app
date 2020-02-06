@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 // import {Button} from 'react-bootstrap';
 
 // import EventDetail from 'components/eventDetail/container';
-// import EventList from 'components/eventList/container';
+import EventList from 'components/eventList/container';
 // import AddShow from 'components/addShow/container'
 // import Underground from 'components/underground/component';
 
@@ -23,11 +23,11 @@ const App = () => {
         <Header />
           <div className="main-container">
             <Switch>
-              {/* <Route exact path="/" render={() => (
+              <Route exact path="/" render={() => (
                 <Redirect from="/" to="/EventList" />
               )} />
               <Route exact path="/EventList" component={EventList} />
-              <Route exact path="/EventDetail/:id" component={EventDetail} />
+              {/* <Route exact path="/EventDetail/:id" component={EventDetail} />
               <Route exact path='/AddShow' component={AddShow} />
               <Route exact path="/WikiBands" component={WikiListBands} />
               <Route exact path="/WikiBands/:id" component={WikiBandDetail} />

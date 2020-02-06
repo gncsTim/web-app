@@ -1,1 +1,2 @@
 export const SET_EVENT_LIST = 'SET_EVENT_LIST'
+export const FETCH_EVENTS = 'FETCH_EVENTS'

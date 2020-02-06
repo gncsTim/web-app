@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import reducer from 'rdx/reducers'
-// import { couchdbMiddleware } from 'rdx/middlewares/couchdb'
+import { couchdbMiddleware } from 'rdx/middlewares/couchdb'
 
 let enhancers = []
 if (process.env.NODE_ENV === 'development') {
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'development') {
   enhancers = composeEnhancers(
   enhancers = applyMiddleware(
     logger,
-    // couchdbMiddleware
+    couchdbMiddleware
     )
   )
 }
