@@ -5,7 +5,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 import EventDetail from 'components/eventDetail/container';
 import EventList from 'components/eventList/container';
 // import AddShow from 'components/addShow/container'
-// import Underground from 'components/underground/component';
+import Underground from 'components/underground/component';
 
 // import WikiListBands from 'components/wiki/wikiListBands/container';
 // import WikiBandDetail from 'components/wiki/wikiBandDetail/container';
@@ -28,12 +28,12 @@ const App = () => {
               )} />
               <Route exact path="/EventList" component={EventList} />
               <Route exact path="/EventDetail/:id" component={EventDetail} />
-              {/*<Route exact path='/AddShow' component={AddShow} />
-              <Route exact path="/WikiBands" component={WikiListBands} />
-              <Route exact path="/WikiBands/:id" component={WikiBandDetail} />
-              <Route exact path="/WikiVenues" component={WikiListVenues} />
+              {/* <Route exact path='/AddShow' component={AddShow} /> */}
+              {/* <Route exact path="/WikiBands" component={WikiListBands} /> */}
+              {/* <Route exact path="/WikiBands/:id" component={WikiBandDetail} /> */}
+              {/* <Route exact path="/WikiVenues" component={WikiListVenues} /> */}
 
-              <Route exact path="/Underground" component={Underground} /> */}
+              <Route exact path="/Underground" component={Underground} />
               <Route path='*' component={PageNotFound} />
             </Switch>
           </div>
