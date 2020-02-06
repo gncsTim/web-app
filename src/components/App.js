@@ -12,7 +12,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 // import WikiListVenues from 'components/wiki/wikiListVenues/container';
 
 import Header from 'components/header/component';
-// import Footer from 'components/footer/component';
+import Footer from 'components/footer/component';
 
 import PageNotFound from 'components/errors/component/pageNotFound'
 
@@ -37,7 +37,7 @@ const App = () => {
               <Route path='*' component={PageNotFound} />
             </Switch>
           </div>
-        {/* <Footer /> */}
+        <Footer />
       </Router>
     </div>
   );
