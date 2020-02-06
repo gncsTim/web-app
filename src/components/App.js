@@ -7,9 +7,9 @@ import EventList from 'components/eventList/container';
 import AddShow from 'components/addShow/container'
 import Underground from 'components/underground/component';
 
-// import WikiListBands from 'components/wiki/wikiListBands/container';
-// import WikiBandDetail from 'components/wiki/wikiBandDetail/container';
-// import WikiListVenues from 'components/wiki/wikiListVenues/container';
+import WikiListBands from 'components/wiki/wikiListBands/container';
+import WikiBandDetail from 'components/wiki/wikiBandDetail/container';
+import WikiListVenues from 'components/wiki/wikiListVenues/container';
 
 import Header from 'components/header/component';
 import Footer from 'components/footer/component';
@@ -29,9 +29,9 @@ const App = () => {
               <Route exact path="/EventList" component={EventList} />
               <Route exact path="/EventDetail/:id" component={EventDetail} />
               <Route exact path='/AddShow' component={AddShow} />
-              {/* <Route exact path="/WikiBands" component={WikiListBands} /> */}
-              {/* <Route exact path="/WikiBands/:id" component={WikiBandDetail} /> */}
-              {/* <Route exact path="/WikiVenues" component={WikiListVenues} /> */}
+              <Route exact path="/WikiBands" component={WikiListBands} />
+              <Route exact path="/WikiBands/:id" component={WikiBandDetail} />
+              <Route exact path="/WikiVenues" component={WikiListVenues} />
 
               <Route exact path="/Underground" component={Underground} />
               <Route path='*' component={PageNotFound} />
