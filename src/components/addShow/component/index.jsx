@@ -30,12 +30,12 @@ const genres = [
     { id: 'genre:stoner', text: 'Stoner' }
  ]
 
- const KeyCodes = {
+/*  const KeyCodes = {
     comma: 188,
     enter: 13,
-};
+}; */
 
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+// const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class AddShow extends Component {
     constructor(props) {
@@ -152,7 +152,7 @@ class AddShow extends Component {
     }
 
     render() {
-        const {name, date, headliner, headlinerGenre, support} = this.state
+        const {name, date, headliner, support} = this.state
         return (
             <Container>
               <h1>Good Night Couch Side | Add Show</h1>
