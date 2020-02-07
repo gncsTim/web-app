@@ -3,6 +3,9 @@ import Container from "react-bootstrap/Container"
 import { Form, Button } from 'react-bootstrap'
 import Datetime from 'react-datetime'
 // import { WithContext as ReactTags } from 'react-tag-input';
+import Chip from '@material-ui/core/Chip';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import uuidv1 from 'uuid/v1'
 import { Col, Row } from 'react-bootstrap'
 
@@ -58,6 +61,18 @@ class AddShow extends Component {
         this.handleChangeSupport = this.handleChangeSupport.bind(this)
         this.addSupport = this.addSupport.bind(this)
         this.deletSupport = this.deletSupport.bind(this)
+        this.handleAddShow = this.handleAddShow.bind(this)
+    }
+
+    handleAddShow(e) {
+        console.log(this.state)
+        const {name, headliner, date} = this.state
+        const event = {
+            name,
+            headliner,
+            date: date.format()
+        }
+        this.props.addEvent(event)
     }
 
     handleDeleteHeadlinerGenre = i => {
@@ -89,7 +104,7 @@ class AddShow extends Component {
     }
 
     handleChangeDate (date) {
-        this.setState(date)
+        this.setState({date})
     }
 
     handleChangeSupport = key => event => {
@@ -180,11 +195,32 @@ class AddShow extends Component {
                     <Col xs={12} md={4}>
                       <Form.Group>
                         <Form.Label>Headliner Genre</Form.Label>
-                        {/* <ReactTags tags={headlinerGenre}
-                            suggestions={genres}
-                            handleDelete={this.handleDeleteHeadlinerGenre}
-                            handleAddition={this.handleAddition()}
-                            delimiters={delimiters} /> */}
+                        <Autocomplete
+                            multiple
+                            id="size-small-filled-multi"
+                            size="small"
+                            options={genres}
+                            getOptionLabel={option => option.title}
+                            renderTags={(value, getTagProps) =>
+                            value.map((option, index) => (
+                                <Chip
+                                variant="outlined"
+                                label={option.title}
+                                size="small"
+                                {...getTagProps({ index })}
+                                />
+                            ))
+                            }
+                            renderInput={params => (
+                            <TextField
+                                {...params}
+                                variant="filled"
+                                label="Size small"
+                                placeholder="Favorites"
+                                fullWidth
+                            />
+                            )}
+                        />
                       </Form.Group>
                       </Col>
                       <Col>
@@ -240,7 +276,7 @@ class AddShow extends Component {
                           </Col>
                     )})}
                       <Col>
-                        <Button variant='primary' type='submit'>
+                        <Button variant='primary' type='submit' onClick={this.handleAddShow}>
                             Add that fucking Show!
                         </Button>
                       </Col>

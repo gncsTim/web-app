@@ -1,7 +1,7 @@
 import PouchDB from 'pouchdb'
 
 import { remoteCouchdbUrl } from './utils'
-import {FETCH_EVENTS} from 'rdx/constants/actionTypes'
+import {FETCH_EVENTS, ADD_EVENT} from 'rdx/constants/actionTypes'
 // import { set_event_list } from 'Components/Event/List/actions'
 
 export const couchdbMiddleware = store => next => {
@@ -16,6 +16,8 @@ export const couchdbMiddleware = store => next => {
       .on('active', heanleOnActive(store))
       .on('denied', heanleOnDenied(store))
       .on('error', heanleOnError(store))
+
+  const requests = new PouchDB('http://localhost:5984/requests')
 
   localDB.query('events/all', {include_docs: true, attachments: true})
         .then(results => {
@@ -32,6 +34,19 @@ export const couchdbMiddleware = store => next => {
         })
         .catch(error => console.log(error))
     return action => {
+      switch (action.type) {
+        case ADD_EVENT:
+            requests.put({
+              _id: 'mydoc',
+              title: 'Heroes'
+            }).then(function (response) {
+              console.log(response)
+              // handle response
+            }).catch(function (err) {
+              console.log(err);
+            });
+          return console.log(action.payload)
+      }
         next(action)
     }
 }
