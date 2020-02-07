@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react'
+import React, { Component } from 'react'
 import Container from "react-bootstrap/Container"
 import { Form, Button } from 'react-bootstrap'
 import Datetime from 'react-datetime'
@@ -229,8 +229,7 @@ class AddShow extends Component {
                     {Object.keys(support).map(key => {
                         const item = support[key]
                         return (
-                          <Col md={12}>
-                            <div key={key}>
+                          <Col md={12} key={key}>
                                 <Row>
                                   <Col xs={12} md={6}>
                                     <Form.Group id={key}>
@@ -271,7 +270,6 @@ class AddShow extends Component {
                                     </Form.Group>
                                   </Col>
                                 </Row>
-                            </div>
                             <hr />
                           </Col>
                     )})}
