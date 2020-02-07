@@ -1,9 +1,11 @@
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
 
+import history from 'rdx/history'
 import { remoteCouchdbUrl } from 'config'
-import { FETCH_EVENTS, ADD_EVENT, LOGIN_REQUEST } from 'rdx/constants/actionTypes'
+import { FETCH_EVENTS, ADD_EVENT, LOGIN_REQUEST, GET_SESSION, LOGOUT } from 'rdx/constants/actionTypes'
 import { loginRequestFaild } from 'components/user/login/action'
+import {setUserCtx, resetUserCtx} from 'components/user/action'
 // import { set_event_list } from 'Components/Event/List/actions'
 
 export const couchdbMiddleware = store => next => {
@@ -64,7 +66,35 @@ export const couchdbMiddleware = store => next => {
           if (err) {
             store.dispatch(loginRequestFaild(err))
           } else {
-            return console.log(response)
+            console.log(response)
+            store.dispatch(setUserCtx({
+              name: response.name,
+              roles: response.roles
+            }))
+            history.push('/')
+          }
+        })
+        break
+      case GET_SESSION:
+        remoteDB.getSession(function(err, response) {
+          if (err) {
+            console.log(err)
+          } else if (!response.userCtx.name) {
+            console.log('nobodys logged in')
+          } else {
+            // response.userCtx.name is the current user
+            console.log(response)
+            store.dispatch(setUserCtx(response.userCtx))
+          }
+        })
+        break
+      case LOGOUT:
+        remoteDB.logOut(function (err, response) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(response)
+            store.dispatch(resetUserCtx())
           }
         })
         break

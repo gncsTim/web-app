@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
+import history from 'rdx/history'
 // import {Button} from 'react-bootstrap';
 
 import EventDetail from 'components/eventDetail/container'
@@ -11,7 +12,7 @@ import WikiListBands from 'components/wiki/wikiListBands/container'
 import WikiBandDetail from 'components/wiki/wikiBandDetail/container'
 import WikiListVenues from 'components/wiki/wikiListVenues/container'
 
-import Header from 'components/header/component'
+import Header from 'components/header/container'
 import Footer from 'components/footer/component'
 
 import LogInForm from 'components/user/login/container'
@@ -21,7 +22,7 @@ import PageNotFound from 'components/errors/component/pageNotFound'
 const App = () => {
   return (
     <div className="App">
-      <Router>
+      <Router history={history}>
         <Header />
         <div className="main-container">
           <Switch>
