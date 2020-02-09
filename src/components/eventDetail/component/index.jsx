@@ -5,13 +5,10 @@ import Moment from 'react-moment'
 
 import {eventShape} from 'gncsPropTypes'
 
-const EventDetail = ({ event, handleClick }) => {
+const EventDetail = ({ event }) => {
   if (!event) return null
   return (
     <Row className="event-detail">
-      <Button onClick={() => handleClick()}>
-        This is a pouchdb test
-      </Button>
       <Col>
         <div className="event-head">
           <div className="event-headline">

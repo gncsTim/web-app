@@ -5,12 +5,6 @@ const mapState = (state, ownProps) => ({
   event: state.eventList.find(item => item._id === ownProps.match.params.id)
 })
 
-const mapDispatch = dispatch => ({
-  handleClick: () => dispatch({
-    type: 'TEST_ACTION'
-  })
-})
-
-const connector = connect(mapState, mapDispatch)
+const connector = connect(mapState)
 
 export default connector(EventList)
