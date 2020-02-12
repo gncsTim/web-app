@@ -2,10 +2,12 @@ header {
   border-bottom: $border-m-primary;
   box-shadow:$primary-box-shadow;
   background-color: $background-color-secondary;
+  text-align: center;
   .header-logo {
     img {
       margin-top: $space-m;
       width: 80px;
+
     }
   }
   .navbar {
@@ -19,10 +21,10 @@ header {
   }
   .navbar-dark .navbar-nav .nav-link a, .navbar-dark .navbar-nav .nav-link, a{
     text-decoration: none;
-    color: $color-white;
+    color: $primary-color;
     padding: $space-s $space-xl $space-s $space-m;
     &:hover, &:focus, &:active {
-      color: $primary-color;
+      color: $color-white;
       text-decoration: none;
     }
   }
@@ -30,7 +32,6 @@ header {
     border-radius: 0;
     background-color: $primary-color;
     margin-top: $space-s;
-    color: $color-white;
     padding: $space-s;
     & a {
       color: $color-white;
