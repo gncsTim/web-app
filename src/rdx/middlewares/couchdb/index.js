@@ -3,7 +3,8 @@ import PouchDBAuth from 'pouchdb-authentication'
 import moment from 'moment'
 
 import { remoteCouchdbUrl } from 'config'
-import { FETCH_EVENTS, ADD_EVENT } from 'rdx/constants/actionTypes'
+import { ADD_EVENT } from 'rdx/constants/actionTypes'
+import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
 
 export const couchdbMiddleware = store => next => {
   PouchDB.plugin(PouchDBAuth)
@@ -71,24 +72,27 @@ export const couchdbMiddleware = store => next => {
     .query('events/all', { include_docs: true, attachments: true })
     .then(results => {
       console.log(results)
-      store.dispatch({
-        type: FETCH_EVENTS,
-        payload: results.rows.map(item => item.doc).filter(doc => {
-          const date = moment(doc.date)
-          const now = moment()
-          if (now.hours() < 7) {
-            now.subtract(1, 'days')
-          } 
-          now.startOf('day')
-          if (date < now) {
-            localDB.remove(doc, (err) => {
-              if (err) console.log(err)
+      store.dispatch(
+        setEventList(
+          results.rows
+            .map(item => item.doc)
+            .filter(doc => {
+              const date = moment(doc.date)
+              const now = moment()
+              if (now.hours() < 7) {
+                now.subtract(1, 'days')
+              }
+              now.startOf('day')
+              if (date < now) {
+                localDB.remove(doc, err => {
+                  if (err) console.log(err)
+                })
+                return false
+              }
+              return true
             })
-            return false
-          }
-          return true
-        })
-      })
+        )
+      )
     })
     .catch(error => console.log(error))
 
@@ -136,15 +140,11 @@ export const couchdbMiddleware = store => next => {
 
 const handleOnChange = store => change => {
   console.log(change, 'changed!')
-  const events = change.docs
-    .filter(item => item.type === 'event')
+  const events = change.docs.filter(item => item.type === 'event')
   if (events.length > 0) {
-    store.dispatch({
-      type: FETCH_EVENTS,
-      payload: events
-    })
+    store.dispatch(addOrUpdateEvents(events))
   }
-  
+
   // change.docs.forEach(doc => {
   //   switch (doc.type) {
   //     case 'event':
