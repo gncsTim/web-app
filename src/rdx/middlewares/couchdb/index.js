@@ -1,5 +1,6 @@
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
+import moment from 'moment'
 
 import { remoteCouchdbUrl } from 'config'
 import { FETCH_EVENTS, ADD_EVENT } from 'rdx/constants/actionTypes'
@@ -70,15 +71,24 @@ export const couchdbMiddleware = store => next => {
     .query('events/all', { include_docs: true, attachments: true })
     .then(results => {
       console.log(results)
-      // results.rows.forEach(row => {
-      //   let { doc } = row
-
-      // })
       store.dispatch({
         type: FETCH_EVENTS,
-        payload: results.rows.map(item => item.doc)
+        payload: results.rows.map(item => item.doc).filter(doc => {
+          const date = moment(doc.date)
+          const now = moment()
+          if (now.hours() < 7) {
+            now.subtract(1, 'days')
+          } 
+          now.startOf('day')
+          if (date < now) {
+            localDB.remove(doc, (err) => {
+              if (err) console.log(err)
+            })
+            return false
+          }
+          return true
+        })
       })
-      // store.dispatch(set_event_list(results))
     })
     .catch(error => console.log(error))
 
