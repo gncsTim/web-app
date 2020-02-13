@@ -1,30 +1,70 @@
 import PouchDB from 'pouchdb'
 import PouchDBAuth from 'pouchdb-authentication'
 
-import history from 'rdx/history'
 import { remoteCouchdbUrl } from 'config'
-import { FETCH_EVENTS, ADD_EVENT, LOGIN_REQUEST, GET_SESSION, LOGOUT } from 'rdx/constants/actionTypes'
-import { loginRequestFaild } from 'components/user/login/action'
-import {setUserCtx, resetUserCtx} from 'components/user/action'
-// import { set_event_list } from 'Components/Event/List/actions'
+import { FETCH_EVENTS, ADD_EVENT } from 'rdx/constants/actionTypes'
 
 export const couchdbMiddleware = store => next => {
   PouchDB.plugin(PouchDBAuth)
-  let localDB = null
   const remoteDB = new PouchDB(remoteCouchdbUrl, { skip_setup: true })
-
-  localDB = new PouchDB('gncs')
-  localDB
-    .sync(remoteDB, {
+  // remoteDB
+  //   .allDocs({ include_docs: true })
+  //   .then(respone => {
+  //     console.log(respone)
+  //   })
+  //   .catch(err => {
+  //     console.log(err)
+  //   })
+  const localDB = new PouchDB('gncs')
+  console.log('puch')
+  localDB.replicate
+    .from(remoteDB, {
       live: true,
+      filter: 'filters/current_events',
       include_docs: true,
       retry: true
     })
+    // .on('complete', () => {
+    //   console.log('complete')
+    //   localDB
+    //     .allDocs({ include_docs: true })
+    //     .then(respone => {
+    //       console.log(respone)
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // })
     .on('change', handleOnChange(store))
     .on('paused', heanleOnPaused(store))
     .on('active', heanleOnActive(store))
     .on('denied', heanleOnDenied(store))
     .on('error', heanleOnError(store))
+
+  // let test = new PouchDB('repli-test')
+  // test.replicate
+  //   .from(remoteDB, {
+  //     filter: 'filters/noDeleted'
+  //   })
+  //   .on('complete', () => {
+  //     test
+  //       .allDocs()
+  //       .then(res => {
+  //         console.log(res)
+  //       })
+  //       .catch(err => {
+  //         console.log(err)
+  //       })
+  //   })
+
+  localDB
+    .allDocs({ include_docs: true })
+    .then(respone => {
+      console.log(respone)
+    })
+    .catch(err => {
+      console.log(err)
+    })
 
   localDB
     .query('events/all', { include_docs: true, attachments: true })
@@ -61,47 +101,12 @@ export const couchdbMiddleware = store => next => {
             console.log(err)
           })
         break
-      case LOGIN_REQUEST:
-        remoteDB.logIn(action.payload.email, action.payload.password, function(err, response) {
-          if (err) {
-            store.dispatch(loginRequestFaild(err))
-          } else {
-            console.log(response)
-            store.dispatch(setUserCtx({
-              name: response.name,
-              roles: response.roles
-            }))
-            history.push('/')
-          }
-        })
-        break
-      case GET_SESSION:
-        remoteDB.getSession(function(err, response) {
-          if (err) {
-            console.log(err)
-          } else if (!response.userCtx.name) {
-            console.log('nobodys logged in')
-          } else {
-            // response.userCtx.name is the current user
-            console.log(response)
-            store.dispatch(setUserCtx(response.userCtx))
-          }
-        })
-        break
-      case LOGOUT:
-        remoteDB.logOut(function (err, response) {
-          if (err) {
-            console.log(err)
-          } else {
-            console.log(response)
-            store.dispatch(resetUserCtx())
-          }
-        })
-        break
+
       case ADD_EVENT:
         requests
           .put({
             _id: 'mydoc',
+            type: 'request',
             title: 'Heroes'
           })
           .then(function(response) {
@@ -121,14 +126,24 @@ export const couchdbMiddleware = store => next => {
 
 const handleOnChange = store => change => {
   console.log(change, 'changed!')
-  change.docs.forEach(doc => {
-    switch (doc.type) {
-      case 'event':
-        return
-      default:
-        return
-    }
-  })
+  const events = change.docs
+    .filter(item => item.type === 'event')
+  if (events.length > 0) {
+    store.dispatch({
+      type: FETCH_EVENTS,
+      payload: events
+    })
+  }
+  
+  // change.docs.forEach(doc => {
+  //   switch (doc.type) {
+  //     case 'event':
+  //       console.log(doc)
+  //       return
+  //     default:
+  //       return
+  //   }
+  // })
 }
 
 const heanleOnPaused = store => info => {
