@@ -7,12 +7,13 @@ import reducer from 'rdx/reducers'
 import { couchdbMiddleware } from 'rdx/middlewares/couchdb'
 
 let enhancers = []
-if (nodeEnv === 'development') {
+// TODO: fix that for production mode
+// if (nodeEnv === 'development') {
   const composeEnhancers = composeWithDevTools({})
   const logger = createLogger({
     collapsed: true
   })
   enhancers = composeEnhancers((enhancers = applyMiddleware(logger, couchdbMiddleware)))
-}
+// }
 
 export default createStore(reducer, enhancers)
