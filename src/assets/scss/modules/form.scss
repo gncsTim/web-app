@@ -1,6 +1,51 @@
 .form-group {
     text-align: left;
+    hr {
+      border-color: $color-white;
+    }
+    button {
+      height: 31px;
+      font-size: inherit;
+    }
+    .form-control {
+      height: 31px;
+    }
     label {
         color: $color-white
     }
+}
+form {
+  hr {
+    border-color: white;
+  }
+  .form-group {
+    text-align: left;
+    label {
+      color: $color-white;
+    }
+    input {
+      height: 30px;
+    }
+    div.ReactTags__tagInput {
+      input.ReactTags__tagInputField {
+        height: 30px;
+        border-radius: .25rem;
+      }
+    }
+  }
+  Button {
+    height: 30px;
+  }
+  .btn-primary, .btn-danger {
+    font-size: inherit;
+
+  }
+  .btn-primary {
+    background-color: $primary-color;
+    border: none;
+    &:hover, &:focus, &:active {
+      background-color: $color-green-dark;
+
+    }
+  }
 }

@@ -7,7 +7,6 @@ import logoImage from 'assets/img/logo.svg'
 
 const Header = ({ handleGetSession,handleLogout, userCtx }) => {
   useEffect(() => {
-    console.log(userCtx)
     if (!userCtx) handleGetSession()
   })
   return (

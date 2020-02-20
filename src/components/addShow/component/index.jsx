@@ -9,6 +9,9 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import uuidv1 from 'uuid/v1'
 import { Col, Row } from 'react-bootstrap'
 
+import { WithContext as ReactTags } from 'react-tag-input';
+
+
 // interface IAddShowForm {
 //     name: string
 // }
@@ -30,12 +33,12 @@ const genres = [
     { id: 'genre:stoner', text: 'Stoner' }
  ]
 
-/*  const KeyCodes = {
+const KeyCodes = {
     comma: 188,
     enter: 13,
-}; */
+};
 
-// const delimiters = [KeyCodes.comma, KeyCodes.enter];
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class AddShow extends Component {
     constructor(props) {
@@ -48,7 +51,7 @@ class AddShow extends Component {
             support: {
                 [uuidv1()]: {
                     name: '',
-                    geners: []
+                    genres: []
                 }
             }
         }
@@ -84,7 +87,7 @@ class AddShow extends Component {
 
     handleDeleteSupportGenre = key => i => {
         let support = Object.assign(this.state.support, {})
-        support[key].geners = support[key].geners.filter((tag, index) => index !== i)
+        support[key].genres = support[key].genres.filter((tag, index) => index !== i)
     }
 
     handleAddition = key => tag => {
@@ -92,7 +95,7 @@ class AddShow extends Component {
             return this.setState({headlinerGenre: this.state.headlinerGenre.concat([tag])});
         }
         let support = Object.assign(this.state.support, {})
-        support[key].geners = support[key].geners.concat([tag])
+        support[key].genres = support[key].genres.concat([tag])
         this.setState({support})
     }
 
@@ -117,7 +120,7 @@ class AddShow extends Component {
         const support = Object.assign(this.state.support, {})
         support[uuidv1()] = {
             name: '',
-            geners: []
+            genres: []
         }
         this.setState({support})
     }
@@ -181,7 +184,7 @@ class AddShow extends Component {
                               onChange={this.handleChangeDate} />
                       </Form.Group>
                     </Col>
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={6}>
                       <Form.Group id='headliner'>
                           <Form.Label>Headliner</Form.Label>
                           <Form.Control
@@ -192,35 +195,16 @@ class AddShow extends Component {
                           />
                       </Form.Group>
                     </Col>
-                    <Col xs={12} md={4}>
+                    <Col xs={12} md={6}>
                       <Form.Group>
                         <Form.Label>Headliner Genre</Form.Label>
-                        <Autocomplete
-                            multiple
-                            id="size-small-filled-multi"
-                            size="small"
-                            options={genres}
-                            getOptionLabel={option => option.title}
-                            renderTags={(value, getTagProps) =>
-                            value.map((option, index) => (
-                                <Chip
-                                variant="outlined"
-                                label={option.title}
-                                size="small"
-                                {...getTagProps({ index })}
-                                />
-                            ))
-                            }
-                            renderInput={params => (
-                            <TextField
-                                {...params}
-                                variant="filled"
-                                label="Size small"
-                                placeholder="Favorites"
-                                fullWidth
-                            />
-                            )}
-                        />
+                        { <ReactTags tags={genres}
+                            inline
+                            inlinePosition="after"
+                            suggestions={genres}
+                            handleDelete={this.handleDeleteHeadlinerGenre}
+                            handleAddition={this.handleAddition}
+                            delimiters={delimiters} /> }
                       </Form.Group>
                       </Col>
                       <Col>
@@ -245,12 +229,14 @@ class AddShow extends Component {
                                     <Form.Group>
                                       <Form.Label>Supprt Genre</Form.Label>
                                       <Row>
-                                      <Col md={6} xs={6}>
-                                      {/* <ReactTags tags={item.geners}
+                                      <Col md={8} xs={6}>
+                                      { <ReactTags tags={item.genres}
+                                          inline
+                                          inlinePosition="after"
                                           suggestions={genres}
                                           handleDelete={this.handleDeleteSupportGenre(key)}
                                           handleAddition={this.handleAddition(key)}
-                                          delimiters={delimiters} /> */}
+                                          delimiters={delimiters} /> }
                                       </Col>
                                       <Col md={2} xs={3}>
                                           <Button className="btn-block"
@@ -259,8 +245,8 @@ class AddShow extends Component {
                                               disabled={support.length <= 1}>
                                               X
                                           </Button>
-                                          </Col>
-                                          <Col md={4}  xs={3}>
+                                      </Col>
+                                          <Col md={2}  xs={3}>
                                           <Button className="btn-block"
                                             variant='primary' onClick={this.addSupport}>
                                             +
