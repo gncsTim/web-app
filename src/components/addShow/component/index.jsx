@@ -7,8 +7,8 @@ import { Col, Row } from 'react-bootstrap'
 
 import { WithContext as ReactTags } from 'react-tag-input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
 
 const genres = [
     { id: 'genre:punk', text: 'Punk' },
@@ -29,12 +29,12 @@ class AddShow extends Component {
         super(props)
         this.state = {
             name: '',
+            date: null,
             venue: '',
             venueAdress: '',
             headliner: '',
             headlinerGenre: [],
             headlinerLinks: [],
-            date: null,
             support: {
                 [uuidv1()]: {
                     name: '',
@@ -67,10 +67,11 @@ class AddShow extends Component {
             headliner,
             headlinerGenre,
             headlinerLinks,
-            date: date.format(),
+            date: date?date.format():"",
             support
         }
-        this.props.addEvent(event)
+        // this.props.addEvent(event)
+        console.log(event)
     }
 
     handleDeleteHeadlinerGenre = i => {
@@ -90,6 +91,8 @@ class AddShow extends Component {
     handleDeleteSupportGenre = key => i => {
         let support = Object.assign(this.state.support, {})
         support[key].genres = support[key].genres.filter((tag, index) => index !== i)
+        this.setState({ support })
+
     }
 
     handleDeleteSupportLinks = key => i => {
@@ -164,7 +167,7 @@ class AddShow extends Component {
     }
 
     render() {
-        const { name, venue, venueAdress, date, headliner, support } = this.state
+        const { name, venue, headlinerGenre, venueAdress, date, headliner, support } = this.state
         return (
             <Container>
                 <h1>Good Night Couch Side | Add Show</h1>
@@ -186,17 +189,19 @@ class AddShow extends Component {
                         </Col>
                         <Col xs={12} md={4}>
                             <Form.Group id='date'>
-                                <Form.Label>Date</Form.Label>
+                                <Form.Label>Date <FontAwesomeIcon icon={faAsterisk} /></Form.Label>
                                 <Datetime
+                                    required
                                     value={date}
                                     onChange={this.handleChangeDate} />
                             </Form.Group>
                         </Col>
                         <Col xs={12} md={4}>
                             <Form.Group id='venue'>
-                                <Form.Label>Venue name</Form.Label>
+                                <Form.Label>Venue name <FontAwesomeIcon icon={faAsterisk} /></Form.Label>
                                 <Form.Control
                                     type="text"
+                                    required
                                     value={venue}
                                     name='venue'
                                     onChange={this.handleChangeTextInput}
@@ -217,9 +222,10 @@ class AddShow extends Component {
 
                         <Col xs={12} md={6}>
                             <Form.Group id='headliner'>
-                                <Form.Label>Headliner</Form.Label>
+                                <Form.Label>Headliner <FontAwesomeIcon icon={faAsterisk} /></Form.Label>
                                 <Form.Control
                                     type="text"
+                                    required
                                     value={headliner}
                                     name='headliner'
                                     onChange={this.handleChangeTextInput}
@@ -228,13 +234,15 @@ class AddShow extends Component {
                         </Col>
                         <Col xs={12} md={6}>
                             <Form.Group>
-                                <Form.Label>Headliner Genre</Form.Label>
-                                {<ReactTags tags={genres}
+                                <Form.Label>Headliner Genre <FontAwesomeIcon icon={faAsterisk} /></Form.Label>
+                                {<ReactTags
+                                    tags={headlinerGenre}
                                     inline
+                                    required
                                     inlinePosition="after"
                                     suggestions={genres}
                                     handleDelete={this.handleDeleteHeadlinerGenre}
-                                    handleAddition={this.handleAddition}
+                                    handleAddition={this.handleAddition()}
                                     delimiters={delimiters} />}
                             </Form.Group>
                         </Col>
@@ -287,7 +295,8 @@ class AddShow extends Component {
                                                 <Form.Label>{`Support ${index + 1} Genre`}</Form.Label>
                                                 <Row>
                                                     <Col md={10} xs={9}>
-                                                        {<ReactTags tags={item.genres}
+                                                        {<ReactTags
+                                                            tags={item.genres}
                                                             inline
                                                             inlinePosition="after"
                                                             suggestions={genres}

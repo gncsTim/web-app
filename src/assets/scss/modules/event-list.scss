@@ -2,6 +2,7 @@
   padding-top: $space-m;
   padding-bottom: $space-m;
   min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
+  padding-bottom: 100px;
 
   a {
     &:hover, &:focus {
@@ -18,15 +19,16 @@
       margin: $space-m 0;
   }
   .list-event {
-
     &:hover, &:focus {
       text-decoration: none;
       background-color: $primary-color;
     }
+    p {
 
-
-    background-color: $color-white;
+      color: $color-black;
+    }
     color: $color-black;
+    background-color: $color-white;
     margin-bottom: $space-m;
     text-align: left;
     .row {
