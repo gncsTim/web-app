@@ -8,6 +8,9 @@ import EventList from 'components/eventList/container'
 import AddShow from 'components/addShow/container'
 import Underground from 'components/underground/component'
 
+import Imprint from 'components/imprint/component'
+
+
 import WikiListBands from 'components/wiki/wikiListBands/container'
 import WikiBandDetail from 'components/wiki/wikiBandDetail/container'
 import WikiListVenues from 'components/wiki/wikiListVenues/container'
@@ -35,6 +38,9 @@ const App = () => {
             <Route exact path="/WikiVenues" component={WikiListVenues} />
 
             <Route exact path="/login" component={LogInForm} />
+
+            <Route exact path="/Imprint" component={Imprint} />
+
 
             <Route exact path="/Underground" component={Underground} />
             <Route path="*" component={PageNotFound} />

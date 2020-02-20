@@ -1,6 +1,8 @@
 .event-list {
   padding-top: $space-m;
   padding-bottom: $space-m;
+  min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
+
   a {
     &:hover, &:focus {
       text-decoration: none;

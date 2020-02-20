@@ -15,7 +15,7 @@ import Feedback from 'react-bootstrap/Feedback'
 
 const LogInForm = ({ handleLoginRequest, loading, error }) => {
     console.log(error);
-    
+
   const [validated, setValidated] = useState(false)
   const [email, setLoginEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -35,6 +35,7 @@ const LogInForm = ({ handleLoginRequest, loading, error }) => {
   }
   return (
     <Container>
+      <h1> Editor login</h1>
       <Row className="justify-content-md-center">
         <Col xs lg="4">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
@@ -69,6 +70,10 @@ const LogInForm = ({ handleLoginRequest, loading, error }) => {
               <Button variant="primary" type="submit">
                 {loading ? <span>loding...</span> : <span>login</span>}
               </Button>
+            </Col>
+            <Col xs={12}>
+            <hr />
+              <p className="text-center">Version: 0.0.1.2</p>
             </Col>
           </Form>
         </Col>

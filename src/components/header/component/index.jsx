@@ -22,6 +22,7 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Link to="/EventList">SHOWS</Link>
+              {/*
               <NavDropdown title="WIKI" id="basic-nav-dropdown">
                 <LinkContainer to="/wikiBands">
                   <NavDropdown.Item>Bands</NavDropdown.Item>
@@ -30,8 +31,12 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
                   <NavDropdown.Item>Venues</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
+              */}
               <Link to="/AddShow">+ SHOW</Link>
+              {/*
               <Link to="/AddWiki">+ WIKI</Link>
+              */}
+
               <Link to="/Underground">UNDERGROUND</Link>
             </Nav>
             {userCtx && (

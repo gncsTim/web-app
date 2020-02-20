@@ -30,7 +30,7 @@ class AddShow extends Component {
         this.state = {
             name: '',
             venue: '',
-            venueAdress: '',    
+            venueAdress: '',
             headliner: '',
             headlinerGenre: [],
             headlinerLinks: [],
@@ -123,7 +123,7 @@ class AddShow extends Component {
         this.setState({ support })
     }
 
-    
+
 
     addSupport() {
         const support = Object.assign(this.state.support, {})
@@ -202,7 +202,7 @@ class AddShow extends Component {
                                     onChange={this.handleChangeTextInput}
                                 />
                             </Form.Group>
-                        </Col> 
+                        </Col>
                         <Col xs={12} md={8}>
                             <Form.Group id='venueAdress'>
                                 <Form.Label>Venue adress (Hellstreet 666, 13120 Berlin)</Form.Label>
@@ -213,7 +213,7 @@ class AddShow extends Component {
                                     onChange={this.handleChangeTextInput}
                                 />
                             </Form.Group>
-                        </Col>   
+                        </Col>
 
                         <Col xs={12} md={6}>
                             <Form.Group id='headliner'>
@@ -239,7 +239,7 @@ class AddShow extends Component {
                             </Form.Group>
                         </Col>
                         <Col md={12}>
-                        
+
                             <Form.Group>
                                 <Form.Label>Headliner Links</Form.Label>
                                 <Row>
@@ -251,7 +251,7 @@ class AddShow extends Component {
                                     </Col>
                                     <Col xs={12} md={6}>
                                         <Form.Control
-                                            type="text"                                        
+                                            type="text"
                                             onChange={this.handleChangeTextInput}
                                         />
                                     </Col>
