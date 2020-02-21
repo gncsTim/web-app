@@ -34,25 +34,25 @@ class AddShow extends Component {
             venueAdress: '',
             headliner: '',
             headlinerGenre: [],
-            headlinerLinks: [],
+            headlinerLinks: ['', ''],
             support: {
                 [uuidv1()]: {
                     name: '',
                     genres: [],
-                    links: []
+                    links: ['', '']
                 }
             }
         }
         this.handleDeleteHeadlinerGenre = this.handleDeleteHeadlinerGenre.bind(this)
-        this.handleDeleteHeadlinerLinks = this.handleDeleteHeadlinerLinks.bind(this)
         this.handleDeleteSupportGenre = this.handleDeleteSupportGenre.bind(this)
-        this.handleDeleteSupportLinks = this.handleDeleteSupportLinks.bind(this)
         this.handleAddition = this.handleAddition.bind(this)
         this.handleChangeTextInput = this.handleChangeTextInput.bind(this)
         this.handleChangeDate = this.handleChangeDate.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChangeSupport = this.handleChangeSupport.bind(this)
         this.addSupport = this.addSupport.bind(this)
+        this.addHeadlinerLinks = this.addHeadlinerLinks.bind(this)
+        this.addSupportLinks = this.addSupportLinks.bind(this)
         this.deletSupport = this.deletSupport.bind(this)
         this.handleAddShow = this.handleAddShow.bind(this)
     }
@@ -67,7 +67,7 @@ class AddShow extends Component {
             headliner,
             headlinerGenre,
             headlinerLinks,
-            date: date?date.format():"",
+            date: date ? date.format() : "",
             support
         }
         // this.props.addEvent(event)
@@ -81,23 +81,11 @@ class AddShow extends Component {
         })
     }
 
-    handleDeleteHeadlinerLinks = i => {
-        const { headlinerLinks } = this.state
-        this.setState({
-            headlinerLinks: headlinerLinks.filter((tag, index) => index !== i)
-        })
-    }
-
     handleDeleteSupportGenre = key => i => {
         let support = Object.assign(this.state.support, {})
         support[key].genres = support[key].genres.filter((tag, index) => index !== i)
         this.setState({ support })
 
-    }
-
-    handleDeleteSupportLinks = key => i => {
-        let support = Object.assign(this.state.support, {})
-        support[key].links = support[key].links.filter((tag, index) => index !== i)
     }
 
     handleAddition = key => tag => {
@@ -126,14 +114,35 @@ class AddShow extends Component {
         this.setState({ support })
     }
 
-
-
     addSupport() {
         const support = Object.assign(this.state.support, {})
         support[uuidv1()] = {
             name: '',
-            genres: []
+            genres: [],
+            links: []
         }
+        this.setState({ support })
+    }
+
+    handleChangeHeadlinerLinks = index => event => {
+        const headlinerLinks = this.state.headlinerLinks.concat([])
+        headlinerLinks[index] = event.target.value
+        this.setState({headlinerLinks})
+    }
+
+    addHeadlinerLinks() {
+        this.setState({ headlinerLinks: this.state.headlinerLinks.concat(['', '']) })
+    }
+
+    handleChangeSupportLinks = (key, index) => event => {
+        const support = JSON.parse(JSON.stringify(this.state.support))
+        support[key].links[index] = event.target.value
+        this.setState({ support })
+    }
+
+    addSupportLinks = key => () => {
+        const support = JSON.parse(JSON.stringify(this.state.support))
+        support[key].links = support[key].links.concat(['', ''])
         this.setState({ support })
     }
 
@@ -167,7 +176,7 @@ class AddShow extends Component {
     }
 
     render() {
-        const { name, venue, headlinerGenre, venueAdress, date, headliner, support } = this.state
+        const { name, venue, headlinerGenre, venueAdress, date, headliner, support, headlinerLinks } = this.state
         return (
             <Container>
                 <h1>Good Night Couch Side | Add Show</h1>
@@ -251,17 +260,23 @@ class AddShow extends Component {
                             <Form.Group>
                                 <Form.Label>Headliner Links</Form.Label>
                                 <Row>
-                                    <Col xs={12} md={6}>
-                                        <Form.Control
-                                            type="text"
-                                            onChange={this.handleChangeTextInput}
-                                        />
+                                    <Col md={10}>
+                                        <Row>
+                                            {headlinerLinks.map((item, index) => (
+                                                <Col xs={12} md={6} key={index}>
+                                                    <Form.Control
+                                                        type="text"
+                                                        onChange={this.handleChangeHeadlinerLinks(index)}
+                                                    />
+                                                </Col>
+                                            ))}
+                                        </Row>
                                     </Col>
-                                    <Col xs={12} md={6}>
-                                        <Form.Control
-                                            type="text"
-                                            onChange={this.handleChangeTextInput}
-                                        />
+                                    <Col md={2}>
+                                        <Button className="btn-block add-show-btn"
+                                            variant='primary' onClick={this.addHeadlinerLinks}>
+                                            <FontAwesomeIcon icon={faPlus} /> Links
+                                        </Button>
                                     </Col>
                                 </Row>
                             </Form.Group>
@@ -316,22 +331,27 @@ class AddShow extends Component {
                                             </Form.Group>
                                         </Col>
                                         <Col>
-                                            <Form.Group id={key}>
-                                                <Form.Label>{`Support ${index + 1} Genre`}</Form.Label>
+                                            <Form.Group>
+                                                <Form.Label>{`Support ${index + 1} Links`}</Form.Label>
                                                 <Row>
-                                                    <Col xs={12} md={6}>
-                                                        <Form.Control
-                                                            type="text"
-                                                            value={item.name}
-                                                            onChange={this.handleChangeSupport(key)}
-                                                        />
+                                                    <Col md={10}>
+                                                        <Row>
+                                                            {item.links.map((item, index) => (
+                                                                <Col xs={12} md={6} key={index}>
+                                                                    <Form.Control
+                                                                        type="text"
+                                                                        value={item.name}
+                                                                        onChange={this.handleChangeSupportLinks(key, index)}
+                                                                    />
+                                                                </Col>                                                                
+                                                            ))}
+                                                        </Row>
                                                     </Col>
-                                                    <Col xs={12} md={6}>
-                                                        <Form.Control
-                                                            type="text"
-                                                            value={item.name}
-                                                            onChange={this.handleChangeSupport(key)}
-                                                        />
+                                                    <Col md={2}>
+                                                        <Button className="btn-block add-show-btn"
+                                                            variant='primary' onClick={this.addSupportLinks(key)}>
+                                                            <FontAwesomeIcon icon={faPlus} /> Links
+                                                        </Button>
                                                     </Col>
                                                 </Row>
                                             </Form.Group>
