@@ -4,7 +4,7 @@ import logoImage from 'assets/img/logo.svg'
 
 const Underground = () => {
 
-  return <Container className="underground">
+  return <Container className="content-page">
           <h1>Support your local Underground Scene</h1>
           <h2>
           <img src={logoImage} width="50px" alt='gncs logo'/> GOOD NIGHT COUCH SIDE

@@ -1,13 +1,23 @@
 footer {
   background-color: $background-color-secondary;
-  height: 60px;
+  min-height: $footer-height;
   border-top: $border-m-white;
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
-  .footer-content {
-    color: $color-white;
-    text-align: center;
+  color: $color-white;
+  padding: $space-m $space-l;
+
+  @media (min-width: 768px) {
+    .footer-content {
+      width: 100%;
+      margin-right: -20%;
+      float: left;
+      text-align: center;
+    }
+    .footer-links {
+      float:right;
+    }
   }
 }

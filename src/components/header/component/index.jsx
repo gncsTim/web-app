@@ -17,11 +17,14 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
         </Link>
       </div>
       <div className="main-container">
-        <Navbar variant="dark" expand="lg">
+        <Navbar variant="dark" expand="sm">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
+
             <Nav className="mr-auto">
               <Link to="/EventList">SHOWS</Link>
+              {/*
+
               <NavDropdown title="WIKI" id="basic-nav-dropdown">
                 <LinkContainer to="/wikiBands">
                   <NavDropdown.Item>Bands</NavDropdown.Item>
@@ -30,16 +33,25 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
                   <NavDropdown.Item>Venues</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>
+              */}
+              
               <Link to="/AddShow">+ SHOW</Link>
+              {/*
               <Link to="/AddWiki">+ WIKI</Link>
+              */}
+
               <Link to="/Underground">UNDERGROUND</Link>
             </Nav>
+            <Nav>
             {userCtx && (
-              <NavDropdown title={userCtx.name} id="userCtx-nav-dropdown">
-                <Link to="/AddShow">+ SHOW</Link>
-                <Button onClick={() => handleLogout()}>Logout</Button>
-              </NavDropdown>
+
+                <NavDropdown className="user-menu" title={userCtx.name} id="userCtx-nav-dropdown">
+                  <LinkContainer to="/Eventlist"  onClick={() => handleLogout()}>
+                    <NavDropdown.Item> Logout</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
             )}
+            </Nav>
           </Navbar.Collapse>
         </Navbar>
       </div>

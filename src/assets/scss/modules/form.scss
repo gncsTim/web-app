@@ -1,5 +1,13 @@
 .form-group {
     text-align: left;
+
+    .fa-asterisk {
+      color: $primary-color;
+      margin-top: -4px;
+      font-size: smaller;
+      position: absolute;
+    }
+
     hr {
       border-color: $color-white;
     }

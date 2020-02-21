@@ -3,6 +3,7 @@ header {
   box-shadow:$primary-box-shadow;
   background-color: $background-color-secondary;
   text-align: center;
+  min-height: $header-height;
   .header-logo {
     img {
       margin-top: $space-m;
@@ -11,11 +12,17 @@ header {
     }
   }
   .navbar {
+    .user-menu {
+      width: calc( #{$dropdown-width} + #{$space-s} );
+      .dropdown-toggle {
+        text-align: left;
+      }
+    }
     padding: 0;
     a {
-      border-left: $border-s-white;
+      border-left: $border-s-primary;
       &:hover, &:focus, &:active {
-        border-left: $border-s-primary;
+        border-left: $border-s-white;
       }
     }
   }
@@ -28,11 +35,13 @@ header {
       text-decoration: none;
     }
   }
-  .navbar-expand-lg .navbar-nav .dropdown-menu {
+  .navbar-expand-sm .navbar-nav .dropdown-menu {
     border-radius: 0;
     background-color: $primary-color;
     margin-top: $space-s;
     padding: $space-s;
+    width: $dropdown-width;
+    min-width: auto;
     & a {
       color: $color-white;
       border: none;

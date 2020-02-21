@@ -1,11 +1,18 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
    return <footer>
-            <div className="footer-content">
-              GOOD NIGHT COUCH SIDE <br />
-              The page for Underground shows in Berlin
+            <div className="main-container">
+              <div className="footer-content">
+                GOOD NIGHT COUCH SIDE <br />
+                The page for Underground shows in Berlin
               </div>
+              <div className="footer-links">
+                <Link to="/Imprint">Imprint</Link>
+              </div>
+            </div>
           </footer>
  }
 
