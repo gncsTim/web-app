@@ -31,7 +31,7 @@ export const couchdbMiddleware = store => next => {
   localDB.replicate
     .from(remoteDB, {
       live: true,
-      // filter: 'filters/current_events',
+      filter: 'filters/current_events',
       include_docs: true,
       retry: true
     })
