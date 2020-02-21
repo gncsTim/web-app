@@ -49,9 +49,8 @@ body {
 
 .main-container {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: $maincontainer-width;
   background-color: $background-color-secondary;
-  background-size: cover;
   font-size: 12px;
   .container {
     min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
@@ -62,7 +61,7 @@ body {
     color: $color-white;
   }
   h1 {
-    font-size: 24px;
+    font-size: $h1-size;
     color: $color-white;
     text-align: center;
   }
