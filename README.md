@@ -1,5 +1,31 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Init Git Flow
+
+git flow init -f                                                                                                                                                                                                                   130 ↵
+
+Which branch should be used for bringing forth production releases?
+   - addEventCouchdb
+   - bugfix/addEventCouchdb
+   - develop
+   - master
+Branch name for production releases: [master] 
+
+Which branch should be used for integration of the "next release"?
+   - addEventCouchdb
+   - bugfix/addEventCouchdb
+   - develop
+Branch name for "next release" development: [develop] 
+
+How to name your supporting branch prefixes?
+Feature branches? [feature/] feature-gncs/
+Bugfix branches? [bugfix/] bugfix-gncs/
+Release branches? [release/] release-gncs/
+Hotfix branches? [hotfix/] hotfix-gncs/
+Support branches? [support/] support-gncs/
+Version tag prefix? [] 
+Hooks and filters directory? [/home/tim/workspace/gncs/web-app/.git/hooks]
+
 ## Available Scripts
 
 In the project directory, you can run:
