@@ -44,7 +44,6 @@ const EventList = ({ eventList }) => {
                 <Col xs={12} md={3}>
                   <h2>{event.venue}</h2>
                   <Moment format="HH:mm | DD.MM.YYYY">
-                    any
                     {event.date}
                   </Moment>
                 </Col>
