@@ -4,6 +4,8 @@ import { Form, Button } from 'react-bootstrap'
 import Datetime from 'react-datetime'
 import uuidv1 from 'uuid/v1'
 import { Col, Row } from 'react-bootstrap'
+import crypto from 'crypto'
+import ksuid from 'ksuid'
 
 import { WithContext as ReactTags } from 'react-tag-input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -154,7 +156,11 @@ class AddShow extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        const { name, date, headliner, headlinerGenre, support } = this.state
+        const { name, date, headliner, headlinerGenre, support, venue } = this.state
+        console.log(date.valueOf())
+        const id = ksuid.fromParts(date.valueOf(), crypto.randomBytes(16))
+        console.log(id.string)
+        // return
         const artist_details = [
             {
                 name: headliner,
@@ -166,13 +172,18 @@ class AddShow extends Component {
             artist_details.push(support[key])
         })
         const data = {
+            _id: id.string,
+            type: 'event',
             name,
-            date,
-            artist_details
+            date: date.toISOString(),
+            artist_details,
+            venue
         }
         if (support && Object.keys(support).length > 0) {
             data.support = Object.keys(support).map(key => support[key].name)
         }
+        console.log(data)
+        this.props.addEvent(data)
     }
 
     render() {

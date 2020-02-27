@@ -12,6 +12,8 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
+    "crypto": "^1.0.1",
+    "ksuid": "^1.2.0",
     "moment": "^2.24.0",
     "pouchdb": "^7.1.1",
     "pouchdb-authentication": "^1.1.3",
