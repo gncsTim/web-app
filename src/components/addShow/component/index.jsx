@@ -119,7 +119,7 @@ class AddShow extends Component {
         support[uuidv1()] = {
             name: '',
             genres: [],
-            links: []
+            links: ['', '']
         }
         this.setState({ support })
     }
@@ -272,8 +272,8 @@ class AddShow extends Component {
                                             ))}
                                         </Row>
                                     </Col>
-                                    <Col md={2}>
-                                        <Button className="btn-block add-show-btn"
+                                    <Col md={2} className="add-linkt-btn-container">
+                                        <Button className="btn-block add-content-btn"
                                             variant='primary' onClick={this.addHeadlinerLinks}>
                                             <FontAwesomeIcon icon={faPlus} /> Links
                                         </Button>
@@ -281,8 +281,8 @@ class AddShow extends Component {
                                 </Row>
                             </Form.Group>
                         </Col>
-                        <Col md={2} xs={3}>
-                            <Button className="btn-block add-show-btn"
+                        <Col md={2} xs={6}>
+                            <Button className="btn-block add-content-btn"
                                 variant='primary' onClick={this.addSupport}>
                                 <FontAwesomeIcon icon={faPlus} /> Support
                             </Button>
@@ -347,8 +347,8 @@ class AddShow extends Component {
                                                             ))}
                                                         </Row>
                                                     </Col>
-                                                    <Col md={2}>
-                                                        <Button className="btn-block add-show-btn"
+                                                    <Col md={2} className="add-linkt-btn-container">
+                                                        <Button className="btn-block add-content-btn"
                                                             variant='primary' onClick={this.addSupportLinks(key)}>
                                                             <FontAwesomeIcon icon={faPlus} /> Links
                                                         </Button>
