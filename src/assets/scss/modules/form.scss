@@ -1,13 +1,20 @@
 .form-group {
     text-align: left;
 
+    .add-linkt-btn-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+    }
+    
     .fa-asterisk {
       color: $primary-color;
       margin-top: -4px;
       font-size: smaller;
       position: absolute;
     }
-
+    
     hr {
       border-color: $color-white;
     }
@@ -17,13 +24,17 @@
     }
     .form-control {
       height: 31px;
+      margin-bottom: 1rem;
     }
     label {
-        color: $color-white
+      color: $color-white
     }
-}
-form {
-  hr {
+  }
+  form {
+    .add-content-btn {
+      margin-bottom: 1rem;
+    }
+    hr {
     border-color: white;
   }
   .form-group {
