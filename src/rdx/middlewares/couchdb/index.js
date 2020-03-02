@@ -11,7 +11,7 @@ import {
 } from './utils'
 import { remoteCouchdbUrl } from 'config'
 import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX } from 'rdx/constants/actionTypes'
-import { setOwneRequest } from 'components/addShow/action'
+import { setOwneRequest, addEventSuccess, addEventError } from 'components/addShow/action'
 import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
 
 PouchDB.plugin(PouchDBAuth)
@@ -36,7 +36,6 @@ export const couchdbMiddleware = store => next => {
   localDB
     .query('events/all', { include_docs: true, attachments: true })
     .then(results => {
-      console.log(results)
       store.dispatch(
         setEventList(
           results.rows
@@ -66,18 +65,12 @@ export const couchdbMiddleware = store => next => {
   requests
     .allDocs({ include_docs: true })
     .then(respone => {
-      console.log(respone)
       store.dispatch(setOwneRequest(respone.rows.map(item => item.id)))
     })
     .catch(err => {
       console.error(err)
     })
   return action => {
-    const owneRequestIds = store.getState().owneRequestIds
-    console.log(action.type)
-    const { userCtx } = store.getState()
-    console.log(userCtx)
-    console.log(userCtx && userCtx.roles.indexOf('_admin', 'editor') !== -1)
     switch (action.type) {
       case SET_REQUEST_SYNC:
         if (syncRequests) syncRequests.cancel()
@@ -116,37 +109,32 @@ export const couchdbMiddleware = store => next => {
           })
         break
       case ADD_EVENT:
-        console.log(owneRequestIds)
         requests
           .put(action.payload)
           .then(response => {
-            console.log(response)
+            store.dispatch(addEventSuccess(response))
           })
           .catch(err => {
-            console.error(err)
+            store.dispatch(addEventError(err))
           })
         return console.log(action.payload)
       case ADD_EVENT_REMOTE:
-        console.log(action.payload)
         localDB
           .put(action.payload)
           .then(response => {
-            console.log(response)
+            store.dispatch(addEventSuccess(response))
           })
           .catch(err => {
-            console.error(err)
+            store.dispatch(addEventError(err))
           })
         break
       case SET_USER_CTX:
-        console.log(action.payload)
         if (action.payload.roles.indexOf('_admin', 'editor') !== -1) {
-          console.log('set replictation from local to remote')
           PouchDB.replicate(localDB, remoteDB, {
             live: true,
             retry: true
           })
             .on('change', change => {
-              console.log(change)
               const events = change.docs.filter(item => item.type === 'event')
               if (events.length > 0) {
                 store.dispatch(addOrUpdateEvents(events))
