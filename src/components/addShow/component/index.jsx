@@ -76,7 +76,7 @@ class AddShow extends Component {
         console.log(event)
     }
 
-    handleDeleteHeadlinerGenre = i => {
+    handleDeleteHeadlinerGenre(i) {
         const { headlinerGenre } = this.state
         this.setState({
             headlinerGenre: headlinerGenre.filter((tag, index) => index !== i)
@@ -156,6 +156,7 @@ class AddShow extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        const {userCtx, addEventRemote, addEvent} = this.props
         const { name, date, headliner, headlinerGenre, support, venue } = this.state
         console.log(date.valueOf())
         const id = ksuid.fromParts(date.valueOf(), crypto.randomBytes(16))
@@ -164,7 +165,7 @@ class AddShow extends Component {
         const artist_details = [
             {
                 name: headliner,
-                genres: headlinerGenre,
+                genres: headlinerGenre.map(item => item.key),
                 links: []
             }
         ]
@@ -173,6 +174,8 @@ class AddShow extends Component {
         })
         const data = {
             _id: id.string,
+            headliner,
+            genres: headlinerGenre.map(item => item.key),
             type: 'event',
             name,
             date: date.toISOString(),
@@ -182,8 +185,12 @@ class AddShow extends Component {
         if (support && Object.keys(support).length > 0) {
             data.support = Object.keys(support).map(key => support[key].name)
         }
+        console.log(userCtx)
+        if (userCtx && userCtx.roles.indexOf('_admin', 'editor') !== -1) {
+            return addEventRemote(data)
+        }
         console.log(data)
-        this.props.addEvent(data)
+        addEvent(data)
     }
 
     render() {

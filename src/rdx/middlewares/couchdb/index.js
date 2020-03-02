@@ -7,17 +7,17 @@ import {
   heanleOnPausedRemote,
   heanleOnActiveRemote,
   heanleOnDeniedRemote,
-  heanleOnErrorRemote,
-  updateRequestSync
+  heanleOnErrorRemote
 } from './utils'
 import { remoteCouchdbUrl } from 'config'
-import { ADD_EVENT, SET_REQUEST_SYNC } from 'rdx/constants/actionTypes'
+import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX } from 'rdx/constants/actionTypes'
 import { setOwneRequest } from 'components/addShow/action'
-import { setEventList } from 'components/eventList/action'
+import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
 
 PouchDB.plugin(PouchDBAuth)
 export const remoteDB = new PouchDB(remoteCouchdbUrl('gncs'), { skip_setup: true })
 export const localDB = new PouchDB('gncs')
+export const requests = new PouchDB('requests')
 
 export const couchdbMiddleware = store => next => {
   localDB.replicate
@@ -61,41 +61,7 @@ export const couchdbMiddleware = store => next => {
     })
     .catch(error => console.log(error))
 
-  const requests = new PouchDB('requests')
   let syncRequests = null
-  // PouchDB.replicate(requests, remoteCouchdbUrl('requests'), {
-  //   live: true,
-  //   retry: true,
-  //   filter: doc => {
-  //     console.log(doc)
-  //     if (!doc._deleted) return false
-  //     if (doc._id.match(/^_design\/.*/)) return true
-  //   }
-  // })
-  //   .on('change', function(info) {
-  //     // handle change
-  //     console.log('handle change: ', info)
-  //   })
-  //   .on('paused', function(err) {
-  //     // replication paused (e.g. replication up to date, user went offline)
-  //     console.log('replication paused (e.g. replication up to date, user went offline): ', err)
-  //   })
-  //   .on('active', function() {
-  //     // replicate resumed (e.g. new changes replicating, user went back online)
-  //     console.log('replicate resumed (e.g. new changes replicating, user went back online)')
-  //   })
-  //   .on('denied', function(err) {
-  //     // a document failed to replicate (e.g. due to permissions)
-  //     console.log('a document failed to replicate (e.g. due to permissions): ', err)
-  //   })
-  //   .on('complete', function(info) {
-  //     // handle complete
-  //     console.log('handle complete: ', info)
-  //   })
-  //   .on('error', function(err) {
-  //     // handle error
-  //     console.log('handle error: ', err)
-  //   })
 
   requests
     .allDocs({ include_docs: true })
@@ -107,52 +73,110 @@ export const couchdbMiddleware = store => next => {
       console.error(err)
     })
   return action => {
-    const userCtx = store.getState().userCtx
     const owneRequestIds = store.getState().owneRequestIds
     console.log(action.type)
+    const { userCtx } = store.getState()
+    console.log(userCtx)
+    console.log(userCtx && userCtx.roles.indexOf('_admin', 'editor') !== -1)
     switch (action.type) {
       case SET_REQUEST_SYNC:
-        console.log(action)
-        console.log(userCtx)
         if (syncRequests) syncRequests.cancel()
-        if (userCtx && userCtx.roles.indesOf('_admin', 'editor')) {
-          console.log('todo')
-        } else {
-          updateRequestSync(requests, remoteCouchdbUrl('request'), action.payload, true)
-        }
+        // requests.allDocs({include_docs: true})
+        //   .then(response => console.log(response))
+        //   .catch(error => console.log(error))
+        syncRequests = PouchDB.replicate(requests, remoteCouchdbUrl('request'), {
+          // live: true,
+          retry: true
+        })
+          .on('change', info => {
+            console.log(info)
+          })
+          .on('paused', function(err) {
+            // replication paused (e.g. replication up to date, user went offline)
+            console.log(
+              'replication paused (e.g. replication up to date, user went offline): ',
+              err
+            )
+          })
+          .on('active', function() {
+            // replicate resumed (e.g. new changes replicating, user went back online)
+            console.log('replicate resumed (e.g. new changes replicating, user went back online)')
+          })
+          .on('denied', function(err) {
+            // a document failed to replicate (e.g. due to permissions)
+            console.log('a document failed to replicate (e.g. due to permissions): ', err)
+          })
+          .on('complete', function(info) {
+            // handle complete
+            console.log('handle complete: ', info)
+          })
+          .on('error', function(err) {
+            // handle error
+            console.log('handle error: ', err)
+          })
         break
-      // case SET_OWNE_REQUEST:
-      //   console.log(action.payload)
-      //   if (syncRequests) syncRequests.cancel()
-      // updateRequestSync(
-      //   requests,
-      //   userCtx.roles.indexOf('_admin', 'editor')
-      //     ? remoteCouchdbUrl('gncs')
-      //     : remoteCouchdbUrl('request'),
-      //   action.payload
-      // )
-      // break
       case ADD_EVENT:
         console.log(owneRequestIds)
         requests
           .put(action.payload)
           .then(response => {
             console.log(response)
-            console.log(owneRequestIds.concat(action.payload))
-            console.log(userCtx)
-
-            // updateRequestSync(
-            //   requests,
-            //   userCtx.roles.indexOf('_admin', 'editor')
-            //     ? remoteCouchdbUrl('gncs')
-            //     : remoteCouchdbUrl('request'),
-            //   owneRequestIds.concat(action.payload)
-            // )
           })
           .catch(err => {
             console.error(err)
           })
         return console.log(action.payload)
+      case ADD_EVENT_REMOTE:
+        console.log(action.payload)
+        localDB
+          .put(action.payload)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        break
+      case SET_USER_CTX:
+        console.log(action.payload)
+        if (action.payload.roles.indexOf('_admin', 'editor') !== -1) {
+          console.log('set replictation from local to remote')
+          PouchDB.replicate(localDB, remoteDB, {
+            live: true,
+            retry: true
+          })
+            .on('change', change => {
+              console.log(change)
+              const events = change.docs.filter(item => item.type === 'event')
+              if (events.length > 0) {
+                store.dispatch(addOrUpdateEvents(events))
+              }
+            })
+            .on('paused', function(err) {
+              // replication paused (e.g. replication up to date, user went offline)
+              console.log(
+                'replication paused (e.g. replication up to date, user went offline): ',
+                err
+              )
+            })
+            .on('active', function() {
+              // replicate resumed (e.g. new changes replicating, user went back online)
+              console.log('replicate resumed (e.g. new changes replicating, user went back online)')
+            })
+            .on('denied', function(err) {
+              // a document failed to replicate (e.g. due to permissions)
+              console.log('a document failed to replicate (e.g. due to permissions): ', err)
+            })
+            .on('complete', function(info) {
+              // handle complete
+              console.log('handle complete: ', info)
+            })
+            .on('error', function(err) {
+              // handle error
+              console.log('handle error: ', err)
+            })
+        }
+        break
       default:
     }
     next(action)

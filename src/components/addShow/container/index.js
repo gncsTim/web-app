@@ -1,15 +1,16 @@
-import {connect} from 'react-redux';
-import AddEvent from '../component';
-import {addEvent} from '../action'
+import { connect } from 'react-redux'
+import AddEvent from '../component'
+import { addEvent, addEventRemote } from '../action'
 
-const mapDispatch = dispatch => ({    
-    addEvent: event => dispatch(addEvent(event))
+const mapState = state => ({
+  userCtx: state.userCtx
 })
 
-const connector = connect(
-  null,
-  mapDispatch
-)
+const mapDispatch = dispatch => ({
+  addEvent: event => dispatch(addEvent(event)),
+  addEventRemote: event => dispatch(addEventRemote(event))
+})
 
+const connector = connect(mapState, mapDispatch)
 
-export default connector(AddEvent);
+export default connector(AddEvent)
