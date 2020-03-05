@@ -34,6 +34,10 @@ class AddShow extends Component {
       name: '',
       date: null,
       venue: '',
+      presale: '',
+      atTheDoor: '',
+      facebookLink: '',
+      description: '',
       venueAdress: '',
       headliner: '',
       headlinerGenre: [],
@@ -65,11 +69,15 @@ class AddShow extends Component {
   }
 
   handleAddShow(e) {
-    console.log(this.state)
+
     const {
       name,
       venue,
       venueAdress,
+      presale,
+      atTheDoor,
+      facebookLink,
+      description,
       headliner,
       headlinerGenre,
       headlinerLinks,
@@ -80,6 +88,10 @@ class AddShow extends Component {
       name,
       venue,
       venueAdress,
+      presale,
+      atTheDoor,
+      facebookLink,
+      description,
       headliner,
       headlinerGenre,
       headlinerLinks,
@@ -87,7 +99,7 @@ class AddShow extends Component {
       support
     }
     // this.props.addEvent(event)
-    console.log(event)
+
   }
 
   handleDeleteHeadlinerGenre(i) {
@@ -107,7 +119,7 @@ class AddShow extends Component {
     if (!key) {
       return this.setState({ headlinerGenre: this.state.headlinerGenre.concat([tag]) })
     }
-    console.log(key)
+
     let support = Object.assign(this.state.support, {})
     support[key].genres.push(tag)
     this.setState({ support })
@@ -126,7 +138,8 @@ class AddShow extends Component {
 
   handleChangeSupport = key => event => {
     const support = Object.assign(this.state.support, {})
-    support[key].name = event.currentTarget.value
+    let value = event.currentTarget.value
+    support[key].name = value
     this.setState({ support })
   }
 
@@ -171,11 +184,10 @@ class AddShow extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const { userCtx, addEventRemote, addEvent } = this.props
-    const { name, date, headliner, headlinerGenre, support, venue, headlinerLinks } = this.state
-    console.log(this.state)
-    console.log(date.valueOf())
+    const { name, date, presale, atTheDoor, facebookLink, description, headliner, headlinerGenre, venue, headlinerLinks } = this.state
+
     const id = ksuid.fromParts(date.valueOf(), crypto.randomBytes(16))
-    console.log(id.string)
+
     // return
     const artist_details = [
       {
@@ -184,14 +196,20 @@ class AddShow extends Component {
         links: headlinerLinks
       }
     ]
+    const support = JSON.parse(JSON.stringify(this.state.support))
     Object.keys(support).forEach(key => {
       const item = support[key]
-      console.log(item)
+      item.genres = item.genres.map( item => item.text)
+
       if (item && item.name.trim() !== '') artist_details.push(item)
     })
     const data = {
       _id: id.string,
       headliner,
+      presale,
+      atTheDoor,
+      facebookLink,
+      description,
       genres: headlinerGenre.map(item => item.text),
       type: 'event',
       name,
@@ -204,12 +222,12 @@ class AddShow extends Component {
         .map(key => support[key].name)
         .filter(item => item && item.trim() !== '')
     }
-    console.log(userCtx)
-    console.log(data)
+
+
     if (userCtx && userCtx.roles.indexOf('_admin', 'editor') !== -1) {
       return addEventRemote(data)
     }
-    console.log(data)
+
     addEvent(data)
   }
 
@@ -218,6 +236,10 @@ class AddShow extends Component {
     const {
       name,
       venue,
+      presale,
+      atTheDoor,
+      facebookLink,
+      description,
       headlinerGenre,
       venueAdress,
       date,
@@ -225,7 +247,7 @@ class AddShow extends Component {
       support,
       headlinerLinks
     } = this.state
-    console.log(addShowRequest)
+
     return (
       <Container>
         <LodingComonent {...addShowRequest} handleSuccess={pushRoute}>
@@ -240,7 +262,7 @@ class AddShow extends Component {
 
         <Form onSubmit={this.handleSubmit}>
           <Row>
-            <Col xs={12} md={8}>
+            <Col xs={12} md={5}>
               <Form.Group id="name">
                 <Form.Label>Show name</Form.Label>
                 <Form.Control
@@ -251,7 +273,7 @@ class AddShow extends Component {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={4}>
+            <Col xs={12} md={3}>
               <Form.Group id="date">
                 <Form.Label>
                   Date <FontAwesomeIcon icon={faAsterisk} />
@@ -260,6 +282,17 @@ class AddShow extends Component {
               </Form.Group>
             </Col>
             <Col xs={12} md={4}>
+              <Form.Group id="facebookLink">
+                <Form.Label>Link to facebook event</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={facebookLink}
+                  name="facebookLink"
+                  onChange={this.handleChangeTextInput}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={12} md={3}>
               <Form.Group id="venue">
                 <Form.Label>
                   Venue name <FontAwesomeIcon icon={faAsterisk} />
@@ -273,7 +306,7 @@ class AddShow extends Component {
                 />
               </Form.Group>
             </Col>
-            <Col xs={12} md={8}>
+            <Col xs={12} md={5}>
               <Form.Group id="venueAdress">
                 <Form.Label>Venue adress (Hellstreet 666, 13120 Berlin)</Form.Label>
                 <Form.Control
@@ -284,7 +317,28 @@ class AddShow extends Component {
                 />
               </Form.Group>
             </Col>
-
+            <Col xs={6} md={2}>
+              <Form.Group id="presale">
+                <Form.Label>Presal Price in € (12,50)</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={presale}
+                  name="presale"
+                  onChange={this.handleChangeTextInput}
+                />
+              </Form.Group>
+            </Col>
+            <Col xs={6} md={2}>
+              <Form.Group id="atTheDoor">
+                <Form.Label>Door Price in € (13,00 - 15,00)</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={atTheDoor}
+                  name="atTheDoor"
+                  onChange={this.handleChangeTextInput}
+                />
+              </Form.Group>
+            </Col>
             <Col xs={12} md={6}>
               <Form.Group id="headliner">
                 <Form.Label>
@@ -346,6 +400,20 @@ class AddShow extends Component {
                 </Row>
               </Form.Group>
             </Col>
+            <Col xs={12} md={12}>
+              <Form.Group id="description">
+                <Form.Label>Event description</Form.Label>
+                <Form.Control
+                  type="textarea"
+                  as="textarea"
+                  rows="2"
+                  value={description}
+                  name="description"
+                  onChange={this.handleChangeTextInput}
+                />
+              </Form.Group>
+            </Col>
+
             <Col md={2} xs={6}>
               <Button
                 className="btn-block add-content-btn"
