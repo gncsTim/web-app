@@ -1,4 +1,4 @@
-import { SET_OWNE_REQUEST, ADD_EVENT } from 'rdx/constants/actionTypes'
+import { SET_OWN_REQUEST, ADD_EVENT } from 'rdx/constants/actionTypes'
 
 export const ownRequestIdsReducer = (state = [], action) => {
   switch (action.type) {
