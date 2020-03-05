@@ -4,9 +4,7 @@ import PropTypes from 'prop-types'
 import logoImage from 'assets/img/logo.svg'
 
 export const LodingComonent = ({ children, loading, success, error, handleSuccess }) => {
-  console.log(loading)
   if (!loading && !(success || error)) return null
-  console.log(success)
   if (success && typeof handleSuccess === 'function') handleSuccess()
   return (
     <div className="loading-content-box">
