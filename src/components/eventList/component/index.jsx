@@ -33,7 +33,6 @@ const EventList = ({ eventList }) => {
                   </h2>
 
                   <ul>
-                    any
                     {event.support.map((support, index, array) => (
                       <li key={`support-list-${index}`}>
                         {support} {index === array.length - 1 ? '' : '-'}
