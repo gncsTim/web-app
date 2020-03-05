@@ -11,7 +11,7 @@ import {
 } from './utils'
 import { remoteCouchdbUrl } from 'config'
 import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX } from 'rdx/constants/actionTypes'
-import { setOwneRequest, addEventSuccess, addEventError } from 'components/addShow/action'
+import { setOwnRequest, addEventSuccess, addEventError } from 'components/addShow/action'
 import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
 
 PouchDB.plugin(PouchDBAuth)
