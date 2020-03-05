@@ -4,10 +4,10 @@ import moment from 'moment'
 
 import {
   handleOnChangeRemote,
-  heanleOnPausedRemote,
-  heanleOnActiveRemote,
-  heanleOnDeniedRemote,
-  heanleOnErrorRemote
+  handleOnPausedRemote,
+  handleOnActiveRemote,
+  handleOnDeniedRemote,
+  handleOnErrorRemote
 } from './utils'
 import { remoteCouchdbUrl } from 'config'
 import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX } from 'rdx/constants/actionTypes'
@@ -28,10 +28,10 @@ export const couchdbMiddleware = store => next => {
       retry: true
     })
     .on('change', handleOnChangeRemote(store))
-    .on('paused', heanleOnPausedRemote(store))
-    .on('active', heanleOnActiveRemote(store))
-    .on('denied', heanleOnDeniedRemote(store))
-    .on('error', heanleOnErrorRemote(store))
+    .on('paused', handleOnPausedRemote(store))
+    .on('active', handleOnActiveRemote(store))
+    .on('denied', handleOnDeniedRemote(store))
+    .on('error', handleOnErrorRemote(store))
 
   localDB
     .query('events/all', { include_docs: true, attachments: true })
