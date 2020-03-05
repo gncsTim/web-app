@@ -4,7 +4,7 @@ import RequestActor from './component'
 import { setRequestSync } from './action'
 
 const mapState = state => ({
-  owneRequestIds: state.owneRequestIds,
+  ownRequestIds: state.ownRequestIds,
   userCtx: state.userCtx
 })
 
