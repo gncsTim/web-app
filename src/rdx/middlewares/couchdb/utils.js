@@ -8,22 +8,22 @@ export const handleOnChangeRemote = store => change => {
   }
 }
 
-export const heanleOnPausedRemote = store => info => {
+export const handleOnPausedRemote = store => info => {
   console.log('replication paused.', info)
   store.dispatch({ type: 'ADD_MSG', payload: 'replication paused.' })
 }
 
-export const heanleOnActiveRemote = store => info => {
+export const handleOnActiveRemote = store => info => {
   console.log('replication resumed.', info)
   store.dispatch({ type: 'ADD_MSG', payload: 'replication resumed.' })
 }
 
-export const heanleOnDeniedRemote = store => info => {
+export const handleOnDeniedRemote = store => info => {
   console.log('+++ DENIED +++', info)
   store.dispatch({ type: 'ADD_MSG', payload: '+++ DENIED +++' })
 }
 
-export const heanleOnErrorRemote = store => err => {
+export const handleOnErrorRemote = store => err => {
   console.log('+++ ERROR ERROR ERROR +++.', err)
   store.dispatch({ type: 'ADD_MSG', payload: err })
 }
