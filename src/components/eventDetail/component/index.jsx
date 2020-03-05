@@ -25,13 +25,17 @@ const EventDetail = ({ event }) => {
         </div>
 
         <Col className="event-body">
-          {event.entrance_vvk &&
-            `Entrance VVK: ${event.entrance_vvk} ${event.entrance_ak ? ', ' : ''} `}
-          {event.entrance_ak && `Entrance AK: ${event.entrance_ak}`}
+          {event.presale &&
+            `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
+          {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
           <br />
           <br />
-          <p>{event.event_description}</p>
+          <p>{event.description}</p>
+          <a href={event.facebookLink} target="_blank">Facebook Event</a>
           <br />
+          <br />
+          <br />
+
           {event.artist_details.map((artist_details, index) => (
             <div key={index}>
               <h2>{artist_details.name}</h2>
@@ -39,7 +43,7 @@ const EventDetail = ({ event }) => {
               <ul>
                 {artist_details.links.map((link, index) => (
                   <li key={index}>
-                    <a href={link}>{link}</a>
+                    <a href={link} target="_blank">{link}</a>
                   </li>
                 ))}
               </ul>

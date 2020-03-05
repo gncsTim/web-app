@@ -1,5 +1,6 @@
 .form-group {
     text-align: left;
+    margin-bottom: 0;
 
     .add-linkt-btn-container {
       display: flex;
@@ -7,14 +8,13 @@
       justify-content: flex-end;
 
     }
-    
+
     .fa-asterisk {
       color: $primary-color;
       margin-top: -4px;
       font-size: smaller;
       position: absolute;
     }
-    
     hr {
       border-color: $color-white;
     }
@@ -25,6 +25,11 @@
     .form-control {
       height: 31px;
       margin-bottom: 1rem;
+    }
+    textarea {
+      &.form-control {
+        height: 62px;
+      }
     }
     label {
       color: $color-white
@@ -39,12 +44,15 @@
   }
   .form-group {
     text-align: left;
+    margin-bottom: 0;
+
     label {
       color: $color-white;
     }
     input {
-      height: 30px;
+      height: 31px;
     }
+
     div.ReactTags__tagInput {
       input.ReactTags__tagInputField {
         height: 30px;

@@ -4,12 +4,13 @@ import { Col, Row } from 'react-bootstrap'
 import Moment from 'react-moment'
 import eventListImage from 'assets/img/gncs_eventlist_img.jpg'
 import { Link } from 'react-router-dom'
+import EventTitle from './eventTitle'
 
 const EventList = ({ eventList }) => {
   if (eventList.length === 0) return null
   return (
     <Col className="event-list">
-      <h1>krasse shows</h1>
+      <h1>Next shows</h1>
       {eventList.map(event => (
         <div key={event._id}>
           <Row>
@@ -28,10 +29,7 @@ const EventList = ({ eventList }) => {
                   </div>
                 </Col>
                 <Col xs={12} md={5}>
-                  <h2>
-                    {event.name === event.headliner ? event.name : event.name + event.headliner}
-                  </h2>
-
+                    < EventTitle title={event.name} headliner={event.headliner} />
                   <ul>
                     {event.support.map((support, index, array) => (
                       <li key={`support-list-${index}`}>
