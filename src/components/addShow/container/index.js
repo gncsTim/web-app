@@ -13,7 +13,6 @@ const mapDispatch = dispatch => ({
   addEventRemote: event => dispatch(addEventRemote(event)),
   resetAddEventRequest: () => dispatch(resetAddEventRequest()),
   pushRoute: () => {
-    console.log(pushRouteWihtDebounce(2000)('/'))
     dispatch(pushRouteWihtDebounce(2000)('/'))
 }
 })
