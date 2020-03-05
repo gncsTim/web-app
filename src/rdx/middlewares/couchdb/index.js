@@ -65,7 +65,7 @@ export const couchdbMiddleware = store => next => {
   requests
     .allDocs({ include_docs: true })
     .then(respone => {
-      store.dispatch(setOwneRequest(respone.rows.map(item => item.id)))
+      store.dispatch(setOwnRequest(respone.rows.map(item => item.id)))
     })
     .catch(err => {
       console.error(err)
