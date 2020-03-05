@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
+
+import { userCtxShape } from 'gncsPropTypes'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import logoImage from 'assets/img/logo.svg'
 
-const Header = ({ handleGetSession,handleLogout, userCtx }) => {
+const Header = ({ handleGetSession, handleLogout, userCtx }) => {
   useEffect(() => {
     if (!userCtx) handleGetSession()
   })
@@ -20,7 +22,6 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
         <Navbar variant="dark" expand="sm">
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-
             <Nav className="mr-auto">
               <Link to="/EventList">SHOWS</Link>
               {/*
@@ -34,7 +35,7 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
                 </LinkContainer>
               </NavDropdown>
               */}
-              
+
               <Link to="/AddShow">+ SHOW</Link>
               {/*
               <Link to="/AddWiki">+ WIKI</Link>
@@ -43,14 +44,13 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
               <Link to="/Underground">UNDERGROUND</Link>
             </Nav>
             <Nav>
-            {userCtx && (
-
+              {userCtx && (
                 <NavDropdown className="user-menu" title={userCtx.name} id="userCtx-nav-dropdown">
-                  <LinkContainer to="/Eventlist"  onClick={() => handleLogout()}>
+                  <LinkContainer to="/Eventlist" onClick={() => handleLogout()}>
                     <NavDropdown.Item> Logout</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
-            )}
+              )}
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -60,13 +60,7 @@ const Header = ({ handleGetSession,handleLogout, userCtx }) => {
 }
 
 Header.propTypes = {
-  userCtx: PropTypes.oneOfType([
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      roles: PropTypes.arrayOf(PropTypes.string)
-    }),
-    null
-  ]),
+  userCtx: PropTypes.shape(userCtxShape),
   handleGetSession: PropTypes.func,
   handleLogout: PropTypes.func
 }

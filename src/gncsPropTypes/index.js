@@ -26,3 +26,8 @@ export const eventShape = {
   entrance_ak: PropTypes.string,
   artist_details: PropTypes.arrayOf(PropTypes.shape(artistDetailsShape))
 }
+
+export const userCtxShape = {
+  name: PropTypes.string,
+  roles: PropTypes.arrayOf(PropTypes.string)
+}

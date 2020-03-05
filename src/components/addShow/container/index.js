@@ -1,15 +1,22 @@
-import {connect} from 'react-redux';
-import AddEvent from '../component';
-import {addEvent} from '../action'
+import { connect } from 'react-redux'
+import AddEvent from '../component'
+import { addEvent, addEventRemote, resetAddEventRequest } from '../action'
+import {pushRouteWihtDebounce} from 'rdx/actions'
 
-const mapDispatch = dispatch => ({    
-    addEvent: event => dispatch(addEvent(event))
+const mapState = state => ({
+  addShowRequest: state.addShowRequest,
+  userCtx: state.userCtx
 })
 
-const connector = connect(
-  null,
-  mapDispatch
-)
+const mapDispatch = dispatch => ({
+  addEvent: event => dispatch(addEvent(event)),
+  addEventRemote: event => dispatch(addEventRemote(event)),
+  resetAddEventRequest: () => dispatch(resetAddEventRequest()),
+  pushRoute: () => {
+    dispatch(pushRouteWihtDebounce(2000)('/'))
+}
+})
 
+const connector = connect(mapState, mapDispatch)
 
-export default connector(AddEvent);
+export default connector(AddEvent)

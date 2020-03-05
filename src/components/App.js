@@ -22,6 +22,8 @@ import LogInForm from 'components/user/login/container'
 
 import PageNotFound from 'components/errors/component/pageNotFound'
 
+import RequestActor from 'components/actors/request'
+
 const App = () => {
   return (
     <div className="App">
@@ -47,6 +49,7 @@ const App = () => {
           </Switch>
         </div>
         <Footer />
+        <RequestActor />
       </Router>
     </div>
   )

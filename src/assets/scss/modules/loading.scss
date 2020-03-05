@@ -1,0 +1,29 @@
+.loading-content-box {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #000000c9;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  color: white;
+
+  .content {
+    padding: 100px;
+    display: inline-grid;
+    background-color: $color-green-dark;
+
+    img {
+      width: 60px;
+      height: 60px;
+      margin: 0px auto 20px auto;
+      -webkit-animation: spin 4s linear infinite;
+      -moz-animation: spin 4s linear infinite;
+      animation: spin 4s linear infinite;
+    }
+  }
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

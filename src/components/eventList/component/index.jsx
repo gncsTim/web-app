@@ -33,7 +33,6 @@ const EventList = ({ eventList }) => {
                   </h2>
 
                   <ul>
-                    any
                     {event.support.map((support, index, array) => (
                       <li key={`support-list-${index}`}>
                         {support} {index === array.length - 1 ? '' : '-'}
@@ -44,7 +43,6 @@ const EventList = ({ eventList }) => {
                 <Col xs={12} md={3}>
                   <h2>{event.venue}</h2>
                   <Moment format="HH:mm | DD.MM.YYYY">
-                    any
                     {event.date}
                   </Moment>
                 </Col>
