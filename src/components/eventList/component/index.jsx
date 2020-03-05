@@ -29,7 +29,7 @@ const EventList = ({ eventList }) => {
                   </div>
                 </Col>
                 <Col xs={12} md={5}>
-                    < EventTitle title={event.name} headliner={event.headliner} />
+                  <EventTitle title={event.name} headliner={event.headliner} />
                   <ul>
                     {event.support.map((support, index, array) => (
                       <li key={`support-list-${index}`}>
