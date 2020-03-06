@@ -1,10 +1,15 @@
 import { addOrUpdateEvents } from 'components/eventList/action'
+import { addGenre } from 'components/genres/action'
 
 export const handleOnChangeRemote = store => change => {
   console.log(change, 'changed!')
   const events = change.docs.filter(item => item.type === 'event')
   if (events.length > 0) {
     store.dispatch(addOrUpdateEvents(events))
+  }
+  const genres = change.docs.filter(item => item.type === 'genre')
+  if (genres.length > 0) {
+    store.dispatch(addGenre(genres))
   }
 }
 

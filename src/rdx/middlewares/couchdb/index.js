@@ -10,9 +10,11 @@ import {
   handleOnErrorRemote
 } from './utils'
 import { remoteCouchdbUrl } from 'config'
-import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX } from 'rdx/constants/actionTypes'
+import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX, GET_ALL_VENUES, GET_ALL_GENRES } from 'rdx/constants/actionTypes'
 import { setOwnRequest, addEventSuccess, addEventError } from 'components/addShow/action'
 import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
+import { setVenues } from 'components/venues/action'
+import { setGenres } from 'components/genres/action'
 
 PouchDB.plugin(PouchDBAuth)
 export const remoteDB = new PouchDB(remoteCouchdbUrl('gncs'), { skip_setup: true })
@@ -23,7 +25,7 @@ export const couchdbMiddleware = store => next => {
   localDB.replicate
     .from(remoteDB, {
       live: true,
-      filter: 'filters/current_events',
+      filter: ('filters/current_events'),
       include_docs: true,
       retry: true
     })
@@ -72,6 +74,24 @@ export const couchdbMiddleware = store => next => {
     })
   return action => {
     switch (action.type) {
+      case GET_ALL_GENRES:
+        localDB.query('genres/all', {include_docs: true})
+          .then(response => {
+            store.dispatch(setGenres(response.rows.map(item => item.doc)))
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        break
+      case GET_ALL_VENUES:
+        localDB.query('venues/all', {include_docs: true})
+          .then(response => {
+            store.dispatch(setVenues(response.rows.map(item => item.doc)))
+          })
+          .catch(err => {
+            console.error(err)
+          })
+        break
       case SET_REQUEST_SYNC:
         if (syncRequests) syncRequests.cancel()
         // requests.allDocs({include_docs: true})
@@ -84,26 +104,26 @@ export const couchdbMiddleware = store => next => {
           .on('change', info => {
             console.log(info)
           })
-          .on('paused', function(err) {
+          .on('paused', function (err) {
             // replication paused (e.g. replication up to date, user went offline)
             console.log(
               'replication paused (e.g. replication up to date, user went offline): ',
               err
             )
           })
-          .on('active', function() {
+          .on('active', function () {
             // replicate resumed (e.g. new changes replicating, user went back online)
             console.log('replicate resumed (e.g. new changes replicating, user went back online)')
           })
-          .on('denied', function(err) {
+          .on('denied', function (err) {
             // a document failed to replicate (e.g. due to permissions)
             console.log('a document failed to replicate (e.g. due to permissions): ', err)
           })
-          .on('complete', function(info) {
+          .on('complete', function (info) {
             // handle complete
             console.log('handle complete: ', info)
           })
-          .on('error', function(err) {
+          .on('error', function (err) {
             // handle error
             console.log('handle error: ', err)
           })
@@ -140,26 +160,25 @@ export const couchdbMiddleware = store => next => {
                 store.dispatch(addOrUpdateEvents(events))
               }
             })
-            .on('paused', function(err) {
+            .on('paused', function (err) {
               // replication paused (e.g. replication up to date, user went offline)
               console.log(
                 'replication paused (e.g. replication up to date, user went offline): ',
                 err
               )
             })
-            .on('active', function() {
+            .on('active', function () {
               // replicate resumed (e.g. new changes replicating, user went back online)
-              console.log('replicate resumed (e.g. new changes replicating, user went back online)')
             })
-            .on('denied', function(err) {
+            .on('denied', function (err) {
               // a document failed to replicate (e.g. due to permissions)
               console.log('a document failed to replicate (e.g. due to permissions): ', err)
             })
-            .on('complete', function(info) {
+            .on('complete', function (info) {
               // handle complete
               console.log('handle complete: ', info)
             })
-            .on('error', function(err) {
+            .on('error', function (err) {
               // handle error
               console.log('handle error: ', err)
             })

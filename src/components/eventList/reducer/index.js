@@ -7,14 +7,13 @@ export const eventListReducer = (state = initialState, action) => {
     case SET_EVENT_LIST:
       return action.payload.sort(sortEventList())
     case ADD_OR_UPDATE_EVENTS:
-      state = [...state]
-      action.payload
-        .forEach(item => {
-          let index = state.findIndex(obj => obj._id === item._id)
-          if (index === -1 ) return state.push(item)
-          state.splice(index, 1, item)
-        })
-        state.sort(sortEventList())
+      state = JSON.parse(JSON.stringify(state))
+      action.payload.forEach(item => {
+        let index = state.findIndex(obj => obj._id === item._id)
+        if (index === -1) return state.push(item)
+        state.splice(index, 1, item)
+      })
+      state.sort(sortEventList())
       return state
     default:
       return state
