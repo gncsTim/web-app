@@ -13,7 +13,7 @@ import { remoteCouchdbUrl } from 'config'
 import { ADD_EVENT, SET_REQUEST_SYNC, ADD_EVENT_REMOTE, SET_USER_CTX, GET_ALL_VENUES } from 'rdx/constants/actionTypes'
 import { setOwnRequest, addEventSuccess, addEventError } from 'components/addShow/action'
 import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
-import { set_venues } from 'components/venues'
+import { setVenues } from 'components/venues/action'
 
 PouchDB.plugin(PouchDBAuth)
 export const remoteDB = new PouchDB(remoteCouchdbUrl('gncs'), { skip_setup: true })
@@ -37,7 +37,6 @@ export const couchdbMiddleware = store => next => {
   localDB
     .query('events/all', { include_docs: true, attachments: true })
     .then(results => {
-      console.log(results)
       store.dispatch(
         setEventList(
           results.rows
@@ -75,10 +74,9 @@ export const couchdbMiddleware = store => next => {
   return action => {
     switch (action.type) {
       case GET_ALL_VENUES:
-        localDB.query('venues/all', {include_docs: ture})
+        localDB.query('venues/all', {include_docs: true})
           .then(response => {
-            console.log(response)
-            // store.dispatch(set_venues())
+            store.dispatch(setVenues(response.rows.map(item => item.doc)))
           })
           .catch(err => {
             console.error(err)

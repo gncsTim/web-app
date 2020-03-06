@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
+import { Typeahead } from 'react-bootstrap-typeahead'
 import { Form, Button } from 'react-bootstrap'
 import Datetime from 'react-datetime'
 import uuidv1 from 'uuid/v1'
@@ -62,10 +63,13 @@ class AddShow extends Component {
     this.addSupportLinks = this.addSupportLinks.bind(this)
     this.deletSupport = this.deletSupport.bind(this)
     this.handleAddShow = this.handleAddShow.bind(this)
+    this.handleChangeVenue = this.handleChangeVenue.bind(this)
+    this.handleSelectVenue = this.handleSelectVenue.bind(this)
   }
 
   componentDidMount(){
       this.props.resetAddEventRequest()
+      this.props.getAllVenues()
   }
 
   handleAddShow(e) {
@@ -129,6 +133,19 @@ class AddShow extends Component {
     const { currentTarget } = event
     this.setState({
       [currentTarget.name]: currentTarget.value
+    })
+  }
+
+  handleChangeVenue(venue) {
+    this.setState({venue})
+  }
+
+  handleSelectVenue(venues) {
+    if (!venues || venues.length === 0) return
+    const venue = venues[0]
+    this.setState({
+      venue: venue.label,
+      venueAdress: `${venue.street}, ${venue.zip} ${venue.city}`
     })
   }
 
@@ -232,7 +249,7 @@ class AddShow extends Component {
   }
 
   render() {
-    const { addShowRequest, pushRoute } = this.props
+    const { addShowRequest, pushRoute, venues } = this.props
     const {
       name,
       venue,
@@ -245,7 +262,7 @@ class AddShow extends Component {
       date,
       headliner,
       support,
-      headlinerLinks
+      headlinerLinks,
     } = this.state
 
     return (
@@ -297,13 +314,11 @@ class AddShow extends Component {
                 <Form.Label>
                   Venue name <FontAwesomeIcon icon={faAsterisk} />
                 </Form.Label>
-                <Form.Control
-                  type="text"
-                  required
-                  value={venue}
-                  name="venue"
-                  onChange={this.handleChangeTextInput}
-                />
+                <Typeahead
+                  id='input-venue-name'
+                  onChange={this.handleSelectVenue}
+                  onInputChange={this.handleChangeVenue}
+                  options={venues} />
               </Form.Group>
             </Col>
             <Col xs={12} md={5}>
