@@ -15,6 +15,7 @@ import { setOwnRequest, addEventSuccess, addEventError } from 'components/addSho
 import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
 import { setVenues } from 'components/venues/action'
 import { setGenres } from 'components/genres/action'
+import { isAdminOrEditor } from 'components/user/utils'
 
 PouchDB.plugin(PouchDBAuth)
 export const remoteDB = new PouchDB(remoteCouchdbUrl('gncs'), { skip_setup: true })
@@ -149,7 +150,7 @@ export const couchdbMiddleware = store => next => {
           })
         break
       case SET_USER_CTX:
-        if (action.payload.roles.indexOf('_admin', 'editor') !== -1) {
+        if (isAdminOrEditor(action.payload.roles)) {
           PouchDB.replicate(localDB, remoteDB, {
             live: true,
             retry: true
