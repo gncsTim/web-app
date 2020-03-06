@@ -9,13 +9,19 @@
   color: white;
 
   .content {
-    padding: 100px;
+    padding: 80px;
     display: inline-grid;
+    text-align: center;
     background-color: $color-green-dark;
+    width: 300px;
+    height: 300px;
+    position: fixed;
+    top: calc(50% - 150px);
+    left: calc(50% - 150px);
 
     img {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       margin: 0px auto 20px auto;
       -webkit-animation: spin 4s linear infinite;
       -moz-animation: spin 4s linear infinite;

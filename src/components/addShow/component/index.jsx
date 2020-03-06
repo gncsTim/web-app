@@ -251,7 +251,7 @@ class AddShow extends Component {
     return (
       <Container>
         <LodingComonent {...addShowRequest} handleSuccess={pushRoute}>
-            <h3>add new show</h3>
+            <h3>added new show</h3>
         </LodingComonent>
         <h1>Good Night Couch Side | Add Show</h1>
         {/* TODO:  show only if not editor */}
