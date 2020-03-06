@@ -13,6 +13,7 @@ import { WithContext as ReactTags } from 'react-tag-input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
+import { isAdminOrEditor } from 'components/user/utils'
 
 const KeyCodes = {
   comma: 188,
@@ -235,7 +236,7 @@ class AddShow extends Component {
     }
 
 
-    if (userCtx && userCtx.roles.indexOf('_admin', 'editor') !== -1) {
+    if (userCtx && isAdminOrEditor(userCtx.roles)) {
       return addEventRemote(data)
     }
 
