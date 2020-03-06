@@ -1,0 +1,78 @@
+.form-group {
+    text-align: left;
+    margin-bottom: 0;
+
+    .add-linkt-btn-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+    }
+
+    .fa-asterisk {
+      color: $primary-color;
+      margin-top: -4px;
+      font-size: smaller;
+      position: absolute;
+    }
+    hr {
+      border-color: $color-white;
+    }
+    button {
+      height: 31px;
+      font-size: inherit;
+    }
+    .form-control {
+      height: 31px;
+      margin-bottom: 1rem;
+    }
+    textarea {
+      &.form-control {
+        height: 62px;
+      }
+    }
+    label {
+      color: $color-white
+    }
+  }
+  form {
+    .add-content-btn {
+      margin-bottom: 1rem;
+    }
+    hr {
+    border-color: white;
+  }
+  .form-group {
+    text-align: left;
+    margin-bottom: 0;
+
+    label {
+      color: $color-white;
+    }
+    input {
+      height: 31px;
+    }
+
+    div.ReactTags__tagInput {
+      input.ReactTags__tagInputField {
+        height: 30px;
+        border-radius: .25rem;
+      }
+    }
+  }
+  Button {
+    height: 30px;
+  }
+  .btn-primary, .btn-danger {
+    font-size: inherit;
+
+  }
+  .btn-primary {
+    background-color: $primary-color;
+    border: none;
+    &:hover, &:focus, &:active {
+      background-color: $color-green-dark;
+
+    }
+  }
+}
