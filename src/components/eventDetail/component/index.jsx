@@ -17,7 +17,9 @@ const EventDetail = ({ event }) => {
             </h2>
           </div>
           <div className="event-headline">
-            <h2>{event.name}</h2>
+            <h2>
+              {event.name && event.name.trim() !== '' ? event.name : event.headliner}
+            </h2>
           </div>
           <div className="event-headline">
             <h2>{event.venue}</h2>
@@ -31,10 +33,8 @@ const EventDetail = ({ event }) => {
           <br />
           <br />
           <p>{event.description}</p>
-          <a href={event.facebookLink} target="_blank">Facebook Event</a>
-          <br />
-          <br />
-          <br />
+          {event.facebookLink && event.facebookLink.trim() !== '' ? <><a href={event.facebookLink} target="_blank">Facebook Event</a><br /><br /><br /></> : ""}  
+
 
           {event.artist_details.map((artist_details, index) => (
             <div key={index}>
