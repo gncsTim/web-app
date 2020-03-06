@@ -6,6 +6,7 @@ import { userCtxReducer } from 'components/user/reducer'
 import { ownRequestIdsReducer } from 'components/actors/request/reducer'
 import { addShowRequestReducer } from 'components/addShow/reducer'
 import { venuesReducer } from 'components/venues/reducer'
+import { genresReducer } from 'components/genres/reducer'
 
 export default combineReducers({
   eventList: eventListReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   userCtx: userCtxReducer,
   ownRequestIds: ownRequestIdsReducer,
   addShowRequest: addShowRequestReducer,
-  venues: venuesReducer
+  venues: venuesReducer,
+  genres: genresReducer
 })

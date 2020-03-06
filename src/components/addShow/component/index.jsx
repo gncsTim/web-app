@@ -14,13 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
 
-const genres = [
-  { id: 'genre:punk', text: 'Punk' },
-  { id: 'genre:metal', text: 'Metal' },
-  { id: 'genre:death_metal', text: 'Death Metal' },
-  { id: 'genre:stoner', text: 'Stoner' }
-]
-
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -70,6 +63,7 @@ class AddShow extends Component {
   componentDidMount(){
       this.props.resetAddEventRequest()
       this.props.getAllVenues()
+      this.props.getAllGenres()
   }
 
   handleAddShow(e) {
@@ -249,7 +243,7 @@ class AddShow extends Component {
   }
 
   render() {
-    const { addShowRequest, pushRoute, venues } = this.props
+    const { addShowRequest, pushRoute, venues, genres } = this.props
     const {
       name,
       venue,
