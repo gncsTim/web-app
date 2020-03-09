@@ -14,23 +14,18 @@ import {
 import Feedback from 'react-bootstrap/Feedback'
 
 const LogInForm = ({ handleLoginRequest, loading, error }) => {
-    console.log(error);
-
   const [validated, setValidated] = useState(false)
   const [email, setLoginEmail] = useState('')
   const [password, setPassword] = useState('')
   const handleSubmit = event => {
     const form = event.currentTarget
-    console.log(form)
     event.preventDefault()
     event.stopPropagation()
     if (form.checkValidity() === false) {
       setValidated(true)
       return console.log('test')
     }
-
-    console.log(email, password)
-    handleLoginRequest({email, password})
+    handleLoginRequest({ email, password })
     setPassword('')
   }
   return (
@@ -65,14 +60,14 @@ const LogInForm = ({ handleLoginRequest, loading, error }) => {
                 <Feedback type="invalid">please enter a password</Feedback>
               </FormGroup>
             </Col>
-            {error && <Alert variant='danger'>{error.message}</Alert>}
+            {error && <Alert variant="danger">{error.message}</Alert>}
             <Col xs={12}>
               <Button variant="primary" type="submit">
                 {loading ? <span>loding...</span> : <span>login</span>}
               </Button>
             </Col>
             <Col xs={12}>
-            <hr />
+              <hr />
               <p className="text-center">Version: 0.0.1.2</p>
             </Col>
           </Form>

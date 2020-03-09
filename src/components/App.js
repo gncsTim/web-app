@@ -19,6 +19,7 @@ import Header from 'components/header/container'
 import Footer from 'components/footer/component'
 
 import LogInForm from 'components/user/login/container'
+import ChangePassword from 'components/user/changePassword/container'
 
 import PageNotFound from 'components/errors/component/pageNotFound'
 
@@ -40,6 +41,7 @@ const App = () => {
             <Route exact path="/WikiVenues" component={WikiListVenues} />
 
             <Route exact path="/login" component={LogInForm} />
+            <Route exact path='/changePassword' component={ChangePassword} />
 
             <Route exact path="/Imprint" component={Imprint} />
 
