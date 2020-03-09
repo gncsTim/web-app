@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ScaleLoader from 'react-spinners/ScaleLoader'
 import {
   Form,
   FormControl,
@@ -52,8 +53,8 @@ class LogInForm extends React.Component {
       this.setState({ validated: true })
       return console.log('not')
     }
-    const {oldPassword, newPassword} = this.state
-    this.props.changePasswordRequest({oldPassword, newPassword})
+    const { oldPassword, newPassword } = this.state
+    this.props.changePasswordRequest({ oldPassword, newPassword })
   }
 
   render() {
@@ -113,7 +114,8 @@ class LogInForm extends React.Component {
               {error && <Alert variant="danger">{error.message}</Alert>}
               <Col xs={12}>
                 <Button variant="primary" type="submit">
-                  {loading ? <span>loding...</span> : <span>change password</span>}
+                  <ScaleLoader height={12} loading={loading} />
+                  {loading ? null : <span>change password</span>}
                 </Button>
               </Col>
             </Form>

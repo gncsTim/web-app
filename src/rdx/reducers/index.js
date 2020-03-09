@@ -7,6 +7,7 @@ import { ownRequestIdsReducer } from 'components/actors/request/reducer'
 import { addShowRequestReducer } from 'components/addShow/reducer'
 import { venuesReducer } from 'components/venues/reducer'
 import { genresReducer } from 'components/genres/reducer'
+import {changePasswordRequestReducer} from 'components/user/changePassword/reducer'
 
 export default combineReducers({
   eventList: eventListReducer,
@@ -15,5 +16,6 @@ export default combineReducers({
   ownRequestIds: ownRequestIdsReducer,
   addShowRequest: addShowRequestReducer,
   venues: venuesReducer,
-  genres: genresReducer
+  genres: genresReducer,
+  changePassword: changePasswordRequestReducer
 })
