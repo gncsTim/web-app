@@ -52,6 +52,8 @@ class LogInForm extends React.Component {
       this.setState({ validated: true })
       return console.log('not')
     }
+    const {oldPassword, newPassword} = this.state
+    this.props.changePasswordRequest({oldPassword, newPassword})
   }
 
   render() {
@@ -123,7 +125,7 @@ class LogInForm extends React.Component {
 }
 
 LogInForm.propTypes = {
-  handleLoginRequest: PropTypes.func,
+  changePasswordRequest: PropTypes.func,
   loading: PropTypes.bool,
   error: PropTypes.any
 }
