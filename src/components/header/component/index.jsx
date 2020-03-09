@@ -46,6 +46,9 @@ const Header = ({ handleGetSession, handleLogout, userCtx }) => {
             <Nav>
               {userCtx && (
                 <NavDropdown className="user-menu" title={userCtx.name} id="userCtx-nav-dropdown">
+                  <LinkContainer to="/changePassword">
+                    <NavDropdown.Item>Change Password</NavDropdown.Item>
+                  </LinkContainer>
                   <LinkContainer to="/Eventlist" onClick={() => handleLogout()}>
                     <NavDropdown.Item> Logout</NavDropdown.Item>
                   </LinkContainer>
