@@ -6,6 +6,9 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import logoImage from 'assets/img/logo.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 
 const Header = ({ handleGetSession, handleLogout, userCtx }) => {
   useEffect(() => {
@@ -36,7 +39,7 @@ const Header = ({ handleGetSession, handleLogout, userCtx }) => {
               </NavDropdown>
               */}
 
-              <Link to="/AddShow">+ SHOW</Link>
+              <Link to="/AddShow"><FontAwesomeIcon icon={faPlus} /> ADD SHOW</Link>
               {/*
               <Link to="/AddWiki">+ WIKI</Link>
               */}

@@ -27,6 +27,13 @@ export const eventShape = {
   artist_details: PropTypes.arrayOf(PropTypes.shape(artistDetailsShape))
 }
 
+export const isMomentProptype = (props, propName, componentName) => {
+  if( !moment.isMoment(props[propName])) return new Error(
+    `Invalid prop ${propName} supplied to ${componentName}, is not a moment object Validation failed`
+  )
+
+}
+
 export const userCtxShape = {
   name: PropTypes.string,
   roles: PropTypes.arrayOf(PropTypes.string)

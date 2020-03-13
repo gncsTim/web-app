@@ -22,7 +22,7 @@
       height: 31px;
       font-size: inherit;
     }
-    .form-control {
+    .form-control, .react-tags-wrapper {
       height: 31px;
       margin-bottom: 1rem;
     }
@@ -70,9 +70,17 @@
   .btn-primary {
     background-color: $primary-color;
     border: none;
+    margin-top: $space-l;
     &:hover, &:focus, &:active {
       background-color: $color-green-dark;
-
     }
   }
+    .btn-secondary {
+      background-color: $color-white;
+      border: $border-s-primary;
+      color: $color-grey;
+      &:hover, &:focus, &:active {
+        background-color: $color-light-grey;
+      }
+    }
 }

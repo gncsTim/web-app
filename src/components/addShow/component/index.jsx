@@ -329,7 +329,7 @@ class AddShow extends Component {
             </Col>
             <Col xs={6} md={2}>
               <Form.Group id="presale">
-                <Form.Label>Presal Price in € (12,50)</Form.Label>
+                <Form.Label>Presal Price</Form.Label>
                 <Form.Control
                   type="text"
                   value={presale}
@@ -340,7 +340,7 @@ class AddShow extends Component {
             </Col>
             <Col xs={6} md={2}>
               <Form.Group id="atTheDoor">
-                <Form.Label>Door Price in € (13,00 - 15,00)</Form.Label>
+                <Form.Label>Door Price</Form.Label>
                 <Form.Control
                   type="text"
                   value={atTheDoor}
@@ -401,7 +401,7 @@ class AddShow extends Component {
                   <Col md={2} className="add-linkt-btn-container">
                     <Button
                       className="btn-block add-content-btn"
-                      variant="primary"
+                      variant="secondary"
                       onClick={this.addHeadlinerLinks}
                     >
                       <FontAwesomeIcon icon={faPlus} /> Links
@@ -424,22 +424,14 @@ class AddShow extends Component {
               </Form.Group>
             </Col>
 
-            <Col md={2} xs={6}>
-              <Button
-                className="btn-block add-content-btn"
-                variant="primary"
-                onClick={this.addSupport}
-              >
-                <FontAwesomeIcon icon={faPlus} /> Support
-              </Button>
-            </Col>
+
             <Col>
-              <hr />
             </Col>
             {Object.keys(support).map((key, index, array) => {
               const item = support[key]
               return (
                 <Col md={12} key={key}>
+                <hr />
                   <Row>
                     <Col xs={12} md={6}>
                       <Form.Group id={key}>
@@ -501,7 +493,7 @@ class AddShow extends Component {
                           <Col md={2} className="add-linkt-btn-container">
                             <Button
                               className="btn-block add-content-btn"
-                              variant="primary"
+                              variant="secondary"
                               onClick={this.addSupportLinks(key)}
                             >
                               <FontAwesomeIcon icon={faPlus} /> Links
@@ -511,12 +503,23 @@ class AddShow extends Component {
                       </Form.Group>
                     </Col>
                   </Row>
-                  <hr />
                 </Col>
               )
             })}
+            <Col md={2} xs={6}>
+              <Form.Group>
+                <Button
+                className="btn-block add-content-btn"
+                variant="secondary"
+                onClick={this.addSupport}
+                >
+                <FontAwesomeIcon icon={faPlus} /> Support
+                </Button>
+              </Form.Group>
+            </Col>
             <Col>
-              <Button variant="primary" type="submit" onClick={this.handleAddShow}>
+            <hr />
+              <Button className="float-right" variant="primary" type="submit" onClick={this.handleAddShow}>
                 Add that fucking Show!
               </Button>
             </Col>

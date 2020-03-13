@@ -8,7 +8,7 @@ import {eventShape} from 'gncsPropTypes'
 const EventDetail = ({ event }) => {
   if (!event) return null
   return (
-    <Row className="event-detail">
+    <div className="event-detail">
       <Col>
         <div className="event-head">
           <div className="event-headline">
@@ -25,33 +25,35 @@ const EventDetail = ({ event }) => {
             <h2>{event.venue}</h2>
           </div>
         </div>
+        
+        <Row>
+          <Col className="event-body">
+            {event.presale &&
+              `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
+            {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
+            <br />
+            <br />
+            <p>{event.description}</p>
+            {event.facebookLink && event.facebookLink.trim() !== '' ? <><a href={event.facebookLink} target="_blank">Facebook Event</a><br /><br /><br /></> : ""}
 
-        <Col className="event-body">
-          {event.presale &&
-            `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
-          {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
-          <br />
-          <br />
-          <p>{event.description}</p>
-          {event.facebookLink && event.facebookLink.trim() !== '' ? <><a href={event.facebookLink} target="_blank">Facebook Event</a><br /><br /><br /></> : ""}  
 
-
-          {event.artist_details.map((artist_details, index) => (
-            <div key={index}>
-              <h2>{artist_details.name}</h2>
-              <p>Genre: {artist_details.genres.join(', ')}</p>
-              <ul>
-                {artist_details.links.map((link, index) => (
-                  <li key={index}>
-                    <a href={link} target="_blank">{link}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </Col>
+            {event.artist_details.map((artist_details, index) => (
+              <div key={index}>
+                <h2>{artist_details.name}</h2>
+                <p>Genre: {artist_details.genres.join(', ')}</p>
+                <ul>
+                  {artist_details.links.map((link, index) => (
+                    <li key={index}>
+                      <a href={link} target="_blank">{link}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </Col>
+        </Row>
       </Col>
-    </Row>
+    </div>
   )
 }
 

@@ -1,5 +1,6 @@
 .event-detail {
-  margin-left: -$space-m;
+  // margin: 0 -$space-l;
+
   color: $color-white;
   min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
   padding-bottom: 100px;
@@ -19,6 +20,8 @@
   .event-head {
     border-bottom: $border-s-primary;
     margin-bottom: $space-l;
+    margin: 0 -15px;
+    padding-top: 15px;
   }
   .event-body {
 
