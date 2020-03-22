@@ -1,9 +1,14 @@
 import { connect } from 'react-redux'
 
 import EventFilter from '../component'
+import { setGenresFilter } from 'components/eventFilter/action'
 
 const mapState = state => ({
     genres: Array.from(new Set(state.eventList.map(event => event.genres).flat()))
   })
 
-export default connect(mapState)(EventFilter)
+const mapDispatch = dispatch => ({
+    setGenresFilter: genres => dispatch(setGenresFilter(genres))
+})
+
+export default connect(mapState, mapDispatch)(EventFilter)

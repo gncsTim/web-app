@@ -29,7 +29,7 @@ class EventFilter extends React.Component {
   handleChangeFilterGenres(filterGenres) {
     console.log(filterGenres);
     this.setState({ filterGenres }, () => {
-            
+        this.props.setGenresFilter(filterGenres)
     });
   }
 
