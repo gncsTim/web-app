@@ -18,7 +18,7 @@ class EventFilter extends React.Component {
     };
     this.handleToggleFilter = this.handleToggleFilter.bind(this);
     this.handleChangeFilterGenres = this.handleChangeFilterGenres.bind(this);
-    this.handleDeleteFilterGenre = this.handleDeleteFilterGenre.bind(this);
+    this.handleClearGenreFilter = this.handleClearGenreFilter.bind(this)
   }
 
   handleToggleFilter() {
@@ -27,19 +27,20 @@ class EventFilter extends React.Component {
   }
 
   handleChangeFilterGenres(filterGenres) {
-    console.log(filterGenres);
     this.setState({ filterGenres }, () => {
-        this.props.setGenresFilter(filterGenres)
+      this.props.setGenresFilter(filterGenres);
     });
   }
 
-  handleDeleteFilterGenre(index) {
-    console.log(index);
+  handleClearGenreFilter() {
+      this.setState({filterGenres: []}, () => {
+        this.props.setGenresFilter([]);
+      })
   }
 
   render() {
     const { showFilter, filterGenres } = this.state;
-    const { genres } = this.props
+    const { genres } = this.props;
     return (
       <div>
         <Button
@@ -59,6 +60,13 @@ class EventFilter extends React.Component {
                   value={filterGenres}
                   onChange={this.handleChangeFilterGenres}
                 />
+              </Col>
+              <Col xs={1}>
+                <Button
+                  onClick={this.handleClearGenreFilter}
+                >
+                  clear
+                </Button>
               </Col>
             </Row>
           </div>
