@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import EventFilter from '../component'
 
 const mapState = state => ({
-    genres: state.genres
+    genres: Array.from(new Set(state.eventList.map(event => event.genres).flat()))
   })
 
-export default connect()(EventFilter)
+export default connect(mapState)(EventFilter)

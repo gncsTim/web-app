@@ -28,7 +28,9 @@ class EventFilter extends React.Component {
 
   handleChangeFilterGenres(filterGenres) {
     console.log(filterGenres);
-    this.setState({ filterGenres });
+    this.setState({ filterGenres }, () => {
+            
+    });
   }
 
   handleDeleteFilterGenre(index) {
@@ -37,9 +39,7 @@ class EventFilter extends React.Component {
 
   render() {
     const { showFilter, filterGenres } = this.state;
-    const { genres } = this.props;
-    let colors = ["orange", "red", "blue", "purple"];
-    // let { Multiselect } = ReactWidgets;
+    const { genres } = this.props
     return (
       <div>
         <Button
@@ -55,7 +55,7 @@ class EventFilter extends React.Component {
               <Col xs={4}>
                 <Multiselect
                   placeholder="Genres"
-                  data={colors}
+                  data={genres}
                   value={filterGenres}
                   onChange={this.handleChangeFilterGenres}
                 />
