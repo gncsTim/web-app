@@ -2,7 +2,8 @@ import {connect} from 'react-redux';
 import EventList from '../component';
 
 const mapState = state => ({
-    eventList: state.eventList
+    eventList: state.eventList,
+    eventFilter: state.eventFilter
 })
 
 const connector = connect(

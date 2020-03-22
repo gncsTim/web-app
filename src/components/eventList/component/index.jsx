@@ -8,12 +8,20 @@ import DisplayDates from './displayDates'
 import EventListItem from './eventListItem'
 
 
-const EventList = ({ eventList }) => {
+const EventList = ({ eventList, eventFilter }) => {
   const today = moment();
 
   if (eventList.length === 0) return null
   const sortEvents = {}
-  eventList.forEach( event => {
+  eventList.filter(event => {
+    let showEvent = true
+    if (eventFilter.genres) {
+      showEvent = event.genres.reduce((acc, cur) => {
+        return acc || eventFilter.genres.indexOf(cur) !== -1
+      }, false)
+    }
+    return showEvent
+  }).forEach( event => {
     event.dateKey = moment(event.date).format('DD.MM.YYYY')
     if (sortEvents[event.dateKey]){
       return sortEvents[event.dateKey].push(event)
