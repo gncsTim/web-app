@@ -13,3 +13,5 @@ export const pushRouteWihtDebounce = debounce =>
       }
     })
   )
+
+export const pushRoute = createAction(PUSH_ROUTE_TO_HISTORY)
