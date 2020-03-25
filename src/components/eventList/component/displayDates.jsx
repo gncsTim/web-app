@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {isMomentProptype} from 'gncsPropTypes'
-import Moment from 'react-moment'
 import moment from 'moment'
 
 const DisplayDates = ({eventDate, today}) => {

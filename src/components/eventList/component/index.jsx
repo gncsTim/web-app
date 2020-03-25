@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Col, Row } from 'react-bootstrap'
-import Moment from 'react-moment'
 import DisplayDates from './displayDates'
 import EventListItem from './eventListItem'
 import moment from 'moment'
