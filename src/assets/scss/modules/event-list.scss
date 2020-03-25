@@ -32,7 +32,7 @@
     margin-bottom: $space-m;
     text-align: left;
     .row {
-      padding: $space-m $space-m;
+      padding: $space-l $space-l;
     }
     .event-list-img {
       border: $border-s-grey;
@@ -52,4 +52,10 @@
       }
     }
   }
+  @media (max-width: 768px) {
+    .event-list-img {
+      display: none;
+    }
+   }
+
 }
