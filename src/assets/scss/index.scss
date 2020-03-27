@@ -54,7 +54,7 @@ body {
   font-size: 12px;
   .container {
     min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
-    padding: $space-m $space-m;
+    padding: $space-m $space-l;
     padding-bottom: 100px;
   }
   P {

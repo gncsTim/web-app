@@ -1,16 +1,29 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { userCtxShape } from 'gncsPropTypes'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import logoImage from 'assets/img/logo.svg'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-const Header = ({ handleGetSession, handleLogout, userCtx }) => {
-  useEffect(() => {
-    if (!userCtx) handleGetSession()
-  })
+const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
+  hideNav = true
+  const toggleNavBar = () => {
+    let basicNavbar = document.getElementById("basic-navbar-nav")
+    if (hideNav) {
+      basicNavbar.classList.add("show")
+      hideNav = false
+    } else {
+      basicNavbar.classList.remove("show")
+      hideNav = true;
+    }
+  }
+
   return (
     <header>
       <div className="header-logo">
@@ -19,11 +32,11 @@ const Header = ({ handleGetSession, handleLogout, userCtx }) => {
         </Link>
       </div>
       <div className="main-container">
-        <Navbar variant="dark" expand="sm">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar variant="dark" expand="sm" >
+          <span className="d-block d-sm-none burger-menu" onClick={() => toggleNavBar()}><FontAwesomeIcon icon={faBars} /></span>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Link to="/EventList">SHOWS</Link>
+              <Link to="/EventList" onClick={() => toggleNavBar()}>SHOWS</Link>
               {/*
 
               <NavDropdown title="WIKI" id="basic-nav-dropdown">
@@ -36,12 +49,18 @@ const Header = ({ handleGetSession, handleLogout, userCtx }) => {
               </NavDropdown>
               */}
 
-              <Link to="/AddShow">+ SHOW</Link>
+              <Link to="/AddShow" onClick={() => toggleNavBar()}><FontAwesomeIcon icon={faPlus} /> ADD SHOW</Link>
               {/*
               <Link to="/AddWiki">+ WIKI</Link>
               */}
 
-              <Link to="/Underground">UNDERGROUND</Link>
+              <Link to="/Underground" onClick={() => toggleNavBar()}>UNDERGROUND</Link>
+              {/* Moblie Account Menu*/}
+              {userCtx && (
+              <div className="user-menu-mobile">
+                <Link to="/Eventlist" onClick={() => {handleLogout(); toggleNavBar()} } > LOGOUT <FontAwesomeIcon icon={faSignOutAlt} /></Link>
+              </div>
+            )}
             </Nav>
             <Nav>
               {userCtx && (
