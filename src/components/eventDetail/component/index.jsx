@@ -1,12 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Col, Row } from 'react-bootstrap'
-import Moment from 'react-moment'
+import React from "react";
+import PropTypes from "prop-types";
+import { Col, Row } from "react-bootstrap";
+import Moment from "react-moment";
 
-import {eventShape} from 'gncsPropTypes'
+import { eventShape } from "gncsPropTypes";
 
 const EventDetail = ({ event }) => {
-  if (!event) return null
+  if (!event) return null;
   return (
     <div className="event-detail">
       <Col>
@@ -18,7 +18,9 @@ const EventDetail = ({ event }) => {
           </div>
           <div className="event-headline">
             <h2>
-              {event.name && event.name.trim() !== '' ? event.name : event.headliner}
+              {event.name && event.name.trim() !== ""
+                ? event.name
+                : event.headliner}
             </h2>
           </div>
           <div className="event-headline">
@@ -29,22 +31,50 @@ const EventDetail = ({ event }) => {
         <Row>
           <Col className="event-body">
             {event.presale &&
-              `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
+              `Presale: ${event.presale} ${event.atTheDoor ? ", " : ""} `}
             {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
             <br />
             <br />
             <p>{event.description}</p>
-            {event.facebookLink && event.facebookLink.trim() !== '' ? <><a href={event.facebookLink} target="_blank">Facebook Event</a><br /><br /><br /></> : ""}
+            {event.facebookLink && event.facebookLink.trim() !== "" ? (
+              <>
+                <a href={event.facebookLink} target="_blank">
+                  Facebook Event
+                </a>
+                <br />
+                <br />
+                <br />
+              </>
+            ) : (
+              ""
+            )}
 
+            {event.streamLinks && (
+              <div>
+                <h2>Streaming Links:</h2>
+                {event.streamLinks.map((streamlink, index) => (
+                  <div key={index}>
+                    <a href={streamlink} target="_blank">
+                      {streamlink}
+                    </a>
+                  </div>
+                ))}
+                <br />
+                <br />
+                <br />
+              </div>
+            )}
 
             {event.artist_details.map((artist_details, index) => (
               <div key={index}>
                 <h2>{artist_details.name}</h2>
-                <p>Genre: {artist_details.genres.join(', ')}</p>
+                <p>Genre: {artist_details.genres.join(", ")}</p>
                 <ul>
                   {artist_details.links.map((link, index) => (
                     <li key={index}>
-                      <a href={link} target="_blank">{link}</a>
+                      <a href={link} target="_blank">
+                        {link}
+                      </a>
                     </li>
                   ))}
                 </ul>
@@ -54,12 +84,12 @@ const EventDetail = ({ event }) => {
         </Row>
       </Col>
     </div>
-  )
-}
+  );
+};
 
 EventDetail.propTypes = {
   event: PropTypes.shape(eventShape),
   handleClick: PropTypes.func
-}
+};
 
-export default EventDetail
+export default EventDetail;

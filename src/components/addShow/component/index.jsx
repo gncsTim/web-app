@@ -31,6 +31,7 @@ class AddShow extends Component {
       presale: '',
       atTheDoor: '',
       facebookLink: '',
+      streamLinks: ['', ''],
       description: '',
       venueAdress: '',
       headliner: '',
@@ -58,6 +59,8 @@ class AddShow extends Component {
     this.handleAddShow = this.handleAddShow.bind(this)
     this.handleChangeVenue = this.handleChangeVenue.bind(this)
     this.handleSelectVenue = this.handleSelectVenue.bind(this)
+    this.handleChangeStreamLinks = this.handleChangeStreamLinks.bind(this)
+    this.addStreamLinks = this.addStreamLinks.bind(this)
   }
 
   componentDidMount(){
@@ -170,6 +173,16 @@ class AddShow extends Component {
     this.setState({ headlinerLinks })
   }
 
+  handleChangeStreamLinks = index => event => {
+    const streamLinks = this.state.streamLinks.concat([])
+    streamLinks[index] = event.target.value
+    this.setState({ streamLinks })
+  }
+
+  addStreamLinks() {
+    this.setState({ streamLinks: this.state.streamLinks.concat(['', '']) })
+  }
+
   addHeadlinerLinks() {
     this.setState({ headlinerLinks: this.state.headlinerLinks.concat(['', '']) })
   }
@@ -195,7 +208,7 @@ class AddShow extends Component {
   handleSubmit(event) {
     event.preventDefault()
     const { userCtx, addEventRemote, addEvent } = this.props
-    const { name, date, presale, atTheDoor, facebookLink, description, headliner, headlinerGenre, venue, headlinerLinks } = this.state
+    const { name, date, presale, atTheDoor, facebookLink, description, headliner, headlinerGenre, venue, headlinerLinks, streamLinks } = this.state
 
     const id = ksuid.fromParts(date.valueOf(), crypto.randomBytes(16))
 
@@ -226,7 +239,8 @@ class AddShow extends Component {
       name,
       date: date.toISOString(),
       artist_details,
-      venue
+      venue,
+      streamLinks: streamLinks.filter(item => item && item.trim() !== '')
     }
     if (support && Object.keys(support).length > 0) {
       data.support = Object.keys(support)
@@ -257,6 +271,7 @@ class AddShow extends Component {
       headliner,
       support,
       headlinerLinks,
+      streamLinks
     } = this.state
 
     return (
@@ -301,6 +316,34 @@ class AddShow extends Component {
                   name="facebookLink"
                   onChange={this.handleChangeTextInput}
                 />
+              </Form.Group>
+            </Col>
+            <Col md={12}>
+              <Form.Group>
+                <Form.Label>Streaming Links</Form.Label>
+                <Row>
+                  <Col md={10}>
+                    <Row>
+                      {streamLinks.map((item, index) => (
+                        <Col xs={12} md={6} key={index}>
+                          <Form.Control
+                            type="text"
+                            onChange={this.handleChangeStreamLinks(index)}
+                          />
+                        </Col>
+                      ))}
+                    </Row>
+                  </Col>
+                  <Col md={2} className="add-linkt-btn-container">
+                    <Button
+                      className="btn-block add-content-btn"
+                      variant="secondary"
+                      onClick={this.addStreamLinks}
+                    >
+                      <FontAwesomeIcon icon={faPlus} /> Links
+                    </Button>
+                  </Col>
+                </Row>
               </Form.Group>
             </Col>
             <Col xs={12} md={3}>
