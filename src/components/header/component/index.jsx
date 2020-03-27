@@ -1,28 +1,28 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
-import { userCtxShape } from 'gncsPropTypes'
-import {Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
-import { Link } from 'react-router-dom'
-import logoImage from 'assets/img/logo.svg'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { userCtxShape } from "gncsPropTypes";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
+import logoImage from "assets/img/logo.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
-  hideNav = true
+  hideNav = true;
   const toggleNavBar = () => {
-    let basicNavbar = document.getElementById("basic-navbar-nav")
+    let basicNavbar = document.getElementById("basic-navbar-nav");
     if (hideNav) {
-      basicNavbar.classList.add("show")
-      hideNav = false
+      basicNavbar.classList.add("show");
+      hideNav = false;
     } else {
-      basicNavbar.classList.remove("show")
+      basicNavbar.classList.remove("show");
       hideNav = true;
     }
-  }
+  };
 
   return (
     <header>
@@ -32,11 +32,18 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
         </Link>
       </div>
       <div className="main-container">
-        <Navbar variant="dark" expand="sm" >
-          <span className="d-block d-sm-none burger-menu" onClick={() => toggleNavBar()}><FontAwesomeIcon icon={faBars} /></span>
+        <Navbar variant="dark" expand="sm">
+          <span
+            className="d-block d-sm-none burger-menu"
+            onClick={() => toggleNavBar()}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </span>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Link to="/EventList" onClick={() => toggleNavBar()}>SHOWS</Link>
+              <Link to="/EventList" onClick={() => toggleNavBar()}>
+                SHOWS
+              </Link>
               {/*
 
               <NavDropdown title="WIKI" id="basic-nav-dropdown">
@@ -48,23 +55,41 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
                 </LinkContainer>
               </NavDropdown>
               */}
-
-              <Link to="/AddShow" onClick={() => toggleNavBar()}><FontAwesomeIcon icon={faPlus} /> ADD SHOW</Link>
+               {userCtx && (
+              <Link to="/AddShow" onClick={() => toggleNavBar()}>
+                <FontAwesomeIcon icon={faPlus} /> ADD SHOW
+              </Link>
+               )}
               {/*
               <Link to="/AddWiki">+ WIKI</Link>
               */}
 
-              <Link to="/Underground" onClick={() => toggleNavBar()}>UNDERGROUND</Link>
+              <Link to="/Underground" onClick={() => toggleNavBar()}>
+                UNDERGROUND
+              </Link>
               {/* Moblie Account Menu*/}
               {userCtx && (
-              <div className="user-menu-mobile">
-                <Link to="/Eventlist" onClick={() => {handleLogout(); toggleNavBar()} } > LOGOUT <FontAwesomeIcon icon={faSignOutAlt} /></Link>
-              </div>
-            )}
+                <div className="user-menu-mobile">
+                  <Link
+                    to="/Eventlist"
+                    onClick={() => {
+                      handleLogout();
+                      toggleNavBar();
+                    }}
+                  >
+                    {" "}
+                    LOGOUT <FontAwesomeIcon icon={faSignOutAlt} />
+                  </Link>
+                </div>
+              )}
             </Nav>
             <Nav>
               {userCtx && (
-                <NavDropdown className="user-menu" title={userCtx.name} id="userCtx-nav-dropdown">
+                <NavDropdown
+                  className="user-menu"
+                  title={userCtx.name}
+                  id="userCtx-nav-dropdown"
+                >
                   <LinkContainer to="/Eventlist" onClick={() => handleLogout()}>
                     <NavDropdown.Item> Logout</NavDropdown.Item>
                   </LinkContainer>
@@ -75,13 +100,13 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
         </Navbar>
       </div>
     </header>
-  )
-}
+  );
+};
 
 Header.propTypes = {
   userCtx: PropTypes.shape(userCtxShape),
   handleGetSession: PropTypes.func,
   handleLogout: PropTypes.func
-}
+};
 
-export default Header
+export default Header;
