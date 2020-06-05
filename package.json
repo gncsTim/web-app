@@ -31,6 +31,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "react-tag-input": "^6.4.2",
+    "react-widgets": "^4.5.0",
     "redux": "^4.0.5",
     "redux-actions": "^2.6.5",
     "redux-debounced": "^0.5.0",
