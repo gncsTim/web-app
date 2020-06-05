@@ -49,7 +49,7 @@ const EventListItem = ({event}) => (
             {event.presale &&
             `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
             {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
-            <p>
+            <span>
               {Array.from(
                 new Set(
                   [].concat.apply(
@@ -58,7 +58,7 @@ const EventListItem = ({event}) => (
                   )
                 )
               ).join(', ')}
-            </p>
+            </span>
           </Col>
       </Row>
     </div>

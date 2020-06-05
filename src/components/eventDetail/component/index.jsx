@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Col, Row, Container } from "react-bootstrap";
-import Moment from "react-moment";
-
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Col, Row } from 'react-bootstrap'
+import Moment from 'react-moment'
 import { eventShape } from "gncsPropTypes";
 
 class EventDetail extends React.Component {
@@ -34,28 +33,17 @@ class EventDetail extends React.Component {
               <h2>{event.venue}</h2>
             </div>
           </div>
+        </div>
 
-          <Row>
-            <Col className="event-body">
-              {event.presale &&
-                `Presale: ${event.presale} ${event.atTheDoor ? ", " : ""} `}
-              {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
-              <br />
-              <br />
-              <p>{event.description}</p>
-              {event.facebookLink && event.facebookLink.trim() !== "" ? (
-                <>
-                  <a href={event.facebookLink} target="_blank">
-                    Facebook Event
-                  </a>
-                  <br />
-                  <br />
-                  <br />
-                </>
-              ) : (
-                ""
-              )}
-
+        <Row>
+          <Col className="event-body">
+            {event.presale &&
+              `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
+            {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
+            <br />
+            <br />
+            <p>{event.description}</p>
+            {event.facebookLink && event.facebookLink.trim() !== '' ? <><a href={event.facebookLink} target="_blank">Facebook Event</a><br /><br /><br /></> : ""}
               {event.artist_details.map((artist_details, index) => (
                 <div key={index}>
                   <h2>{artist_details.name}</h2>
