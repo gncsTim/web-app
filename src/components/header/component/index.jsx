@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { userCtxShape } from 'gncsPropTypes'
-import {Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
 import logoImage from 'assets/img/logo.svg'
@@ -11,15 +11,41 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
+import { Tween, Timeline } from 'react-gsap'
+import {TweenMax, Linear} from 'gsap'
+import CalculateMobileNav from './calculateMobileNav'
+
+
 const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
   hideNav = true
+  let basicNavbar
+  let basicNavbarHigh
+
+  window.onload = () => {
+     basicNavbarHigh = CalculateMobileNav()
+     basicNavbar = document.getElementById("basic-navbar-nav")
+
+  }
+  console.log(basicNavbarHigh)
+
   const toggleNavBar = () => {
-    let basicNavbar = document.getElementById("basic-navbar-nav")
+    let menuIcon = document.getElementsByClassName("test")
+    let test = new Tween();
+
     if (hideNav) {
-      basicNavbar.classList.add("show")
+      console.log(basicNavbarHigh)
+
+      // basicNavbar.classList.add("show")
+      // TweenMax.to(basicNavbar, 0.5,{display:"block"})
+      TweenMax.to(basicNavbar, 0.5,{y:basicNavbarHigh})
+      TweenMax.to(menuIcon, 0.5, {rotation:135});
       hideNav = false
     } else {
-      basicNavbar.classList.remove("show")
+      // basicNavbar.classList.remove("show")
+      // TweenMax.to(basicNavbar, 0.5,{display:"none"})
+      TweenMax.to(basicNavbar, 0.5,{y:"-" + basicNavbarHigh})
+
+      TweenMax.to(menuIcon, 0.5, {rotation:0});
       hideNav = true;
     }
   }
@@ -33,8 +59,10 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
       </div>
       <div className="main-container">
         <Navbar variant="dark" expand="sm" >
-          <span className="d-block d-sm-none burger-menu" onClick={() => toggleNavBar()}><FontAwesomeIcon icon={faBars} /></span>
-          <Navbar.Collapse id="basic-navbar-nav">
+          <span className="d-block d-sm-none burger-menu" onClick={() => toggleNavBar()}>
+            <FontAwesomeIcon className="test" icon={faPlus} /> Menu
+          </span>
+          <div id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Link to="/EventList" onClick={() => toggleNavBar()}>SHOWS</Link>
               {/*
@@ -62,16 +90,16 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
               </div>
             )}
             </Nav>
-            <Nav>
+            <Nav className="user-menu">
               {userCtx && (
-                <NavDropdown className="user-menu" title={userCtx.name} id="userCtx-nav-dropdown">
+                <NavDropdown title={userCtx.name} id="userCtx-nav-dropdown">
                   <LinkContainer to="/Eventlist" onClick={() => handleLogout()}>
                     <NavDropdown.Item> Logout</NavDropdown.Item>
                   </LinkContainer>
                 </NavDropdown>
               )}
             </Nav>
-          </Navbar.Collapse>
+          </div>
         </Navbar>
       </div>
     </header>

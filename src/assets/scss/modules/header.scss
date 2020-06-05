@@ -5,6 +5,9 @@ header {
   text-align: center;
   min-height: $header-height;
   .header-logo {
+    z-index: 2;
+position: relative;
+background-color: black;
     a {
       padding: 0;
     }
@@ -15,13 +18,20 @@ header {
     }
   }
   .navbar {
-    .user-menu-mobile {
-      display: none;
-    }
-    .user-menu {
-      width: calc( #{$dropdown-width} + #{$space-s} );
-      .dropdown-toggle {
-        text-align: left;
+    #basic-navbar-nav {
+      width: 100%;
+      .navbar-nav {
+        float: left;
+      }
+      .user-menu-mobile {
+        display: none;
+      }
+      .user-menu {
+        width: calc( #{$dropdown-width} + #{$space-s} );
+        float: right;
+        .dropdown-toggle {
+          text-align: left;
+        }
       }
     }
     padding: 0;
@@ -64,10 +74,47 @@ header {
   @media (max-width: 576px) {
     .navbar {
       margin-bottom: -2px;
+
+      #basic-navbar-nav {
+        top: -120px;
+        left: 0px;
+        position: absolute;
+        z-index: 1;
+        background-color: black;
+        // padding-bottom: $space-l;
+        border-bottom: $border-m-primary;
+        .navbar-nav {
+          float: inherit;
+          .user-menu-mobile {
+            display: grid;
+            // margin-left: calc(50% - #{$space-m});
+            margin: 0 $space-m;
+            border-top: $border-s-white;
+            text-align: right;
+            a {
+              color: $color-light-grey;
+              padding-right: $space-l;
+              float: right;
+              border: none;
+            }
+          }
+          a {
+            border-top: $border-s-white;
+            padding: $space-m 0;
+            margin: 0 $space-m;
+            font-weight: bold;
+            border-left: none;
+            &:hover, &:focus, &:active {
+              border-left: none;
+            }
+          }
+        }
+      }
       .burger-menu {
+        z-index: 3;
         color: $color-white;
-        font-size: x-large;
-        top: -60px;
+        font-size: large;
+        top: -55px;
         position: absolute;
       }
       .user-menu {
@@ -75,29 +122,6 @@ header {
       }
       text-align: center;
       padding: 0 $space-xl;
-      .navbar-nav {
-        .user-menu-mobile {
-          display: grid;
-          margin-left: calc(50% - #{$space-m});
-          text-align: right;
-          a {
-            color: $color-light-grey;
-            padding-right: $space-l;
-            float: right;
-            border: none;
-          }
-        }
-        a {
-          border-bottom: $border-s-white;
-          padding: $space-m 0;
-          margin: 0 $space-m;
-          font-weight: bold;
-          border-left: none;
-          &:hover, &:focus, &:active {
-            border-left: none;
-          }
-        }
-      }
     }
   }
 }

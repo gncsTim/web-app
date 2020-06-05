@@ -12,6 +12,7 @@ import {
   Alert
 } from 'react-bootstrap'
 import Feedback from 'react-bootstrap/Feedback'
+import CalculateMobileNav from '../../../header/component/calculateMobileNav'
 
 const LogInForm = ({ handleLoginRequest, loading, error }) => {
     console.log(error);
@@ -67,7 +68,7 @@ const LogInForm = ({ handleLoginRequest, loading, error }) => {
             </Col>
             {error && <Alert variant='danger'>{error.message}</Alert>}
             <Col xs={12}>
-              <Button variant="primary" type="submit">
+              <Button variant="primary" type="submit" onClick={() => CalculateMobileNav()}>
                 {loading ? <span>loding...</span> : <span>login</span>}
               </Button>
             </Col>
