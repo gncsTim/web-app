@@ -5,6 +5,9 @@ header {
   text-align: center;
   min-height: $header-height;
   .header-logo {
+    a {
+      padding: 0;
+    }
     img {
       margin-top: $space-m;
       width: 80px;
@@ -12,6 +15,9 @@ header {
     }
   }
   .navbar {
+    .user-menu-mobile {
+      display: none;
+    }
     .user-menu {
       width: calc( #{$dropdown-width} + #{$space-s} );
       .dropdown-toggle {
@@ -52,6 +58,46 @@ header {
     & a:focus, & a:hover, & a.active {
       background-color: $primary-color;
       color: $color-black;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .navbar {
+      margin-bottom: -2px;
+      .burger-menu {
+        color: $color-white;
+        font-size: x-large;
+        top: -60px;
+        position: absolute;
+      }
+      .user-menu {
+        display: none;
+      }
+      text-align: center;
+      padding: 0 $space-xl;
+      .navbar-nav {
+        .user-menu-mobile {
+          display: grid;
+          margin-left: calc(50% - #{$space-m});
+          text-align: right;
+          a {
+            color: $color-light-grey;
+            padding-right: $space-l;
+            float: right;
+            border: none;
+          }
+        }
+        a {
+          border-bottom: $border-s-white;
+          padding: $space-m 0;
+          margin: 0 $space-m;
+          font-weight: bold;
+          border-left: none;
+          &:hover, &:focus, &:active {
+            border-left: none;
+          }
+        }
+      }
     }
   }
 }

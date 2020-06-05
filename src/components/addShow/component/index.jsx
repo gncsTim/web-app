@@ -7,7 +7,6 @@ import uuidv1 from 'uuid/v1'
 import { Col, Row } from 'react-bootstrap'
 import crypto from 'crypto'
 import ksuid from 'ksuid'
-
 import { LodingComonent } from 'components/modal/loading'
 import { WithContext as ReactTags } from 'react-tag-input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

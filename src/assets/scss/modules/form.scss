@@ -77,8 +77,9 @@
   }
     .btn-secondary {
       background-color: $color-white;
-      border: $border-s-primary;
-      color: $color-grey;
+      border: $border-m-primary;
+      color: $color-dark-grey;
+      padding: 0;
       &:hover, &:focus, &:active {
         background-color: $color-light-grey;
       }
