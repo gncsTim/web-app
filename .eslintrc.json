@@ -22,7 +22,7 @@
         "react"
     ],
     "rules": {
-        "indent": ["error", 2, { "SwitchCase": 1, "flatTernaryExpressions": true}],
+        "indent": ["error", 4, { "SwitchCase": 1, "flatTernaryExpressions": true}],
         "linebreak-style": [
             "error",
             "unix"
