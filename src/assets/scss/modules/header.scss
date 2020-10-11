@@ -31,6 +31,9 @@ header {
         border-left: $border-s-white;
       }
     }
+    .fa-facebook-square, .fa-instagram {
+      font-size: large;
+    }
   }
   .navbar-dark .navbar-nav .nav-link a, .navbar-dark .navbar-nav .nav-link, a{
     text-decoration: none;

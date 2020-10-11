@@ -1,101 +1,90 @@
-import React, { useState } from "react";
-import { Button, Collapse, Row, Col } from "react-bootstrap";
-// import Multiselect from "react-widgets/lib/Multiselect";
-import MultiSelect from "react-multi-select-component";
-
-const KeyCodes = {
-  comma: 188,
-  enter: 13
-};
-
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+import PropType from 'prop-types'
+import React from 'react'
+import { Button, Row, Col } from 'react-bootstrap'
+import MultiSelect from 'react-multi-select-component'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 class EventFilter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showFilter: false,
-      filterGenres: []
-    };
-    this.handleToggleFilter = this.handleToggleFilter.bind(this);
-    this.handleChangeFilterGenres = this.handleChangeFilterGenres.bind(this);
-    this.handleClearGenreFilter = this.handleClearGenreFilter.bind(this)
-  }
+    constructor(props) {
+        super(props)
+        this.state = {
+            showFilter: false,
+            filterGenres: [],
+        }
+        this.handleChangeFilterGenres = this.handleChangeFilterGenres.bind(this)
+        this.handleClearGenreFilter = this.handleClearGenreFilter.bind(this)
+    }
 
-  handleToggleFilter() {
-    const { showFilter } = this.state;
-    this.setState({ showFilter: !showFilter });
-  }
+    handleChangeFilterGenres(filterGenres) {
+        var selected = filterGenres.map((item) => item.value)
 
-  handleChangeFilterGenres(filterGenres) {
-    console.log("THISSSS")
-    console.log(filterGenres)
-    var selected = filterGenres.map(function(item){
-         return {value: item.value};
-      });
-      console.log(selected)
+        this.setState({ filterGenres }, () => {
+            this.props.setGenresFilter(selected)
+        })
+    }
 
-    this.setState({ filterGenres }, () => {
-      this.props.setGenresFilter(filterGenres);
-    });
-  }
+    handleClearGenreFilter() {
+        this.setState({ filterGenres: [] }, () => {
+            this.props.setGenresFilter([])
+        })
+    }
 
-  handleClearGenreFilter() {
-      this.setState({filterGenres: []}, () => {
-        this.props.setGenresFilter([]);
-      })
-  }
+    render() {
+        const { filterGenres } = this.state
+        const { genres } = this.props
+        var options = genres.map(function (item) {
+            return { label: item, value: item }
+        })
 
-  render() {
-    const { showFilter, filterGenres } = this.state;
-    const { genres } = this.props;
-    console.log( {genres});
-    console.log( {showFilter});
-    var options = genres.map(function(item){
-         return {label: item, value: item};
-      });
-    // const options = [
-    //       { label: "Grapes 🍇", value: "grapes" },
-    //       { label: "Mango 🥭", value: "mango" },
-    //       { label: "Strawberry 🍓", value: "strawberry"},
-    //     ];
-    console.log( {options});
-        console.log( {filterGenres});
-
-    return (
-      <div>
-        <Button
-          onClick={this.handleToggleFilter}
-          aria-controls="collapse-event-filter"
-          aria-expanded={showFilter}
-        >
-          filter
-        </Button>
-        <Collapse in={showFilter}>
-          <div id="collapse-event-filter">
-            <Row>
-              <Col xs={4}>
-                <MultiSelect
-                  options={options}
-                  value={filterGenres}
-                  hasSelectAll={false}
-                  onChange={this.handleChangeFilterGenres}
-
-                />
-              </Col>
-              <Col xs={1}>
-                <Button
-                  onClick={this.handleClearGenreFilter}
-                >
-                  clear
-                </Button>
-              </Col>
-            </Row>
-          </div>
-        </Collapse>
-      </div>
-    );
-  }
+        return (
+            <div className="filter-bar">
+                <Row>
+                    <Col xs={12} sm={4}>
+                        <h2><center> Cities</center></h2>
+                        <Row>
+                            <Col xs={10} sm={8}>
+                                <MultiSelect
+                                    options={options}
+                                    value={filterGenres}
+                                    hasSelectAll={false}
+                                    onChange={this.handleChangeFilterGenres}
+                                />
+                            </Col>
+                            <Col xs={2} sm={1}>
+                                <Button className="btn-dark" onClick={this.handleClearGenreFilter}>
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Col>
+                    <Col xs={12} sm={4}>
+                        <h2><center> Genres</center></h2>
+                        <Row>
+                            <Col xs={10} sm={8}>
+                                <MultiSelect
+                                    options={options}
+                                    value={filterGenres}
+                                    hasSelectAll={false}
+                                    onChange={this.handleChangeFilterGenres}
+                                />
+                            </Col>
+                            <Col xs={2} sm={1}>
+                                <Button className="btn-dark" onClick={this.handleClearGenreFilter}>
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
 }
 
-export default EventFilter;
+EventFilter.propTypes = {
+    setGenresFilter: PropType.func.isRequired,
+    genres: PropType.array.isRequired,
+}
+
+export default EventFilter

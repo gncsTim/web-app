@@ -1,14 +1,11 @@
-import {connect} from 'react-redux';
-import EventList from '../component';
+import { connect } from 'react-redux'
+import EventList from '../component'
 
-const mapState = state => ({
+const mapState = (state) => ({
     eventList: state.eventList,
-    eventFilter: state.eventFilter
+    eventFilter: state.eventFilter,
 })
 
-const connector = connect(
-  mapState
-)
+const connector = connect(mapState)
 
-
-export default connector(EventList);
+export default connector(EventList)
