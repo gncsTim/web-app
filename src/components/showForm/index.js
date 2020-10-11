@@ -11,12 +11,14 @@ import { WithContext as ReactTags } from 'react-tag-input'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
+
 import { isAdminOrEditor } from 'components/user/utils'
 import SupportForm from './supportForm'
+import HeadlinerForm from './headlinerForm'
 
 const KeyCodes = {
   comma: 188,
-  enter: 13
+  enter: 13,
 }
 
 const delimiters = [KeyCodes.comma, KeyCodes.enter]
@@ -40,9 +42,9 @@ class ShowForm extends Component {
         [uuidv1()]: {
           name: '',
           genres: [],
-          links: ['', '']
-        }
-      }
+          links: ['', ''],
+        },
+      },
     }
     this.handleDeleteHeadlinerGenre = this.handleDeleteHeadlinerGenre.bind(this)
     this.handleAddition = this.handleAddition.bind(this)
@@ -57,12 +59,18 @@ class ShowForm extends Component {
     this.handleAddShow = this.handleAddShow.bind(this)
     this.handleChangeVenue = this.handleChangeVenue.bind(this)
     this.handleSelectVenue = this.handleSelectVenue.bind(this)
+    this.updateState = this.updateState.bind(this)
+    this.handleChangeSupportLinks = this.handleChangeSupportLinks.bind(this)
   }
 
   componentDidMount() {
     // this.props.resetAddEventRequest()
     // this.props.getAllVenues()
     // this.props.getAllGenres()
+  }
+
+  updateState(obj) {
+    this.setState(obj)
   }
 
   handleAddShow(e) {
@@ -78,7 +86,7 @@ class ShowForm extends Component {
       headlinerGenre,
       headlinerLinks,
       date,
-      support
+      support,
     } = this.state
     const event = {
       name,
@@ -92,7 +100,7 @@ class ShowForm extends Component {
       headlinerGenre,
       headlinerLinks,
       date: date ? date.format() : '',
-      support
+      support,
     }
     // this.props.addEvent(event)
   }
@@ -100,12 +108,12 @@ class ShowForm extends Component {
   handleDeleteHeadlinerGenre(i) {
     const { headlinerGenre } = this.state
     this.setState({
-      headlinerGenre: headlinerGenre.filter((tag, index) => index !== i)
+      headlinerGenre: headlinerGenre.filter((tag, index) => index !== i),
     })
   }
 
   handleAddition(key) {
-    return tag => {
+    return (tag) => {
       if (!key) {
         return this.setState({ headlinerGenre: this.state.headlinerGenre.concat([tag]) })
       }
@@ -119,7 +127,7 @@ class ShowForm extends Component {
   handleChangeTextInput(event) {
     const { currentTarget } = event
     this.setState({
-      [currentTarget.name]: currentTarget.value
+      [currentTarget.name]: currentTarget.value,
     })
   }
 
@@ -132,7 +140,7 @@ class ShowForm extends Component {
     const venue = venues[0]
     this.setState({
       venue: venue.label,
-      venueAdress: `${venue.street}, ${venue.zip} ${venue.city}`
+      venueAdress: `${venue.street}, ${venue.zip} ${venue.city}`,
     })
   }
 
@@ -141,7 +149,7 @@ class ShowForm extends Component {
   }
 
   handleChangeSupport(key) {
-    return event => {
+    return (event) => {
       const support = Object.assign(this.state.support, {})
       let value = event.currentTarget.value
       support[key].name = value
@@ -154,13 +162,13 @@ class ShowForm extends Component {
     support[uuidv1()] = {
       name: '',
       genres: [],
-      links: ['', '']
+      links: ['', ''],
     }
     this.setState({ support })
   }
 
   handleChangeHeadlinerLinks(index) {
-    return event => {
+    return (event) => {
       const headlinerLinks = this.state.headlinerLinks.concat([])
       headlinerLinks[index] = event.target.value
       this.setState({ headlinerLinks })
@@ -172,7 +180,7 @@ class ShowForm extends Component {
   }
 
   handleChangeSupportLinks(key, index) {
-    return event => {
+    return (event) => {
       const support = JSON.parse(JSON.stringify(this.state.support))
       support[key].links[index] = event.target.value
       this.setState({ support })
@@ -188,7 +196,7 @@ class ShowForm extends Component {
   }
 
   deletSupport(key) {
-    return event => {
+    return (event) => {
       let support = Object.assign(this.state.support, {})
       delete support[key]
       this.setState({ support })
@@ -208,7 +216,7 @@ class ShowForm extends Component {
       headliner,
       headlinerGenre,
       venue,
-      headlinerLinks
+      headlinerLinks,
     } = this.state
 
     const id = ksuid.fromParts(date.valueOf(), crypto.randomBytes(16))
@@ -217,14 +225,14 @@ class ShowForm extends Component {
     const artist_details = [
       {
         name: headliner,
-        genres: headlinerGenre.map(item => item.text),
-        links: headlinerLinks
-      }
+        genres: headlinerGenre.map((item) => item.text),
+        links: headlinerLinks,
+      },
     ]
     const support = JSON.parse(JSON.stringify(this.state.support))
-    Object.keys(support).forEach(key => {
+    Object.keys(support).forEach((key) => {
       const item = support[key]
-      item.genres = item.genres.map(item => item.text)
+      item.genres = item.genres.map((item) => item.text)
 
       if (item && item.name.trim() !== '') artist_details.push(item)
     })
@@ -235,17 +243,17 @@ class ShowForm extends Component {
       atTheDoor,
       facebookLink,
       description,
-      genres: headlinerGenre.map(item => item.text),
+      genres: headlinerGenre.map((item) => item.text),
       type: 'event',
       name,
       date: date.toISOString(),
       artist_details,
-      venue
+      venue,
     }
     if (support && Object.keys(support).length > 0) {
       data.support = Object.keys(support)
-        .map(key => support[key].name)
-        .filter(item => item && item.trim() !== '')
+        .map((key) => support[key].name)
+        .filter((item) => item && item.trim() !== '')
     }
 
     if (userCtx && isAdminOrEditor(userCtx.roles)) {
@@ -269,9 +277,8 @@ class ShowForm extends Component {
       date,
       headliner,
       support,
-      headlinerLinks
+      headlinerLinks,
     } = this.state
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row>
@@ -351,67 +358,7 @@ class ShowForm extends Component {
               />
             </Form.Group>
           </Col>
-          <Col xs={12} md={6}>
-            <Form.Group id="headliner">
-              <Form.Label>
-                Headliner <FontAwesomeIcon icon={faAsterisk} />
-              </Form.Label>
-              <Form.Control
-                type="text"
-                required
-                value={headliner}
-                name="headliner"
-                onChange={this.handleChangeTextInput}
-              />
-            </Form.Group>
-          </Col>
-          <Col xs={12} md={6}>
-            <Form.Group>
-              <Form.Label>
-                Headliner Genre <FontAwesomeIcon icon={faAsterisk} />
-              </Form.Label>
-              {
-                <ReactTags
-                  tags={headlinerGenre}
-                  inline
-                  required
-                  inlinePosition="after"
-                  suggestions={genres}
-                  handleDelete={this.handleDeleteHeadlinerGenre}
-                  handleAddition={this.handleAddition()}
-                  delimiters={delimiters}
-                />
-              }
-            </Form.Group>
-          </Col>
-          <Col md={12}>
-            <Form.Group>
-              <Form.Label>Headliner Links</Form.Label>
-              <Row>
-                <Col md={10}>
-                  <Row>
-                    {headlinerLinks.map((item, index) => (
-                      <Col xs={12} md={6} key={index}>
-                        <Form.Control
-                          type="text"
-                          onChange={this.handleChangeHeadlinerLinks(index)}
-                        />
-                      </Col>
-                    ))}
-                  </Row>
-                </Col>
-                <Col md={2} className="add-linkt-btn-container">
-                  <Button
-                    className="btn-block add-content-btn"
-                    variant="secondary"
-                    onClick={this.addHeadlinerLinks}
-                  >
-                    <FontAwesomeIcon icon={faPlus} /> Links
-                  </Button>
-                </Col>
-              </Row>
-            </Form.Group>
-          </Col>
+          
           <Col xs={12} md={12}>
             <Form.Group id="description">
               <Form.Label>Event description</Form.Label>
@@ -425,12 +372,25 @@ class ShowForm extends Component {
               />
             </Form.Group>
           </Col>
-
+          <HeadlinerForm
+            headliner={headliner}
+            updateState={this.updateState}
+            headlinerLinks={headlinerLinks}
+            headlinerGenre={headlinerGenre}
+            genres={genres} />
           <Col></Col>
           {Object.keys(support).map((key, index, array) => (
             <Col md={12} key={key}>
               <hr />
-              <SupportForm {...support[key]} index={index} arraylength={array.length <= 1} />
+              <SupportForm
+                {...support[key]}
+                supportKey={key}
+                index={index}
+                arraylength={array.length <= 1}
+                handleChangeSupport={this.handleChangeSupport}
+                handleChangeSupportLinks={this.handleChangeSupportLinks}
+                addSupportLinks={this.addSupportLinks}
+              />
             </Col>
           ))}
           <Col md={2} xs={6}>

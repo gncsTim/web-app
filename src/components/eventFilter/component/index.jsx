@@ -7,7 +7,7 @@ const KeyCodes = {
   enter: 13
 };
 
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
+// const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class EventFilter extends React.Component {
   constructor(props) {

@@ -6,14 +6,15 @@ import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import GenresForm from './genresForm'
 
 class SupportForm extends React.Component {
+
   render() {
-    const { key, index, links, name, arraylength } = this.props
+    const { supportKey, index, links, name, arraylength, handleChangeSupport, handleChangeSupportLinks, addSupportLinks } = this.props
     return (
       <Row>
         <Col xs={12} md={6}>
-          <Form.Group id={key}>
+          <Form.Group id={supportKey}>
             <Form.Label>Support {index + 1}</Form.Label>
-            {/* <Form.Control type="text" value={name} onChange={this.handleChangeSupport(key)} /> */}
+            <Form.Control type="text" value={name} onChange={handleChangeSupport(supportKey)} />
           </Form.Group>
         </Col>
         <Col xs={12} md={6}>
@@ -27,7 +28,7 @@ class SupportForm extends React.Component {
                 <Button
                   className="btn-block"
                   variant="danger"
-                  /* onClick={this.deletSupport(key)} */
+                  /* onClick={this.deletSupport(supportKey)} */
                   disabled={arraylength}
                 >
                   <FontAwesomeIcon icon={faTimes} />
@@ -36,7 +37,7 @@ class SupportForm extends React.Component {
             </Row>
           </Form.Group>
         </Col>
-        {/* <Col>
+        <Col>
           <Form.Group>
             <Form.Label>{`Support ${index + 1} Links`}</Form.Label>
             <Row>
@@ -47,7 +48,7 @@ class SupportForm extends React.Component {
                       <Form.Control
                         type="text"
                         value={item.name}
-                        onChange={this.handleChangeSupportLinks(key, index)}
+                        onChange={handleChangeSupportLinks(supportKey, index)}
                       />
                     </Col>
                   ))}
@@ -57,25 +58,28 @@ class SupportForm extends React.Component {
                 <Button
                   className="btn-block add-content-btn"
                   variant="secondary"
-                  onClick={this.addSupportLinks(key)}
+                  onClick={addSupportLinks(supportKey)}
                 >
                   <FontAwesomeIcon icon={faPlus} /> Links
                 </Button>
               </Col>
             </Row>
           </Form.Group>
-        </Col> */}
+        </Col>
       </Row>
     )
   }
 }
 
 SupportForm.propTypes = {
-  key: PropTypes.string.isRequired,
+  supportKey: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   links: PropTypes.arrayOf(PropTypes.string).isRequired,
   name: PropTypes.string,
-  arraylength: PropTypes.number.isRequired
+  arraylength: PropTypes.number.isRequired,
+  handleChangeSupport: PropTypes.func.isRequired,
+  handleChangeSupportLinks: PropTypes.func.isRequired,
+  addSupportLinks: PropTypes.func.isRequired
 }
 
 export default SupportForm
