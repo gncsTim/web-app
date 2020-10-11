@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Collapse, Row, Col } from "react-bootstrap";
-import Multiselect from "react-widgets/lib/Multiselect";
+// import Multiselect from "react-widgets/lib/Multiselect";
+import MultiSelect from "react-multi-select-component";
 
 const KeyCodes = {
   comma: 188,
@@ -27,6 +28,13 @@ class EventFilter extends React.Component {
   }
 
   handleChangeFilterGenres(filterGenres) {
+    console.log("THISSSS")
+    console.log(filterGenres)
+    var selected = filterGenres.map(function(item){
+         return {value: item.value};
+      });
+      console.log(selected)
+
     this.setState({ filterGenres }, () => {
       this.props.setGenresFilter(filterGenres);
     });
@@ -41,6 +49,19 @@ class EventFilter extends React.Component {
   render() {
     const { showFilter, filterGenres } = this.state;
     const { genres } = this.props;
+    console.log( {genres});
+    console.log( {showFilter});
+    var options = genres.map(function(item){
+         return {label: item, value: item};
+      });
+    // const options = [
+    //       { label: "Grapes 🍇", value: "grapes" },
+    //       { label: "Mango 🥭", value: "mango" },
+    //       { label: "Strawberry 🍓", value: "strawberry"},
+    //     ];
+    console.log( {options});
+        console.log( {filterGenres});
+
     return (
       <div>
         <Button
@@ -54,11 +75,12 @@ class EventFilter extends React.Component {
           <div id="collapse-event-filter">
             <Row>
               <Col xs={4}>
-                <Multiselect
-                  placeholder="Genres"
-                  data={genres}
+                <MultiSelect
+                  options={options}
                   value={filterGenres}
+                  hasSelectAll={false}
                   onChange={this.handleChangeFilterGenres}
+
                 />
               </Col>
               <Col xs={1}>

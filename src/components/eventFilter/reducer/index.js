@@ -6,6 +6,8 @@ export const eventFilterReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case SET_GENRES_FILTER:
       state = JSON.parse(JSON.stringify(state));
+      console.log("blaaaaa")
+      console.log(state)
       if (action.payload.length === 0) {
           delete state.genres
       } else {

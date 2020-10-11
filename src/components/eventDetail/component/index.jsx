@@ -33,7 +33,6 @@ class EventDetail extends React.Component {
               <h2>{event.venue}</h2>
             </div>
           </div>
-        </div>
 
         <Row>
           <Col className="event-body">

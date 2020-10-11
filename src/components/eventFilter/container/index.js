@@ -8,7 +8,8 @@ const mapState = state => ({
   })
 
 const mapDispatch = dispatch => ({
-    setGenresFilter: genres => dispatch(setGenresFilter(genres))
+    setGenresFilter: genres => dispatch(setGenresFilter(genres.values))
+
 })
 
 export default connect(mapState, mapDispatch)(EventFilter)
