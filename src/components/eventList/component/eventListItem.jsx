@@ -11,10 +11,8 @@ const EventListItem = ({ event }) => (
     <Link to={'/EventDetail/' + event._id}>
         <div className="list-event">
             <Row>
-                <Col xs={12} md={2}>
-                    <div className="event-list-img">
-                        <img src={eventListImage} alt="default event list logo" />
-                    </div>
+                <Col xs={12} md={2} className="event-list-img">
+                    <img src={eventListImage} alt="default event list logo" />
                 </Col>
                 <Col xs={12} md={5}>
                     <EventTitle title={event.name} headliner={event.headliner} />
@@ -39,9 +37,11 @@ const EventListItem = ({ event }) => (
                     </h3>
                 </Col>
                 <Col xs={12} md={2}>
-                    {event.presale && `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
-                    {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
-                    <span>
+                    <p>
+                        {event.presale && `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
+                        {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
+                    </p>
+                    <p>
                         {Array.from(
                             new Set(
                                 [].concat.apply(
@@ -50,7 +50,7 @@ const EventListItem = ({ event }) => (
                                 )
                             )
                         ).join(', ')}
-                    </span>
+                    </p>
                 </Col>
             </Row>
         </div>
