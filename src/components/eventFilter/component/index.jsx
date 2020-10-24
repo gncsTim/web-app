@@ -18,21 +18,18 @@ class EventFilter extends React.Component {
 
     handleChangeFilterGenres(filterGenres) {
         var selected = filterGenres.map((item) => item.value)
+        this.props.setGenresFilter(selected)
 
-        this.setState({ filterGenres }, () => {
-            this.props.setGenresFilter(selected)
-        })
     }
 
     handleClearGenreFilter() {
-        this.setState({ filterGenres: [] }, () => {
-            this.props.setGenresFilter([])
-        })
+        this.props.setGenresFilter([])
     }
 
     render() {
-        const { filterGenres } = this.state
-        const { genres } = this.props
+        const { genres, eventFilter = {} } = this.props
+        let filterGenres = eventFilter.genres || []
+        filterGenres = filterGenres.map((item) => ({label: item, value: item}))
         var options = genres.map(function (item) {
             return { label: item, value: item }
         })
@@ -85,6 +82,7 @@ class EventFilter extends React.Component {
 EventFilter.propTypes = {
     setGenresFilter: PropType.func.isRequired,
     genres: PropType.array.isRequired,
+
 }
 
 export default EventFilter
