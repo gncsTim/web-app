@@ -51,6 +51,7 @@ class EventDetail extends React.Component {
                                 <>
                                     <a
                                         href={event.facebookLink}
+                                        rel="noopener noreferrer"
                                         target="_blank"
                                     >
                                         Facebook Event
@@ -76,6 +77,7 @@ class EventDetail extends React.Component {
                                                     <li key={index}>
                                                         <a
                                                             href={link}
+                                                            rel="noopener noreferrer"
                                                             target="_blank"
                                                         >
                                                             {link}

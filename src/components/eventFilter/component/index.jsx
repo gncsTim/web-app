@@ -2,13 +2,6 @@ import React from "react";
 import { Button, Collapse, Row, Col } from "react-bootstrap";
 import Multiselect from "react-widgets/lib/Multiselect";
 
-const KeyCodes = {
-  comma: 188,
-  enter: 13
-};
-
-const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
 class EventFilter extends React.Component {
   constructor(props) {
     super(props);
