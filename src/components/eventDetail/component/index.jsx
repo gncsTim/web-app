@@ -77,4 +77,4 @@ EventDetail.propTypes = {
   handleClick: PropTypes.func
 }
 
-export default EventDetail
+export default EventDetail;
