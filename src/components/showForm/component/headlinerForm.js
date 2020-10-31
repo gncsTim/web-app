@@ -11,9 +11,19 @@ class HeadlinerForm extends React.Component {
     constructor(props) {
         super(props)
         this.handleChangeHeadliner = this.handleChangeHeadliner.bind(this)
-        this.handleChangeHeadlinerLinks = this.handleChangeHeadlinerLinks.bind(this)
+        this.handleChangeHeadlinerLinks = this.handleChangeHeadlinerLinks.bind(
+            this
+        )
         this.handleAddition = this.handleAddition.bind(this)
-        this.handleDeleteHeadlinerGenre = this.handleDeleteHeadlinerGenre.bind(this)
+        this.handleDeleteHeadlinerGenre = this.handleDeleteHeadlinerGenre.bind(
+            this
+        )
+        this.addHeadlinerLinks = this.addHeadlinerLinks.bind(this)
+    }
+
+    addHeadlinerLinks() {
+        let headlinerLinks = this.props.headlinerLinks.concat(['', ''])
+        this.props.updateState({ headlinerLinks })
     }
 
     handleChangeHeadliner(event) {
@@ -50,15 +60,15 @@ class HeadlinerForm extends React.Component {
         return (
             <div>
                 <Col xs={12} md={6}>
-                    <Form.Group id='headliner'>
+                    <Form.Group id="headliner">
                         <Form.Label>
                             Headliner <FontAwesomeIcon icon={faAsterisk} />
                         </Form.Label>
                         <Form.Control
-                            type='text'
+                            type="text"
                             required
                             value={headliner}
-                            name='headliner'
+                            name="headliner"
                             onChange={this.handleChangeHeadliner}
                         />
                     </Form.Group>
@@ -66,15 +76,17 @@ class HeadlinerForm extends React.Component {
                 <Col xs={12} md={6}>
                     <Form.Group>
                         <Form.Label>
-                            Headliner Genre <FontAwesomeIcon icon={faAsterisk} />
+                            Headliner Genre{' '}
+                            <FontAwesomeIcon icon={faAsterisk} />
                         </Form.Label>
                         {
                             <ReactTags
                                 tags={headlinerGenre}
                                 inline
                                 required
-                                inlinePosition='after'
+                                inlinePosition="after"
                                 suggestions={genres}
+                                allowDragDrop={false}
                                 handleDelete={this.handleDeleteHeadlinerGenre}
                                 handleAddition={this.handleAddition()}
                                 delimiters={delimiters}
@@ -91,17 +103,19 @@ class HeadlinerForm extends React.Component {
                                     {headlinerLinks.map((item, index) => (
                                         <Col xs={12} md={6} key={index}>
                                             <Form.Control
-                                                type='text'
-                                                onChange={this.handleChangeHeadlinerLinks(index)}
+                                                type="text"
+                                                onChange={this.handleChangeHeadlinerLinks(
+                                                    index
+                                                )}
                                             />
                                         </Col>
                                     ))}
                                 </Row>
                             </Col>
-                            <Col md={2} className='add-linkt-btn-container'>
+                            <Col md={2} className="add-linkt-btn-container">
                                 <Button
-                                    className='btn-block add-content-btn'
-                                    variant='secondary'
+                                    className="btn-block add-content-btn"
+                                    variant="secondary"
                                     onClick={this.addHeadlinerLinks}
                                 >
                                     <FontAwesomeIcon icon={faPlus} /> Links

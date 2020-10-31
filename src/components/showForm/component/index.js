@@ -99,7 +99,6 @@ class ShowForm extends Component {
                 .map((key) => support[key].name)
                 .filter((item) => item && item.trim() !== '')
         }
-
         if (userCtx && isAdminOrEditor(userCtx.roles)) {
             return addEventRemote(data)
         }
@@ -145,7 +144,7 @@ class ShowForm extends Component {
                         headlinerGenre={headlinerGenre}
                         genres={genres}
                     />
-                    <SupportForm supports={support} updateState={this.updateState} />
+                    <SupportForm support={support} updateState={this.updateState} />
                     <Col>
                         <hr />
                         <Button className='float-right' variant='primary' type='submit'>
