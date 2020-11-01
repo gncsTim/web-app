@@ -8,22 +8,24 @@ import reducer from 'rdx/reducers'
 import { couchdbMiddleware } from 'rdx/middlewares/couchdb'
 import { userMiddleware } from 'rdx/middlewares/couchdb/user'
 import { routeHistoryMiddleware } from 'rdx/middlewares/routeHistory'
+import { appUserMiddleware } from 'components/user/middleware'
 
 let enhancers = []
 // TODO: fix that for production mode
 // if (nodeEnv === 'development') {
 const composeEnhancers = composeWithDevTools({})
 const logger = createLogger({
-  collapsed: true
+    collapsed: true,
 })
 enhancers = composeEnhancers(
-  (enhancers = applyMiddleware(
-    logger,
-    createDebounce(),
-    couchdbMiddleware,
-    userMiddleware,
-    routeHistoryMiddleware
-  ))
+    (enhancers = applyMiddleware(
+        logger,
+        createDebounce(),
+        couchdbMiddleware,
+        userMiddleware,
+        appUserMiddleware,
+        routeHistoryMiddleware
+    ))
 )
 // }
 
