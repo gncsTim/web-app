@@ -44,6 +44,7 @@ export const userMiddleware = (store) => (next) => {
                     if (err) {
                         console.log(err)
                     } else {
+                        localStorage.removeItem('gncsUser')
                         store.dispatch(resetUserCtx())
                     }
                 })
