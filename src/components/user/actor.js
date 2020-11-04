@@ -7,7 +7,9 @@ import { setUserCtx } from './action'
 class UserActor extends React.Component {
     componentDidMount() {
         const gncsUser = JSON.parse(localStorage.getItem('gncsUser'))
-        this.props.handleSetUserCtx(gncsUser)
+        if (gncsUser) {
+            this.props.handleSetUserCtx(gncsUser)
+        }
     }
     render() {
         return null
@@ -15,11 +17,11 @@ class UserActor extends React.Component {
 }
 
 UserActor.propTypes = {
-    handleSetUserCtx: PropTypes.func.isRequired
+    handleSetUserCtx: PropTypes.func.isRequired,
 }
 
-const mapDispatch = dispatch => ({
-    handleSetUserCtx: (gncsUser) => dispatch(setUserCtx(gncsUser))
+const mapDispatch = (dispatch) => ({
+    handleSetUserCtx: (gncsUser) => dispatch(setUserCtx(gncsUser)),
 })
 
 export default connect(null, mapDispatch)(UserActor)
