@@ -37,6 +37,8 @@ class EventFilter extends React.Component {
         return (
             <div className="filter-bar">
                 <Row>
+                    {/*TODO: City Filter when City db is there */}
+                    {/*
                     <Col xs={12} sm={4}>
                         <h2><center> Cities</center></h2>
                         <Row>
@@ -54,7 +56,7 @@ class EventFilter extends React.Component {
                                 </Button>
                             </Col>
                         </Row>
-                    </Col>
+                    </Col> */}
                     <Col xs={12} sm={4}>
                         <h2><center> Genres</center></h2>
                         <Row>
