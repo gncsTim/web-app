@@ -84,7 +84,7 @@ class EventFilter extends React.Component {
 EventFilter.propTypes = {
     setGenresFilter: PropType.func.isRequired,
     genres: PropType.array.isRequired,
-
+    eventFilter: PropType.object.isRequired,
 }
 
 export default EventFilter

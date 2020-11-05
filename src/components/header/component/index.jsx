@@ -10,7 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookSquare, faInstagram } from '@fortawesome/free-brands-svg-icons'
 
-
 const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
     hideNav = true
     const toggleNavBar = () => {
@@ -63,10 +62,20 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
                             <Link to="/Underground" onClick={() => toggleNavBar()}>
                                 UNDERGROUND
                             </Link>
-                            <a href="https://www.facebook.com/goodnightcouchside" target="_blank" rel="noopener noreferrer" onClick={() => toggleNavBar()}>
+                            <a
+                                href="https://www.facebook.com/goodnightcouchside"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => toggleNavBar()}
+                            >
                                 <FontAwesomeIcon icon={faFacebookSquare} />
                             </a>
-                            <a href="https://www.instagram.com/goodnightcouchside/" target="_blank" rel="noopener noreferrer" onClick={() => toggleNavBar()}>
+                            <a
+                                href="https://www.instagram.com/goodnightcouchside/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => toggleNavBar()}
+                            >
                                 <FontAwesomeIcon icon={faInstagram} />
                             </a>
                             {/* Moblie Account Menu*/}
@@ -109,6 +118,7 @@ Header.propTypes = {
     userCtx: PropTypes.shape(userCtxShape),
     handleGetSession: PropTypes.func,
     handleLogout: PropTypes.func,
+    hideNav: PropTypes.bool,
 }
 
 export default Header
