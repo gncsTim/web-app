@@ -68,34 +68,34 @@ class AddShow extends Component {
 
   handleAddShow(e) {
 
-    const {
-      name,
-      venue,
-      venueAdress,
-      presale,
-      atTheDoor,
-      facebookLink,
-      description,
-      headliner,
-      headlinerGenre,
-      headlinerLinks,
-      date,
-      support
-    } = this.state
-    const event = {
-      name,
-      venue,
-      venueAdress,
-      presale,
-      atTheDoor,
-      facebookLink,
-      description,
-      headliner,
-      headlinerGenre,
-      headlinerLinks,
-      date: date ? date.format() : '',
-      support
-    }
+    // const {
+    //   name,
+    //   venue,
+    //   venueAdress,
+    //   presale,
+    //   atTheDoor,
+    //   facebookLink,
+    //   description,
+    //   headliner,
+    //   headlinerGenre,
+    //   headlinerLinks,
+    //   date,
+    //   support
+    // } = this.state
+    // const event = {
+    //   name,
+    //   venue,
+    //   venueAdress,
+    //   presale,
+    //   atTheDoor,
+    //   facebookLink,
+    //   description,
+    //   headliner,
+    //   headlinerGenre,
+    //   headlinerLinks,
+    //   date: date ? date.format() : '',
+    //   support
+    // }
     // this.props.addEvent(event)
 
   }
@@ -246,7 +246,7 @@ class AddShow extends Component {
     const { addShowRequest, pushRoute, venues, genres } = this.props
     const {
       name,
-      venue,
+      // venue,
       presale,
       atTheDoor,
       facebookLink,

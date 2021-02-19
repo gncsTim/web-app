@@ -19,7 +19,9 @@ class EventDetail extends React.Component {
                     <div className="event-head">
                         <div className="event-headline">
                             <h2>
-                                <Moment format="DD.MM.YYYY - HH.mm">{event.date}</Moment>
+                                <Moment format="DD.MM.YYYY - HH.mm">
+                                    {event.date}
+                                </Moment>
                             </h2>
                         </div>
                         <div className="event-headline">
@@ -37,14 +39,21 @@ class EventDetail extends React.Component {
                     <Row>
                         <Col className="event-body">
                             {event.presale &&
-                                `Presale: ${event.presale} ${event.atTheDoor ? ', ' : ''} `}
-                            {event.atTheDoor && `Price at the Door: ${event.atTheDoor}`}
+                                `Presale: ${event.presale} ${
+                                    event.atTheDoor ? ', ' : ''
+                                } `}
+                            {event.atTheDoor &&
+                                `Price at the Door: ${event.atTheDoor}`}
                             <br />
                             <br />
                             <p>{event.description}</p>
                             {event.facebookLink && event.facebookLink.trim() !== '' ? (
                                 <>
-                                    <a href={event.facebookLink} target="_blank" rel="noopener noreferrer">
+                                    <a
+                                        href={event.facebookLink}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                    >
                                         Facebook Event
                                     </a>
                                     <br />
