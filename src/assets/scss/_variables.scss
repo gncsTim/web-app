@@ -1,6 +1,13 @@
 //shadows
 $primary-box-shadow: 0em 0.1em 0.5em 0.1em $color-grey;
 
+$green-box-shadow: 3px 3px 5px rgba(0, 200, 0, 0.8);
+$green-box-shadow-hover: 3px 3px 5px rgba(0, 200, 0, 0.8);
+
+$green-box-shadow-light: 1px 1px 8px rgba(0, 200, 0, 0.8);
+
+$box-shadow-background: 3px 14px 9px 5px $color-black;
+
 //spaces
 $space-s: 5px;
 $space-m: 10px;
@@ -19,7 +26,7 @@ $border-m-primary: solid 2px $primary-color;
 //font-size
 $h1-size: 24px;
 $h2-size: 16px;
-$h3-size: 14px; 
+$h3-size: 14px;
 
 //fix lengths
 $footer-height: 60px;

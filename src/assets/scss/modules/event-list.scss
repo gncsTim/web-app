@@ -3,15 +3,15 @@
   padding-bottom: $space-m;
   min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
   padding-bottom: 100px;
-  
+  box-shadow: $box-shadow-background;
   .filter-bar {
     center {
       margin-bottom: $space-m;
       color: $color-white;
     }
-    margin-bottom: $space-l;  
+    margin-bottom: $space-l;
   }
-  
+
   a {
     &:hover, &:focus {
       text-decoration: none;
@@ -20,6 +20,7 @@
   }
   .event-list-date {
       background-color: $primary-color;
+      opacity: 0.8;
       color: $color-black;
       text-align: left;
       padding-right: $space-s;
@@ -29,18 +30,16 @@
   .list-event {
     &:hover, &:focus {
       text-decoration: none;
-      background-color: $primary-color;
+      box-shadow: 3px 3px 5px rgba(0, 200, 0, 0.8);
+
       .row {
         div:not(:first-child):not(:last-child) {
-          border-right: $color-white solid 0.5px;
+          // border-right: $primary-color solid 0.5px;
         }
       }
     }
-    p {
-      color: $color-black;
-    }
-    color: $color-black;
-    background-color: $color-light-grey;
+    color: $color-white;
+    box-shadow: 3px 3px 5px rgba(0, 200, 0, 0.4);
     margin-bottom: $space-m;
     text-align: left;
     .row {
@@ -55,8 +54,8 @@
       margin: -10px -15px -10px -15px;
       position: relative;
         img {
-          object-fit: cover; 
-          width: 100%; 
+          object-fit: cover;
+          width: 100%;
           height: 100%;
 
         }

@@ -1,6 +1,6 @@
 header {
   border-bottom: $border-m-primary;
-  box-shadow:$primary-box-shadow;
+  box-shadow:$green-box-shadow-light;
   background-color: $background-color-secondary;
   text-align: center;
   min-height: $header-height;
@@ -11,7 +11,6 @@ header {
     img {
       margin-top: $space-m;
       width: 80px;
-
     }
   }
   .navbar {
