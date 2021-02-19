@@ -37,6 +37,7 @@
         ],
         "default-case": ["error", { "commentPattern": "^skip\\sdefault" }],
         "no-duplicate-imports": "error",
-        "space-before-blocks": "error"
+        "space-before-blocks": "error",
+        "no-console": ["error", { "allow": ["warn", "error"] }]
     }
 }
