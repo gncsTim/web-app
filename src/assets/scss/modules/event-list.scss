@@ -1,8 +1,15 @@
 .event-list {
-  padding-top: $space-m;
-  padding-bottom: $space-m;
+  padding: $space-m $space-xxl;
   min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
   padding-bottom: 100px;
+  box-shadow: $box-shadow-background;
+  .filter-bar {
+    center {
+      margin-bottom: $space-m;
+      color: $color-white;
+    }
+    margin-bottom: $space-l;
+  }
 
   a {
     &:hover, &:focus {
@@ -12,36 +19,47 @@
   }
   .event-list-date {
       background-color: $primary-color;
+      opacity: 0.8;
       color: $color-black;
       text-align: left;
       padding-right: $space-s;
       padding-left: $space-l;
       margin: $space-m 0;
+      margin-left: -$space-l;
   }
   .list-event {
     &:hover, &:focus {
       text-decoration: none;
-      background-color: $primary-color;
-    }
-    p {
+      box-shadow: 3px 3px 5px rgba(0, 200, 0, 0.8);
 
-      color: $color-black;
+      .row {
+        div:not(:first-child):not(:last-child) {
+          border-right: $primary-color-light solid 0.5px;
+        }
+      }
     }
-    color: $color-black;
-    background-color: $color-light-grey;
+    color: $color-white;
+    box-shadow: 3px 3px 5px rgba(0, 200, 0, 0.4);
     margin-bottom: $space-m;
     text-align: left;
     .row {
-      padding: $space-l $space-l;
+      padding: $space-m $space-m;
+      max-height: 110px;
+      div:not(:first-child):not(:last-child) {
+        border-right: $color-black solid 0.5px;
+      }
     }
     .event-list-img {
-      border: $border-s-grey;
-      width: 100px;
-      height: 100px;
-      margin: 0 auto;
-      img {
-        width: 100%;
-      }
+      max-height: 110px;
+      margin: -10px -15px -10px -15px;
+      position: relative;
+        img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+
+        }
+
     }
     ul {
       list-style: none;
@@ -53,9 +71,13 @@
     }
   }
   @media (max-width: 768px) {
-    .event-list-img {
-      display: none;
+    .list-event {
+      .row {
+        max-height: none;
+        .event-list-img {
+          display: none;
+        }
+      }
     }
-   }
-
+  }
 }

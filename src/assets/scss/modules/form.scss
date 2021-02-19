@@ -1,3 +1,38 @@
+button {
+  height: $form-hight;
+  font-size: inherit;
+}
+Button {
+  height: $form-hight;
+}
+.btn-primary, .btn-danger {
+  font-size: inherit;
+}
+  .btn-secondary {
+    background-color: $color-white;
+    border: $border-m-primary;
+    color: $color-dark-grey;
+    padding: 0;
+    &:hover, &:focus, &:active {
+      background-color: $color-light-grey;
+    }
+  }
+
+.multi-select {
+  .dropdown-container, .dropdown-heading {
+    cursor: pointer;
+
+    height: $form-hight;
+      label {
+        margin: 0;
+      }
+      .dropdown-heading-dropdown-arrow {
+        padding: 0;
+  
+      }
+  }
+} 
+
 .form-group {
     text-align: left;
     margin-bottom: 0;
@@ -18,23 +53,21 @@
     hr {
       border-color: $color-white;
     }
-    button {
-      height: 31px;
-      font-size: inherit;
-    }
     .form-control, .react-tags-wrapper {
-      height: 31px;
+      height: $form-hight;
       margin-bottom: 1rem;
     }
     textarea {
       &.form-control {
-        height: 62px;
+        height: $form-hight*2;
       }
     }
     label {
       color: $color-white
     }
   }
+
+  
   form {
     .add-content-btn {
       margin-bottom: 1rem;
@@ -50,22 +83,15 @@
       color: $color-white;
     }
     input {
-      height: 31px;
+      height: $form-hight;
     }
 
     div.ReactTags__tagInput {
       input.ReactTags__tagInputField {
-        height: 30px;
+        height: $form-hight;
         border-radius: .25rem;
       }
     }
-  }
-  Button {
-    height: 30px;
-  }
-  .btn-primary, .btn-danger {
-    font-size: inherit;
-
   }
   .btn-primary {
     background-color: $primary-color;
@@ -75,13 +101,4 @@
       background-color: $color-green-dark;
     }
   }
-    .btn-secondary {
-      background-color: $color-white;
-      border: $border-m-primary;
-      color: $color-dark-grey;
-      padding: 0;
-      &:hover, &:focus, &:active {
-        background-color: $color-light-grey;
-      }
-    }
 }
