@@ -47,51 +47,6 @@ class EventDetail extends React.Component {
                             <br />
                             <br />
                             <p>{event.description}</p>
-<<<<<<< HEAD
-                            {event.facebookLink &&
-                            event.facebookLink.trim() !== '' ? (
-                                    <>
-                                        <a
-                                            href={event.facebookLink}
-                                            rel="noopener noreferrer"
-                                            target="_blank"
-                                        >
-                                            Facebook Event
-                                        </a>
-                                        <br />
-                                        <br />
-                                        <br />
-                                    </>
-                                ) : (
-                                    ''
-                                )}
-                            {event.artist_details.map(
-                                (artist_details, index) => (
-                                    <div key={index}>
-                                        <h2>{artist_details.name}</h2>
-                                        <p>
-                                            Genre:{' '}
-                                            {artist_details.genres.join(', ')}
-                                        </p>
-                                        <ul>
-                                            {artist_details.links.map(
-                                                (link, index) => (
-                                                    <li key={index}>
-                                                        <a
-                                                            href={link}
-                                                            rel="noopener noreferrer"
-                                                            target="_blank"
-                                                        >
-                                                            {link}
-                                                        </a>
-                                                    </li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </div>
-                                )
-                            )}
-=======
                             {event.facebookLink && event.facebookLink.trim() !== '' ? (
                                 <>
                                     <a
@@ -123,7 +78,6 @@ class EventDetail extends React.Component {
                                     </ul>
                                 </div>
                             ))}
->>>>>>> develop
                         </Col>
                     </Row>
                 </Col>
