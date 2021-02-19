@@ -1,6 +1,6 @@
 header {
   border-bottom: $border-m-primary;
-  box-shadow:$primary-box-shadow;
+  box-shadow:$green-box-shadow-light;
   background-color: $background-color-secondary;
   text-align: center;
   min-height: $header-height;
@@ -11,7 +11,6 @@ header {
     img {
       margin-top: $space-m;
       width: 80px;
-
     }
   }
   .navbar {
@@ -30,6 +29,9 @@ header {
       &:hover, &:focus, &:active {
         border-left: $border-s-white;
       }
+    }
+    .fa-facebook-square, .fa-instagram {
+      font-size: large;
     }
   }
   .navbar-dark .navbar-nav .nav-link a, .navbar-dark .navbar-nav .nav-link, a{

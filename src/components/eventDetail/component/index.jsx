@@ -63,32 +63,21 @@ class EventDetail extends React.Component {
                             ) : (
                                 ''
                             )}
-                            {event.artist_details.map(
-                                (artist_details, index) => (
-                                    <div key={index}>
-                                        <h2>{artist_details.name}</h2>
-                                        <p>
-                                            Genre:{' '}
-                                            {artist_details.genres.join(', ')}
-                                        </p>
-                                        <ul>
-                                            {artist_details.links.map(
-                                                (link, index) => (
-                                                    <li key={index}>
-                                                        <a
-                                                            href={link}
-                                                            rel="noopener noreferrer"
-                                                            target="_blank"
-                                                        >
-                                                            {link}
-                                                        </a>
-                                                    </li>
-                                                )
-                                            )}
-                                        </ul>
-                                    </div>
-                                )
-                            )}
+                            {event.artist_details.map((artist_details, index) => (
+                                <div key={index}>
+                                    <h2>{artist_details.name}</h2>
+                                    <p>Genre: {artist_details.genres.join(', ')}</p>
+                                    <ul>
+                                        {artist_details.links.map((link, index) => (
+                                            <li key={index}>
+                                                <a href={link} target="_blank" rel="noopener noreferrer">
+                                                    {link}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
                         </Col>
                     </Row>
                 </Col>
@@ -100,6 +89,8 @@ class EventDetail extends React.Component {
 EventDetail.propTypes = {
     event: PropTypes.shape(eventShape),
     handleClick: PropTypes.func,
+    isEventListEmpty: PropTypes.bool,
+    redirctToPageNotFound: PropTypes.func,
 }
 
 export default EventDetail
