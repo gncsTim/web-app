@@ -34,3 +34,19 @@ jobs:
         name: gncs/web-app
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Deploy package to digitalocean
+      uses: appleboy/ssh-action@master
+      env:
+          GITHUB_USERNAME: ${{ secrets.GITHUB_USERNAME }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        host: ${{ secrets.STAGE_GNCS_HOST }}
+        username: ${{ secrets.STAGE_GNCS_DEPLOY }}
+        password: ${{ secrets.STAGE_NGCS_DEPLOY_PASSWORD }}
+        port: ${{ secrets.STAGE_PORT }}
+        script: |
+          docker stop gncs-web-app
+          docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+          docker pull gncs/web-app:latest
+          docker run --name gncs-web-app -dit -p 8080:80 gncs/web-app:latest
