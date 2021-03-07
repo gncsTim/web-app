@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import EventList from '../component'
+import EventList from '../component/acceptedShows'
 
 const mapState = (state) => ({
     eventList: state.eventList,

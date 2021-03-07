@@ -81,6 +81,9 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
                             {/* Moblie Account Menu*/}
                             {userCtx && (
                                 <div className="user-menu-mobile">
+                                    <p>Admin:</p>
+                                    <Link to="/RequestedShows" onClick={() => toggleNavBar()}>Requested Shows</Link>
+                                    <Link to="/AddShow" onClick={() => toggleNavBar()}>Add Shows</Link>
                                     <Link
                                         to="/Eventlist"
                                         onClick={() => {
@@ -101,8 +104,14 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
                                     title={userCtx.name}
                                     id="userCtx-nav-dropdown"
                                 >
+                                    <LinkContainer to="/RequestedShows">
+                                      <NavDropdown.Item>Requested Shows</NavDropdown.Item>
+                                    </LinkContainer>
+                                    <LinkContainer to="/AddShow">
+                                      <NavDropdown.Item>Add Shows</NavDropdown.Item>
+                                    </LinkContainer>
                                     <LinkContainer to="/Eventlist" onClick={() => handleLogout()}>
-                                        <NavDropdown.Item> Logout</NavDropdown.Item>
+                                      <NavDropdown.Item>Logout <FontAwesomeIcon icon={faSignOutAlt} /></NavDropdown.Item>
                                     </LinkContainer>
                                 </NavDropdown>
                             )}
