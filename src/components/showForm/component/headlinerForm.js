@@ -58,7 +58,7 @@ class HeadlinerForm extends React.Component {
     render() {
         const { headliner, headlinerGenre, headlinerLinks, genres } = this.props
         return (
-            <div>
+            <>
                 <Col xs={12} md={6}>
                     <Form.Group id="headliner">
                         <Form.Label>
@@ -124,7 +124,7 @@ class HeadlinerForm extends React.Component {
                         </Row>
                     </Form.Group>
                 </Col>
-            </div>
+            </>
         )
     }
 }

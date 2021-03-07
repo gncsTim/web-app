@@ -23,6 +23,15 @@ const Header = ({ handleGetSession, handleLogout, userCtx, hideNav }) => {
         }
     }
 
+    window.addEventListener('click', function(e){
+        if (!document.querySelector('header').contains(e.target)){
+          if (!hideNav) {
+            toggleNavBar();
+          }
+        }
+      });
+
+
     return (
         <header>
             <div className="header-logo">

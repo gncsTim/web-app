@@ -14,7 +14,7 @@ class AddShow extends Component {
                 <LodingComonent {...addShowRequest} handleSuccess={pushRoute}>
                     <h3>added new show</h3>
                 </LodingComonent>
-                <h1>Good Night Couch Side | Add Show</h1>
+                <h1>Add Show</h1>
                 {/* TODO:  show only if not editor */}
                 <p>
                     That is the place where you can add your show. It will send to our database and
