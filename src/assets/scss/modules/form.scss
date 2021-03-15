@@ -8,15 +8,15 @@ Button {
 .btn-primary, .btn-danger {
   font-size: inherit;
 }
-  .btn-secondary {
-    background-color: $color-white;
-    border: $border-m-primary;
-    color: $color-dark-grey;
-    padding: 0;
-    &:hover, &:focus, &:active {
-      background-color: $color-light-grey;
-    }
+.btn-secondary {
+  background-color: $color-white;
+  border: $border-m-primary;
+  color: $color-dark-grey;
+  padding: 0;
+  &:hover, &:focus, &:active {
+    background-color: $color-light-grey;
   }
+}
 
 .multi-select {
   .dropdown-container, .dropdown-heading {
@@ -56,6 +56,14 @@ Button {
     .form-control, .react-tags-wrapper {
       height: $form-hight;
       margin-bottom: 1rem;
+
+      .ReactTags__suggestions {
+        z-index: 1;
+        font-weight: bolder;
+        li{
+          margin-left: -40px;
+        }
+      }
     }
     textarea {
       &.form-control {
