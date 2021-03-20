@@ -40,11 +40,13 @@ class GenresForm extends React.Component {
             <ReactTags
                 tags={selected}
                 inline
+                autofocus={false}
                 inlinePosition="after"
                 suggestions={genres}
                 handleDelete={this.handleDeleteGenre}
                 handleAddition={this.handleAddition}
                 delimiters={delimiters}
+                placeholder="Band Genres"
             />
         )
     }

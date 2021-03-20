@@ -58,7 +58,7 @@ class HeadlinerForm extends React.Component {
     render() {
         const { headliner, headlinerGenre, headlinerLinks, genres } = this.props
         return (
-            <div>
+            <>
                 <Col xs={12} md={6}>
                     <Form.Group id="headliner">
                         <Form.Label>
@@ -80,17 +80,20 @@ class HeadlinerForm extends React.Component {
                             <FontAwesomeIcon icon={faAsterisk} />
                         </Form.Label>
                         {
-                            <ReactTags
-                                tags={headlinerGenre}
-                                inline
-                                required
-                                inlinePosition="after"
-                                suggestions={genres}
-                                allowDragDrop={false}
-                                handleDelete={this.handleDeleteHeadlinerGenre}
-                                handleAddition={this.handleAddition()}
-                                delimiters={delimiters}
-                            />
+                            <>
+                                <ReactTags
+                                    tags={headlinerGenre}
+                                    autofocus={false}
+                                    required
+                                    inlinePosition="after"
+                                    suggestions={genres}
+                                    placeholder="Band Genres"
+                                    allowDragDrop={false}
+                                    handleDelete={this.handleDeleteHeadlinerGenre}
+                                    handleAddition={this.handleAddition()}
+                                    delimiters={delimiters}
+                                />
+                            </>
                         }
                     </Form.Group>
                 </Col>
@@ -124,7 +127,7 @@ class HeadlinerForm extends React.Component {
                         </Row>
                     </Form.Group>
                 </Col>
-            </div>
+            </>
         )
     }
 }

@@ -4,7 +4,8 @@ import history from 'rdx/history'
 // import {Button} from 'react-bootstrap';
 
 import EventDetail from 'components/eventDetail/container'
-import EventList from 'components/eventList/container'
+import EventList from 'components/eventList/container/acceptedShows'
+import RequestedShows from 'components/eventList/container/requestedShows'
 import AddShow from 'components/addShow/container'
 import Underground from 'components/underground/component'
 
@@ -59,7 +60,7 @@ const App = () => {
                             component={WikiListVenues}
                         />
 
-                        <Route exact path="/login" component={LogInForm} />
+                        <Route exact path="/asdf" component={LogInForm} />
 
                         <Route exact path="/Imprint" component={Imprint} />
 
@@ -67,6 +68,11 @@ const App = () => {
                             exact
                             path="/Underground"
                             component={Underground}
+                        />
+                        <Route
+                            exact
+                            path="/RequestedShows"
+                            component={RequestedShows}
                         />
                         <Route path="*" component={PageNotFound} />
                     </Switch>

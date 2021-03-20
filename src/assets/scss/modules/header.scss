@@ -45,7 +45,7 @@ header {
   }
   .navbar-expand-sm .navbar-nav .dropdown-menu {
     border-radius: 0;
-    background-color: $primary-color;
+    background-color: $color-dark-grey;
     margin-top: $space-s;
     padding: $space-s;
     width: $dropdown-width;
@@ -53,9 +53,13 @@ header {
     & a {
       color: $color-white;
       border: none;
+      padding-left: $space-m;
     }
     .dropdown-item:not(:last-child)  {
       border-bottom: $border-s-black;
+    }
+    .dropdown-item:last-child  {
+      text-align: right;
     }
     & a:focus, & a:hover, & a.active {
       background-color: $primary-color;
@@ -80,8 +84,13 @@ header {
       .navbar-nav {
         .user-menu-mobile {
           display: grid;
+          margin-top: $space-xl;
           margin-left: calc(50% - #{$space-m});
           text-align: right;
+          p {
+            text-align: left;
+            margin-bottom: 0;
+          }
           a {
             color: $color-light-grey;
             padding-right: $space-l;
