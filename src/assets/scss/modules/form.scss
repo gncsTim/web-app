@@ -28,10 +28,10 @@ Button {
       }
       .dropdown-heading-dropdown-arrow {
         padding: 0;
-  
+
       }
   }
-} 
+}
 
 .form-group {
     text-align: left;
@@ -65,6 +65,9 @@ Button {
         }
       }
     }
+    select {
+      padding: 0;
+    }
     textarea {
       &.form-control {
         height: $form-hight*2;
@@ -75,7 +78,7 @@ Button {
     }
   }
 
-  
+
   form {
     .add-content-btn {
       margin-bottom: 1rem;

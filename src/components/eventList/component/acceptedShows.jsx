@@ -11,17 +11,23 @@ const EventList = ({ eventList, eventFilter }) => {
 
     if (eventList.length === 0) return null
     const sortEvents = {}
-    console.log(eventFilter)
     eventList
         .filter((event) => {
             let showEvent = true
 
             if (eventFilter.genres) {
-                console.log(eventFilter.genres)
                 showEvent = event.genres.reduce((acc, cur) => {
                     return acc || eventFilter.genres.indexOf(cur) !== -1
                 }, false)
             }
+            if (eventFilter.regions) {
+                if (event.venueRegion) {
+                    showEvent = eventFilter.regions.includes(event.venueRegion)
+                } else {
+                    showEvent = false
+                }
+            }
+
             return showEvent
         })
         .forEach((event) => {

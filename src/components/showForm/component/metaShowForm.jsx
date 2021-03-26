@@ -7,6 +7,9 @@ import { faAsterisk } from '@fortawesome/free-solid-svg-icons'
 import Datetime from 'react-datetime'
 import { Typeahead } from 'react-bootstrap-typeahead'
 
+import REGIONLIST from 'components/eventFilter/constants'
+
+
 class MetaShowForm extends React.Component {
     constructor(props) {
         super(props)
@@ -15,6 +18,7 @@ class MetaShowForm extends React.Component {
         this.handleChangeVenue = this.handleChangeVenue.bind(this)
         this.handleSelectVenue = this.handleSelectVenue.bind(this)
     }
+
 
     handleChangeTextInput(e) {
         const { name, value } = e.target
@@ -34,7 +38,9 @@ class MetaShowForm extends React.Component {
         const venue = venues[0]
         this.props.updateState({
             venue: venue.label,
-            venueAdress: `${venue.street}, ${venue.zip} ${venue.city}`,
+            venueStreet: venue.street,
+            venuePostalCode: venue.zip,
+            venueRegion: venue.region,
         })
     }
 
@@ -44,7 +50,9 @@ class MetaShowForm extends React.Component {
             eventDate,
             eventFacebookLink,
             venues,
-            venueAdress,
+            venueStreet,
+            venuePostalCode,
+            venueRegion,
             presale,
             atTheDoor,
             eventDescription
@@ -94,17 +102,46 @@ class MetaShowForm extends React.Component {
                         />
                     </Form.Group>
                 </Col>
-                <Col xs={12} md={5}>
-                    <Form.Group id='venueAdress'>
-                        <Form.Label>Venue adress (Hellstreet 666, 13120 Berlin)</Form.Label>
+                <Col xs={12} md={2}>
+                    <Form.Group id='venueStreet'>
+                        <Form.Label>Street + Nr (Hellstreet 666)</Form.Label>
                         <Form.Control
                             type='text'
-                            value={venueAdress}
-                            name='venueAdress'
+                            value={venueStreet}
+                            name='venueStreet'
                             onChange={this.handleChangeTextInput}
                         />
                     </Form.Group>
                 </Col>
+                <Col xs={4} md={1}>
+                    <Form.Group id='venuePostalCode'>
+                        <Form.Label>ZIP (13120)</Form.Label>
+                        <Form.Control
+                            type='text'
+                            value={venuePostalCode}
+                            name='venuePostalCode'
+                            onChange={this.handleChangeTextInput}
+                        />
+                    </Form.Group>
+                </Col>
+                <Col xs={8} md={2}>
+                    <Form.Group id='venueRegion'>
+                        <Form.Label>Region</Form.Label>
+                        <Form.Control
+                            as="select"
+                            type='select'
+                            value={venueRegion}
+                            name='venueRegion'
+                            onChange={this.handleChangeTextInput}
+                            defaultValue={REGIONLIST.BERLIN}
+                        >
+                            {REGIONLIST.map(region=>(
+                                <option value={region} key={region}>{region}</option>
+                            ))}
+                        </Form.Control>
+                    </Form.Group>
+                </Col>
+
                 <Col xs={6} md={2}>
                     <Form.Group id='presale'>
                         <Form.Label>Presal Price</Form.Label>
@@ -151,7 +188,9 @@ MetaShowForm.propTypes = {
     eventDate: momentPropTypes.momentObj,
     eventFacebookLink: PropTypes.string,
     venues: PropTypes.array,
-    venueAdress: PropTypes.string,
+    venueStreet: PropTypes.string,
+    venuePostalCode: PropTypes.string,
+    venueRegion: PropTypes.string,
     presale: PropTypes.string,
     atTheDoor: PropTypes.string,
     eventDescription: PropTypes.string,
