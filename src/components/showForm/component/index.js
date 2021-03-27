@@ -102,6 +102,7 @@ class ShowForm extends Component {
             venuePostalCode,
             venueRegion,
         }
+        console.log(data)
         if (support && Object.keys(support).length > 0) {
             data.support = Object.keys(support)
                 .map((key) => support[key].name)

@@ -133,8 +133,8 @@ class MetaShowForm extends React.Component {
                             value={venueRegion}
                             name='venueRegion'
                             onChange={this.handleChangeTextInput}
-                            defaultValue={REGIONLIST.BERLIN}
                         >
+                            <option value='' disabled>choose Region</option>
                             {REGIONLIST.map(region=>(
                                 <option value={region} key={region}>{region}</option>
                             ))}
