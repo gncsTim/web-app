@@ -49,4 +49,4 @@ jobs:
           docker stop gncs-web-app:develop
           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
           docker pull gncs/web-app:develop
-          docker run --name gncs-web-app -dit -p 8080:80 gncs/web-app:develop
+          docker run -dit -p 8080:80 gncs/web-app:develop
