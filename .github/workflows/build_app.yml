@@ -46,7 +46,7 @@ jobs:
         password: ${{ secrets.STAGE_NGCS_DEPLOY_PASSWORD }}
         port: ${{ secrets.STAGE_PORT }}
         script: |
-          docker stop gncs-web-app
+          docker stop gncs-web-app:develop
           docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
-          docker pull gncs/web-app
-          docker run --name gncs-web-app -dit -p 8080:80 gncs/web-app
+          docker pull gncs/web-app:develop
+          docker run --name gncs-web-app -dit -p 8080:80 gncs/web-app:develop
