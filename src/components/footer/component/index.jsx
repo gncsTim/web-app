@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Privacy from 'components/modal/privacy'
 
 const Footer = () => {
     return (
@@ -12,7 +13,9 @@ const Footer = () => {
                 <div className="footer-links">
                     <Link to="/Imprint">Imprint</Link>
                 </div>
+                <Privacy />
             </div>
+            
         </footer>
     )
 }
