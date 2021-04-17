@@ -5,9 +5,6 @@ import { Collapse, Button } from 'react-bootstrap'
 class PrivacyComponent extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            show: false,
-        }
         this.handleClickSaveEssentialData = this.handleClickSaveEssentialData.bind(
             this
         )
@@ -19,10 +16,10 @@ class PrivacyComponent extends React.Component {
         this.props.saveEssentialData()
     }
     render() {
-        const { show } = this.state
+        const { showPrivacy } = this.props
         return (
             <div className="privacy">
-                <Collapse in={show}>
+                <Collapse in={showPrivacy}>
                     <div className="privacy-content">
                         Anim pariatur cliche reprehenderit, enim eiusmod high
                         life accusamus terry richardson ad squid. Nihil anim
@@ -41,6 +38,11 @@ class PrivacyComponent extends React.Component {
 PrivacyComponent.propTypes = {
     saveEssentialData: PropTypes.func.isRequired,
     loadPrivacy: PropTypes.func.isRequired,
+    showPrivacy: PropTypes.bool,
+}
+
+PrivacyComponent.defaultProps = {
+    showPrivacy: false
 }
 
 export default PrivacyComponent
