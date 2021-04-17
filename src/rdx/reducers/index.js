@@ -8,6 +8,8 @@ import { addShowRequestReducer } from 'components/addShow/reducer'
 import { venuesReducer } from 'components/venues/reducer'
 import { genresReducer } from 'components/genres/reducer'
 import { eventFilterReducer } from 'components/eventFilter/reducer'
+import { privacyReducer } from 'components/footer/privacy/reducer'
+
 export default combineReducers({
     eventList: eventListReducer,
     loginState: loginStateReducer,
@@ -17,4 +19,5 @@ export default combineReducers({
     venues: venuesReducer,
     genres: genresReducer,
     eventFilter: eventFilterReducer,
+    privacy: privacyReducer,
 })

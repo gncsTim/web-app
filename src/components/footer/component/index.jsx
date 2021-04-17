@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Privacy from 'components/modal/privacy'
+import Privacy from 'components/footer/privacy'
 
 const Footer = () => {
     return (
