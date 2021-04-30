@@ -21,17 +21,15 @@ Button {
 .multi-select {
   .dropdown-container, .dropdown-heading {
     cursor: pointer;
-
     height: $form-hight;
       label {
         margin: 0;
       }
       .dropdown-heading-dropdown-arrow {
-        padding: 0;
-  
+        padding: 0!important;
       }
   }
-} 
+}
 
 .form-group {
     text-align: left;
@@ -41,7 +39,6 @@ Button {
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-
     }
 
     .fa-asterisk {
@@ -65,6 +62,9 @@ Button {
         }
       }
     }
+    select {
+      padding: 0;
+    }
     textarea {
       &.form-control {
         height: $form-hight*2;
@@ -75,7 +75,7 @@ Button {
     }
   }
 
-  
+
   form {
     .add-content-btn {
       margin-bottom: 1rem;

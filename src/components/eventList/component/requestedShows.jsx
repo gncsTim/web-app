@@ -7,14 +7,13 @@ import DisplayDates from './displayDates'
 import EventListItem from './eventListItem'
 
 const RequestedShows = ({ eventList, eventFilter }) => {
-
-  return (
-      <>
-        <Col className="event-list">
-          <h1>Requested Shows</h1>
-        </Col>
-      </>
-  )
+    return (
+        <>
+            <Col className="event-list">
+                <h1>Requested Shows</h1>
+            </Col>
+        </>
+    )
 }
 
 export default RequestedShows
