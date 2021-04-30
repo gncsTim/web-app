@@ -13,22 +13,27 @@ const EventList = ({ eventList, eventFilter }) => {
     const sortEvents = {}
     eventList
         .filter((event) => {
-            let showEvent = true
+            let regionActive = true
+            let genreActive = true
+            
 
-            if (eventFilter.genres) {
-                showEvent = event.genres.reduce((acc, cur) => {
-                    return acc || eventFilter.genres.indexOf(cur) !== -1
-                }, false)
-            }
             if (eventFilter.regions) {
-                if (event.venueRegion) {
-                    showEvent = eventFilter.regions.includes(event.venueRegion)
+                if (event.venueRegion && eventFilter.regions.includes(event.venueRegion)) {
+                    regionActive = true
                 } else {
-                    showEvent = false
+                    regionActive = false
                 }
             }
-
-            return showEvent
+            if (eventFilter.genres) {
+                if ( event.genres.reduce((acc, cur) => {
+                    return acc || eventFilter.genres.indexOf(cur) !== -1
+                }, false)) {
+                    genreActive = true
+                } else {
+                    genreActive = false
+                }
+            }
+            return regionActive && genreActive
         })
         .forEach((event) => {
             event.dateKey = moment(event.date).format('DD.MM.YYYY')

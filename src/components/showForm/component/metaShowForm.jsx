@@ -104,22 +104,24 @@ class MetaShowForm extends React.Component {
                 </Col>
                 <Col xs={12} md={2}>
                     <Form.Group id='venueStreet'>
-                        <Form.Label>Street + Nr (Hellstreet 666)</Form.Label>
+                        <Form.Label>Street + Nr</Form.Label>
                         <Form.Control
                             type='text'
                             value={venueStreet}
                             name='venueStreet'
+                            placeholder='Kapital-Muß-Weg 666'
                             onChange={this.handleChangeTextInput}
                         />
                     </Form.Group>
                 </Col>
                 <Col xs={4} md={1}>
                     <Form.Group id='venuePostalCode'>
-                        <Form.Label>ZIP (13120)</Form.Label>
+                        <Form.Label>ZIP</Form.Label>
                         <Form.Control
                             type='text'
                             value={venuePostalCode}
                             name='venuePostalCode'
+                            placeholder="13120"
                             onChange={this.handleChangeTextInput}
                         />
                     </Form.Group>
