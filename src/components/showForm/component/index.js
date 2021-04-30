@@ -21,7 +21,9 @@ class ShowForm extends Component {
             atTheDoor: '',
             facebookLink: '',
             description: '',
-            venueAdress: '',
+            venueStreet: '',
+            venuePostalCode: '',
+            venueRegion: '',
             headliner: '',
             headlinerGenre: [],
             headlinerLinks: ['', ''],
@@ -60,6 +62,9 @@ class ShowForm extends Component {
             headliner,
             headlinerGenre,
             venue,
+            venuePostalCode,
+            venueStreet,
+            venueRegion,
             headlinerLinks,
         } = this.state
 
@@ -93,6 +98,9 @@ class ShowForm extends Component {
             date: date.toISOString(),
             artist_details,
             venue,
+            venueStreet,
+            venuePostalCode,
+            venueRegion,
         }
         if (support && Object.keys(support).length > 0) {
             data.support = Object.keys(support)
@@ -116,7 +124,9 @@ class ShowForm extends Component {
             facebookLink,
             description,
             headlinerGenre,
-            venueAdress,
+            venueStreet,
+            venuePostalCode,
+            venueRegion,
             date,
             headliner,
             support,
@@ -132,7 +142,9 @@ class ShowForm extends Component {
                         eventDate={date}
                         venue={venue}
                         venues={venues}
-                        venueAdress={venueAdress}
+                        venueStreet={venueStreet}
+                        venuePostalCode={venuePostalCode}
+                        venueRegion={venueRegion}
                         presale={presale}
                         atTheDoor={atTheDoor}
                         eventDescription={description}
@@ -170,8 +182,8 @@ ShowForm.propTypes = {
             _id: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired,
             street: PropTypes.string,
-            zip: PropTypes.number,
-            city: PropTypes.string,
+            zip: PropTypes.string,
+            region: PropTypes.string,
         })
     ),
     isAddShow: PropTypes.bool,

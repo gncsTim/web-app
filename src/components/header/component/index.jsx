@@ -156,7 +156,7 @@ class Header extends React.Component {
                                 {userCtx && (
                                     <NavDropdown
                                         className='user-menu'
-                                        title={userCtx.name}
+                                        title='Backstage'
                                         id='userCtx-nav-dropdown'
                                     >
                                         <LinkContainer to='/RequestedShows'>
