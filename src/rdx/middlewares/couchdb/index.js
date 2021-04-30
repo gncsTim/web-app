@@ -17,13 +17,18 @@ import {
     SET_USER_CTX,
     GET_ALL_VENUES,
     GET_ALL_GENRES,
+    LOAD_REQUESTED_SHOWS,
 } from 'rdx/constants/actionTypes'
 import {
     setOwnRequest,
     addEventSuccess,
     addEventError,
 } from 'components/addShow/action'
-import { setEventList, addOrUpdateEvents } from 'components/eventList/action'
+import {
+    setEventList,
+    addOrUpdateEvents,
+    fetchLoadRequestedShows,
+} from 'components/eventList/action'
 import { setVenues } from 'components/venues/action'
 import { setGenres } from 'components/genres/action'
 import { isAdminOrEditor } from 'components/user/utils'
@@ -218,6 +223,18 @@ export const couchdbMiddleware = (store) => (next) => {
                             console.log('handle error: ', err)
                         })
                 }
+                break
+            case LOAD_REQUESTED_SHOWS:
+                new PouchDB(remoteCouchdbUrl('request'))
+                    .allDocs({
+                        include_docs: true,
+                    })
+                    .then((results) => {
+                        store.dispatch(fetchLoadRequestedShows(results))
+                    })
+                    .catch((err) => {
+                        console.error(err)
+                    })
                 break
             default:
         }

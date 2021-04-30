@@ -1,19 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Col, Row } from 'react-bootstrap'
-import moment from 'moment'
+import { Col } from 'react-bootstrap'
 import EventFilter from 'components/eventFilter/container'
-import DisplayDates from './displayDates'
 import EventListItem from './eventListItem'
 
-const RequestedShows = ({ eventList, eventFilter }) => {
+const RequestedShows = ({ loadRequestedShows, requestedShows }) => {
+    useEffect(() => {
+        loadRequestedShows()
+    }, [])
     return (
-        <>
-            <Col className="event-list">
-                <h1>Requested Shows</h1>
-            </Col>
-        </>
+        <Col className="event-list">
+            <h1>Requestet Shows</h1>
+            <EventFilter />
+            {requestedShows.rows
+                ? requestedShows.rows
+                    .map((item) => item.doc)
+                    .map((event) => (
+                        <EventListItem key={event._id} event={event} />
+                    ))
+                : 'not request shows'}
+        </Col>
     )
+}
+
+RequestedShows.propTypes = {
+    loadRequestedShows: PropTypes.func.isRequired,
+    // TODO: add requestet shoe propTypes
+    requestedShows: PropTypes.any,
 }
 
 export default RequestedShows

@@ -1,4 +1,8 @@
-import { SET_EVENT_LIST, ADD_OR_UPDATE_EVENTS } from 'rdx/constants/actionTypes'
+import {
+    SET_EVENT_LIST,
+    ADD_OR_UPDATE_EVENTS,
+    FETCH_LOAD_REQUESTED_SHOWS,
+} from 'rdx/constants/actionTypes'
 import { sortEventList } from '../utils'
 const initialState = []
 
@@ -15,6 +19,20 @@ export const eventListReducer = (state = initialState, action) => {
             })
             state.sort(sortEventList())
             return state
+        default:
+            return state
+    }
+}
+
+const REQUESTET_SHOW_INIT = {}
+
+export const eventRequestetShowsReducer = (
+    state = REQUESTET_SHOW_INIT,
+    action
+) => {
+    switch (action.type) {
+        case FETCH_LOAD_REQUESTED_SHOWS:
+            return action.payload
         default:
             return state
     }
