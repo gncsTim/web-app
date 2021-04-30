@@ -4,9 +4,7 @@ import { Button, Row, Col } from 'react-bootstrap'
 import MultiSelect from 'react-multi-select-component'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-
 import REGIONLIST from 'components/eventFilter/constants'
-
 
 class EventFilter extends React.Component {
     constructor(props) {
