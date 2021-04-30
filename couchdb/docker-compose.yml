@@ -1,0 +1,14 @@
+version: '3'
+
+services:     
+  couchdb:
+    image: "couchdb:latest"
+    restart: always
+    ports: 
+      - 5984:5984
+    volumes: 
+      - ./data/couchdb:/opt/couchdb/data
+      - ./data/couchdb_config:/opt/couchdb/etc/local.d
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=password

@@ -22,21 +22,25 @@ WORKDIR /app
 # ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-COPY . .
-# COPY .env ./
-# COPY package*.json ./
-# COPY public/* ./public/
-# COPY src/* ./src/
-# COPY package-lock.json ./
-RUN npm install
+COPY package-lock.json ./
+COPY package*.json ./
+COPY .env ./
+RUN npm ci
 
+COPY . .
+# COPY src/* ./src/
+# COPY public/* ./public/
 RUN npm run build
+
 
 FROM nginx:latest
 
 RUN rm -rf ./usr/share/nginx/html/*
 
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
+COPY ./config/web/nginx.conf /etc/nginx/nginx.conf
+# COPY ./config/web/default /etc/nginx/sites-enabled/
+# ADD ./config/web/default /etc/nginx/conf.d/
 # Copy the default nginx.conf provided by tiangolo/node-frontend
 # COPY --from=build-stage /nginx.conf /etc/nginx/conf.d/default.conf
 
