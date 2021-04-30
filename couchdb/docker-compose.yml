@@ -7,7 +7,7 @@ services:
     ports: 
       - 5984:5984
     volumes: 
-      - ./data/couchdb:/opt/couchdb/etc/
+      - ./data/couchdb:/opt/couchdb/data
       - ./data/couchdb_config:/opt/couchdb/etc/local.d
     environment:
       - COUCHDB_USER=admin
