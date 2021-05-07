@@ -8,7 +8,7 @@ const Imprint = () => {
     }, [])
     return (
         <Container className="content-page">
-            <h1>IMPRINT</h1>
+            <h1>Impressum</h1>
             <h2>
                 <img src={logoImage} width="50px" alt="gncs logo" /> Impressum
             </h2>

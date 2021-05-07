@@ -31,7 +31,7 @@ const Footer = () => {
                         <FontAwesomeIcon icon={faInstagram} />
                     </a>
                     <Link to="/privacy">Privacy</Link>
-                    <Link to="/Imprint">Imprint</Link>
+                    <Link to="/Imprint">Legal notice</Link>
                 </div>
             </div>
         </footer>
