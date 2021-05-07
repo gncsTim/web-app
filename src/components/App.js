@@ -10,6 +10,7 @@ import AddShow from 'components/addShow/container'
 import Underground from 'components/underground/component'
 
 import Imprint from 'components/imprint/component'
+import Privacy from 'components/privacy/component'
 
 import WikiListBands from 'components/wiki/wikiListBands/container'
 import WikiBandDetail from 'components/wiki/wikiBandDetail/container'
@@ -24,6 +25,9 @@ import UserActor from 'components/user/actor'
 import PageNotFound from 'components/errors/component/pageNotFound'
 
 import RequestActor from 'components/actors/request'
+
+import PrivacyModal from 'components/privacyModal/privacy'
+
 
 const App = () => {
     return (
@@ -64,6 +68,9 @@ const App = () => {
 
                         <Route exact path="/Imprint" component={Imprint} />
 
+                        <Route exact path="/Privacy" component={Privacy} />
+
+
                         <Route
                             exact
                             path="/Underground"
@@ -77,6 +84,8 @@ const App = () => {
                         <Route path="*" component={PageNotFound} />
                     </Switch>
                 </div>
+                <PrivacyModal />
+
                 <Footer />
                 <RequestActor />
                 <UserActor />

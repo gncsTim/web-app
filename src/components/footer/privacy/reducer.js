@@ -1,4 +1,4 @@
-import { UPDATE_PRIVACY, SHOW_PRIVACY, SAVE_ESSENTIAL_DATA } from 'rdx/constants/actionTypes'
+import { UPDATE_PRIVACY, SHOW_PRIVACY, SAVE_ESSENTIAL_DATA, REMOVE_NOTIFICATION } from 'rdx/constants/actionTypes'
 
 const INIT_STATE = {}
 
@@ -10,6 +10,8 @@ export const privacyReducer = (state = INIT_STATE, action) => {
             return { ...state, ...action.payload }
         case SHOW_PRIVACY:
             return { ...state, showPrivacy: true }
+        case REMOVE_NOTIFICATION:
+            return { showPrivacy: false }    
         default:
             return state
     }

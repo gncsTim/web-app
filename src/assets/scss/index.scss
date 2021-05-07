@@ -51,7 +51,7 @@ body {
 .main-container {
   margin: 0 auto;
   max-width: $maincontainer-width;
-  font-size: 12px;
+  font-size: 13.5px;
   .container {
     min-height: calc( 100vh - #{$header-height} - #{$footer-height} );
     padding: $space-m $space-l;

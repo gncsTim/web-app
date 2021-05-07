@@ -1,9 +1,26 @@
 .privacy {
     padding-top: 15px;
     clear: both;
+    position: fixed; 
+    bottom:0%;
+    min-height: 200px;
+    max-width: 1200px;
+    background-color: $color-dark-grey;
     .privacy-content {
-        background-color: $color-white;
-        color: $color-black;
-        padding: 15px;
+        color: $color-light-grey;
+        padding: $space-l $space-xxl*2;
+        .btn {
+            float: right;
+            margin: $space-m;
+            padding: 0 $space-m;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .privacy {
+        .privacy-content {
+            padding: $space-m $space-xxl;
+            min-height: 320px;
+        }
     }
 }
