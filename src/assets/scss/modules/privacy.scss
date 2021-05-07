@@ -1,0 +1,29 @@
+$privacy-desktop-high: 200px;
+$privacy-mobile-high: 320px;
+
+.privacy {
+    padding-top: 15px;
+    clear: both;
+    position: fixed; 
+    bottom:0%;
+    min-height: $privacy-desktop-high;
+    max-width: $maincontainer-width;
+    background-color: $color-dark-grey;
+    .privacy-content {
+        color: $color-light-grey;
+        padding: $space-l $space-xxl*2;
+        .btn {
+            float: right;
+            margin: $space-m;
+            padding: 0 $space-m;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .privacy {
+        .privacy-content {
+            padding: $space-m $space-xxl;
+            min-height: $privacy-mobile-high;
+        }
+    }
+}

@@ -8,6 +8,11 @@ footer {
   left: 0;
   color: $color-white;
   padding: $space-m $space-l;
+  .footer-links {
+    a {
+      margin: $space-m;
+    }
+  }
 
   @media (min-width: 768px) {
     .footer-content {
