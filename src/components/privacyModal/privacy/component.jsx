@@ -33,7 +33,7 @@ class PrivacyComponent extends React.Component {
                                 Wir speichern keine Benutzer definierten Daten, außer die Zustimmung darüber dass wir keine weiteren Benutzerdaten speichern. 
                                 Wenn nicht zugestimmt wird, werden keine Daten gespeichert und diese Abfrage erscheint bei jeden reload.
                             </p>
-                            <Button variant='primary' conClick={this.handleClickSaveEssentialData}>
+                            <Button variant='primary' onClick={this.handleClickSaveEssentialData}>
                                 speichern
                             </Button>
                             <Button variant='secondary' onClick={this.handleClickRemoveNotification}>
