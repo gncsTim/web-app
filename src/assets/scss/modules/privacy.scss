@@ -1,10 +1,13 @@
+$privacy-desktop-high: 200px;
+$privacy-mobile-high: 320px;
+
 .privacy {
     padding-top: 15px;
     clear: both;
     position: fixed; 
     bottom:0%;
-    min-height: 200px;
-    max-width: 1200px;
+    min-height: $privacy-desktop-high;
+    max-width: $maincontainer-width;
     background-color: $color-dark-grey;
     .privacy-content {
         color: $color-light-grey;
@@ -20,7 +23,7 @@
     .privacy {
         .privacy-content {
             padding: $space-m $space-xxl;
-            min-height: 320px;
+            min-height: $privacy-mobile-high;
         }
     }
 }
