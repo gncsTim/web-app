@@ -85,7 +85,6 @@ const App = () => {
                     </Switch>
                 </div>
                 <PrivacyModal />
-
                 <Footer />
                 <RequestActor />
                 <UserActor />

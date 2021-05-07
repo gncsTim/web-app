@@ -9,7 +9,7 @@ import { couchdbMiddleware } from 'rdx/middlewares/couchdb'
 import { userMiddleware } from 'rdx/middlewares/couchdb/user'
 import { routeHistoryMiddleware } from 'rdx/middlewares/routeHistory'
 import { appUserMiddleware } from 'components/user/middleware'
-import { privacyMiddleware } from 'components/footer/privacy/middleware'
+import { privacyMiddleware } from 'components/privacyModal/privacy/middleware'
 
 let enhancers = []
 // TODO: fix that for production mode
