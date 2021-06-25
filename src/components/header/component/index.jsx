@@ -5,7 +5,8 @@ import { userCtxShape } from 'gncsPropTypes'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
-import logoImage from 'assets/img/logo.svg'
+import logoImage from 'assets/img/couch_logo_header.svg'
+import logoImageMobile from 'assets/img/couch_logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -57,7 +58,8 @@ class Header extends React.Component {
             <header>
                 <div className='header-logo'>
                     <Link to='/'>
-                        <img src={logoImage} alt='gncs logo' />
+                        <img src={logoImage} className="desktop-logo" alt='gncs logo' />
+                        <img src={logoImageMobile} className="mobile-logo" alt='gncs logo' />
                     </Link>
                 </div>
                 <div className='main-container'>

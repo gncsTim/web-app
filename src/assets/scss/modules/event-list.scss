@@ -69,6 +69,13 @@
         margin-right: $space-s;
       }
     }
+    .genres {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
   @media (max-width: 768px) {
     .list-event {

@@ -5,17 +5,23 @@
   padding-bottom: 100px;
   box-shadow: $box-shadow-background;
 
+  margin-top: -5px;
+
   p {
     max-width: 600px;
   }
   .event-headline {
     width: fit-content;
     background: $primary-color;
-    padding: $space-m;
+    padding: $space-m $space-xl;
     color: $color-black;
-    margin: $space-m 0;
-    opacity: 0.8
+    // margin: $space-m 0;
+    opacity: 0.8;
+    word-spacing: 10px;
+    text-transform: uppercase;
+    min-height: 50px;
     h2, h3 {
+      font-size: 22px;
       margin-bottom: 0;
     }
   }
@@ -24,5 +30,58 @@
     margin-bottom: $space-l;
     margin: 0 -15px;
     padding-top: 15px;
+    background-position: center; 
+    min-height: 220px;
+
+  }
+  .event-body {
+    padding: $space-xl*2 $space-xl;
+
+    .event-artist-details {
+      margin-top: $space-l;
+      padding-top: $space-m;
+      &::before {
+       border-top: 1px solid white;
+        content: '';
+        width: 50%;
+        height: 10px;
+        display: block;
+        margin: auto;
+      }
+    }
+
+    ul {
+      padding-left: 15px;
+      li {
+        clear: both;
+      }
+    }
+  }
+  a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  }
+}
+
+@media (max-width: 768px) {
+  .event-detail {
+    .event-body {
+      ul {
+        padding-left: 0;
+      }
+      .event-details {
+        &::before {
+          border-top: 1px solid white;
+           content: '';
+           width: 50%;
+           height: 10px;
+           display: block;
+           margin: auto;
+         }
+    
+      }
+    }
   }
 }
