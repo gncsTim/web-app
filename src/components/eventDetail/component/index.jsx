@@ -14,18 +14,13 @@ class EventDetail extends React.Component {
         if (!event && !isEventListEmpty) redirctToPageNotFound()
     }
 
-
-
     render() {
         const { event } = this.props
         if (!event) return <div>not found</div>
 
-       
         let imageNumber = randomFigure(20)
         const imageName = '.jpg'
         const imagePath = '/images/eventDetailHeader/'
-
-        
 
         return (
             <div className="event-detail">
@@ -78,7 +73,6 @@ class EventDetail extends React.Component {
                                 </div>
                             ))}
                         </Col>
-
 
                         <Col md={{ span: 4, offset: 2}}  className="float-right event-details">    
                             <div className="floatright">
@@ -149,12 +143,7 @@ class EventDetail extends React.Component {
                                     </li>
                                 </ul>
                             </div>
-
                         </Col>
-
-                    </Row>
-                    <Row className="event-body">
-
                     </Row>
                 </Col>
             </div>

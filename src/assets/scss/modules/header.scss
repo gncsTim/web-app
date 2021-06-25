@@ -1,3 +1,6 @@
+$desktop-logo-width: 580px;
+$mobile-logo-width: 85px;
+
 header {
   border-bottom: $border-m-primary;
   box-shadow:$green-box-shadow-light;
@@ -15,7 +18,7 @@ header {
     }
     .desktop-logo {
       margin-top: $space-m;
-      width: 580px;
+      width: $desktop-logo-width;
     }
 
   }
@@ -78,7 +81,7 @@ header {
       padding-top: $space-s;
       .mobile-logo {
         display: block;
-        width: 85px;
+        width: $mobile-logo-width;
         margin: auto;
       }
       .desktop-logo {
