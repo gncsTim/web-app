@@ -5,7 +5,7 @@ import { Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Moment from 'react-moment'
 import EventTitle from './eventTitle'
-import randomFigure from '../action/index'
+import { randomFigure } from 'components/utils'
 
 const EventListItem = ({ event }) => {
 

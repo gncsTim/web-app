@@ -13,9 +13,3 @@ export const addOrUpdateEvents = (events) => {
         payload: events,
     }
 }
-
-export const randomFigure = (maxValue) => {
-    return Math.floor(Math.random() * maxValue)
-}
-
-export default randomFigure
