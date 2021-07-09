@@ -1,17 +1,26 @@
+$desktop-logo-width: 580px;
+$mobile-logo-width: 85px;
+
 header {
   border-bottom: $border-m-primary;
   box-shadow:$green-box-shadow-light;
   background-color: $background-color-secondary;
   text-align: center;
   min-height: $header-height;
+  z-index: 2;
+  position: relative;
   .header-logo {
     a {
       padding: 0;
     }
-    img {
-      margin-top: $space-m;
-      width: 80px;
+    .mobile-logo {
+      display: none;
     }
+    .desktop-logo {
+      margin-top: $space-m;
+      width: $desktop-logo-width;
+    }
+
   }
   .navbar {
     .user-menu-mobile {
@@ -68,6 +77,19 @@ header {
   }
 
   @media (max-width: 576px) {
+    .header-logo {
+      padding-top: $space-s;
+      .mobile-logo {
+        display: block;
+        width: $mobile-logo-width;
+        margin: auto;
+      }
+      .desktop-logo {
+        display: none;
+      }
+  
+    }
+  
     .navbar {
       margin-bottom: -2px;
       .burger-menu {
